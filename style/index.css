@@ -5,11 +5,20 @@
 * {
     box-sizing: border-box;
 }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     font-family: "Poppins", sans-serif;
     background-color:  #FFFAF0;
+    margin: 0;
+    padding: 0;
 }
 h1 {
     font-size: clamp(1.5rem, 3vw, 4rem);
@@ -38,6 +47,7 @@ p {
 /*Navigation style*/
 nav {
     width: 100%;
+    height: var(--nav-height-desk);
     margin: 0;
     padding: 0;
     display: flex;
@@ -84,7 +94,6 @@ nav {
      color: #D98CA4;
 }
 .logo-container {
-    height: var(--nav-height-desk);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -92,6 +101,7 @@ nav {
 .logo-container> img {
     height: 40px;
     width: auto;
+    margin-left: 1rem;
 }
 .cart-btn {
     margin: 0 1rem 0 3rem;
@@ -110,16 +120,17 @@ nav {
 }
 @media only screen and (max-width: 640px) {
     nav {
-        justify-content: unset;
-        align-items: unset;
         position: relative;
+        height: var(--nav-height-mobile);
+        overflow: hidden;
     }
     .nav-links {
         position: fixed;
+        margin: 0;
         top: var(--nav-height-mobile);
         left: 0;
         width: 100%;
-        height: 100dvh;
+        height: calc(100dvh - var(--nav-height-mobile));
         flex-direction: column;
         flex-grow: 1;
         align-items: flex-start;
@@ -147,11 +158,8 @@ nav {
         margin-top: 1rem;
     }
     .nav-links> li {
-        margin-left: 1.5rem;
+        margin-left: 1rem;
         flex-grow: unset;
-    }
-    .logo-container {
-        height: var(--nav-height-mobile);
     }
     .cart-btn {
         margin: 0 0 0 auto
