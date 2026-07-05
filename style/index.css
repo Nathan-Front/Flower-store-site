@@ -251,7 +251,7 @@ nav {
     line-height: 1.6;
 }
 .footer-container {
-    max-width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -328,7 +328,7 @@ nav {
     color: #88998f;
 }
 .footer-bottom> p> a {
-    color: #0000EE;
+    color: #c48b71;
     font-size: 13px;
 }
 @media only screen and (max-width: 640px) {
