@@ -20,7 +20,14 @@ body {
     margin: 0;
     padding: 0;
 }
-h1, h2 {
+html {
+    scroll-snap-type: y proximity;
+    scroll-padding: var(--nav-height-desk);
+}
+section {
+    scroll-snap-align: start;
+}
+h1, h2, h3 {
     font-family: "Cormorant Garamond", serif;
 }
 h1 {
@@ -33,7 +40,7 @@ h2 {
     font-size: clamp(1.5rem, 4vw, 4rem);
 }
 h3 {
-    font-size: clamp(1.5rem, 2vw, 2.5rem);
+    font-size: clamp(1.5rem, 2vw, 3rem);
 }
 h1, h2, h3, h4, h5 {
     padding: 0;

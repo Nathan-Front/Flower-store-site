@@ -1,6 +1,6 @@
 .index-second-sec {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
 }
@@ -33,4 +33,43 @@
 .upper-con ul li div span {
     font-weight: 600;
     font-size: clamp(1rem, 1.3vw, 1.6rem);
+}
+/*lower container*/
+.lower-con {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.lower-con h3 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    padding: 2rem 0 3rem 0;
+}
+.lower-con ul {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+.lower-con ul li {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2rem;
+}
+.lower-con ul li div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0;
+    gap: 10px;
+}
+.lower-con ul li div span {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+}
+.lower-con ul li div span:first-child {
+    font-weight: 900;
+}
+.lower-con ul li div span:last-child {
+    font-weight: 700;
 }
