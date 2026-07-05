@@ -26,14 +26,18 @@ async function fetchHTML() {
                 return res.text();
             })
         ]);
-        //render html files
-        body.insertAdjacentHTML("beforeend", nav);
-        //store sections in an array
-        let sections = [];
+        body.insertAdjacentHTML("beforebegin", nav); //render nav first
+        let sections = []; //store sections in an array
+        if (page === "index") {
+            sections = await Promise.all([
+                fetch("./components/index/indexFirstSection.html").then(res => res.text()),
+            ]);
+        }
+          
         //clear app content
         app.innerHTML = "";
         //render sections based on page
-
+        sections.forEach(sec => {app.insertAdjacentHTML("beforeend", sec);});
         //render footer
         body.insertAdjacentHTML("beforeend", foot);
     } catch(error) {

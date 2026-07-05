@@ -20,9 +20,11 @@ body {
     margin: 0;
     padding: 0;
 }
+h1, h2 {
+    font-family: "Cormorant Garamond", serif;
+}
 h1 {
     font-size: clamp(1.5rem, 3vw, 4rem);
-    font-family: "Cormorant Garamond", serif;
 }
 h1> span {
     color: darksalmon;
@@ -48,13 +50,12 @@ p {
 nav {
     width: 100%;
     height: var(--nav-height-desk);
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 1400px;
-    margin: auto;
 }
 .nav-links {
     list-style-type: none;
@@ -195,7 +196,7 @@ nav {
         url("../images/navigation/nav-background.png");
         background-position: center;
         background-repeat: no-repeat;
-        background-size: cover;  
+        background-size: cover; 
     }
     .nav-links.openNav {
         transform: translateX(0);
@@ -217,6 +218,7 @@ nav {
         display: block;
     }
     .menu-btn {
+        margin-right: 0.5rem;
         width: 44px;
         height: 44px;
         display: flex;
@@ -251,7 +253,7 @@ nav {
     line-height: 1.6;
 }
 .footer-container {
-    max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
