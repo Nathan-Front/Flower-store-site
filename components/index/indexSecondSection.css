@@ -1,0 +1,36 @@
+.index-second-sec {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.upper-con {
+    width: 100%;
+}
+.upper-con ul {
+    width: 90%;
+    margin: 0 auto;
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    border-bottom: 1px solid #e2ded5;
+}
+.upper-con ul li {
+    place-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.upper-con ul li img {
+    width: 20%;
+}
+.upper-con ul li div {
+    display: flex;
+    flex-direction: column;
+}
+.upper-con ul li div span {
+    font-weight: 600;
+    font-size: clamp(1rem, 1.3vw, 1.6rem);
+}
