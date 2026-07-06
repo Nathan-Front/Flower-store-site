@@ -12,19 +12,22 @@
     margin: 0 auto;
     padding: 3rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    justify-content: center; 
     gap: 1rem;
     border-bottom: 1px solid #e2ded5;
+    align-items: stretch;
 }
 .upper-con ul li {
-    place-self: center;
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
 }
 .upper-con ul li img {
-    width: 20%;
+    width: clamp(50px, 5vw, 90px);
 }
 .upper-con ul li div {
     display: flex;
@@ -46,7 +49,7 @@
     padding: 2rem 0 3rem 0;
 }
 .lower-con ul {
-    width: 100%;
+    width: 98%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2rem;
@@ -54,7 +57,10 @@
 .lower-con ul li {
     display: flex;
     flex-direction: column;
-    padding-inline: 2rem;
+    padding: 2rem;
+    background: #FFFFFF;
+    border: 1px solid #ECECEC;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 .lower-con ul li div {
     display: flex;
@@ -73,3 +79,36 @@
 .lower-con ul li div span:last-child {
     font-weight: 700;
 }
+@media only screen and (max-width: 640px) {
+    .index-second-sec {
+        height: auto;
+    }
+    .upper-con ul {
+        justify-content: flex-start;
+        grid-template-columns: 1fr;
+    }
+    .upper-con ul li {
+        width: 100%;
+        gap: 32px;
+        justify-content: flex-start;
+    }
+    .upper-con ul li div {
+        flex-direction: row;
+        flex-grow: 1;
+        gap: 24px;
+        align-items: center;
+    }
+    .upper-con ul li div span {
+        width: 30%;
+    }
+    .upper-con ul li div p {
+        width: 65%;
+    }
+}
+@media (min-width: 541px) and (max-width: 640px) {
+    .upper-con ul {
+        justify-content: flex-start;
+        grid-template-columns: repeat(2, auto);
+    }
+}
+

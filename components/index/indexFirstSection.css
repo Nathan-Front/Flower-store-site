@@ -10,7 +10,7 @@
 .sec-title {
     font-size: clamp(3rem, 5vw, 6rem); 
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1.6px;
+    letter-spacing: 1.5px;
 }
 .sec-title span {
     display: block;
@@ -22,7 +22,7 @@
 .index-first-sec p {
     font-size: clamp(1.1rem, 1.5vw, 2.5rem);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1.6px;
+    letter-spacing: 1.2px;
 }
 .index-first-sec button {
     width: fit-content;
@@ -32,7 +32,7 @@
     background-color: #7A8462;
     border-radius: 12px;
     transition: 0.3s ease;
-    letter-spacing: 1.6px;
+    letter-spacing: 1.5px;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
 }
 .index-first-sec button:hover {
@@ -78,6 +78,8 @@
     }
     .sec-title span {
         text-align: center;
+        width: 95%;
+        margin: 0 auto;
     }
     .index-first-sec p {
         width: 90%;
@@ -138,7 +140,7 @@
         gap: 5rem;
     }
     .sec-title {
-        margin: 22rem 0 0 5rem;
+        margin: 20rem 0 0 5rem;
     }
     .index-first-sec p {
         margin: 0 0 0 5rem;
