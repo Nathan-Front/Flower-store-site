@@ -131,6 +131,7 @@ nav {
     padding: 0.6rem 0.8rem;
     border-radius: 0.65rem;
     background:#f6eee5;
+    transition: 0.4s ease;
 }
 .cart-btn:hover {
     cursor: pointer;
@@ -151,6 +152,7 @@ nav {
     color: white;
     font-size: 0.75rem;
     width: 3ch; 
+    transition: 0.4s ease;
 }
 .fa-cart-shopping {
     color: #c48b71;
