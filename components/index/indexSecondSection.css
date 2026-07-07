@@ -1,8 +1,8 @@
 .index-second-sec {
     width: 100%;
-    height: 100dvh;
     display: flex;
     flex-direction: column;
+    padding: 3rem 0;
 }
 .upper-con {
     width: 100%;
@@ -10,7 +10,7 @@
 .upper-con ul {
     width: 90%;
     margin: 0 auto;
-    padding: 3rem 0;
+    padding: 2rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     justify-content: center; 
@@ -45,13 +45,13 @@
     align-items: center;
 }
 .lower-con h3 {
-    font-size: clamp(2rem, 3vw, 3rem);
-    padding: 2rem 0 3rem 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    padding: 32px 0 48px 0;
 }
 .lower-con ul {
     width: 98%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 .lower-con ul li {
@@ -78,10 +78,14 @@
 }
 .lower-con ul li div span:last-child {
     font-weight: 700;
+    color: #b34561;
 }
 @media only screen and (max-width: 640px) {
     .index-second-sec {
         height: auto;
+    }
+    .lower-con h3 {
+        padding: 40px 0 24px 0;
     }
     .upper-con ul {
         justify-content: flex-start;
@@ -104,6 +108,12 @@
     .upper-con ul li div p {
         width: 65%;
     }
+    .lower-con ul {
+        gap: 0;
+    }
+    .lower-con ul li {
+        margin: 2rem;
+    }
 }
 @media (min-width: 541px) and (max-width: 640px) {
     .upper-con ul {
@@ -111,4 +121,14 @@
         grid-template-columns: repeat(2, auto);
     }
 }
-
+@media (min-width: 641px) and (max-width: 920px) {
+    .lower-con ul {
+        padding: 2rem;
+    }
+}
+@media (min-width: 1536px) and (max-width: 2560px) {
+    .index-second-sec {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}

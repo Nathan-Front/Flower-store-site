@@ -32,6 +32,7 @@ async function fetchHTML() {
             sections = await Promise.all([
                 fetch("./components/index/indexFirstSection.html").then(res => res.text()),
                 fetch("./components/index/indexSecondSection.html").then(res => res.text()),
+                fetch("./components/index/indexThirdSection.html").then(res => res.text()),
             ]);
         }
           
