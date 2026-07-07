@@ -80,6 +80,15 @@
     font-weight: 700;
     color: #b34561;
 }
+.view-all-btn {
+    max-width: fit-content;
+    margin: 8px 16px 16px auto;
+    color: #b34561;
+    transition: 0.3s ease;
+}
+.view-all-btn:hover {
+    text-decoration: underline;
+}
 @media only screen and (max-width: 640px) {
     .index-second-sec {
         height: auto;
@@ -114,6 +123,9 @@
     .lower-con ul li {
         margin: 2rem;
     }
+    .view-all-btn {
+        display: none;
+    }
 }
 @media (min-width: 541px) and (max-width: 640px) {
     .upper-con ul {
@@ -124,6 +136,9 @@
 @media (min-width: 641px) and (max-width: 920px) {
     .lower-con ul {
         padding: 2rem;
+    }
+    .view-all-btn {
+        margin: 8px 16px 0 auto;
     }
 }
 @media (min-width: 1536px) and (max-width: 2560px) {
