@@ -58,57 +58,87 @@
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    background: #FFFFFF;
-    border: 1px solid #ECECEC;
-    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    background: #fcfaf7;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    transition: 0.3s ease;
+}
+.lower-con ul li:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,.12);
+}
+.lower-con ul li img {
+    transition: 0.4s ease;
+    border: 1px solid #f9e8ee;
+}
+.lower-con ul li img:hover {
+    scale: calc(1.05);
 }
 .lower-con> ul> li> div {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
     padding: 1rem 0;
     gap: 10px;
 }
+.lower-con> ul> li> div> small {
+    display: inline-block;
+    padding:0.35rem 0.75rem;
+    border-radius: 1rem;
+    background:#f9e8ee;
+    color: #b24f6d;
+    font-size: 0.6rem;
+    font-weight: 600;
+}
 .lower-con ul> li> div> span {
     font-size: clamp(1rem, 1.3vw, 1.5rem);
+    font-weight: 1000;
+    margin-top: 8px;
+    font-family: "Cormorant Garamond", sans-serif;
+    color:#2e2e2e;
 }
-.lower-con> ul> li> div> span:first-child {
-    font-weight: 900;
+.lower-con> ul> li> div> p {
+    text-align: left;
 }
 .price-btn-con {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     padding: 8px 0;
+    margin-top: 16px;
 }
 .price-btn-con span {
    font-weight: 600;
 }
 .price-btn-con> button {
-    font-weight: 600;
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
-    background-color: #b34561;
+    display: flex;
+    gap: 8px;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+    background-color: #a64b66;
     padding: 12px;
-    border-radius: 50%;
-    border: 1px solid #b34561;
+    border-radius: 12px;
+    border: 1px solid #a64b66;
+    color: #FFFFFF;
 }
 .price-btn-con> button> i {
     color: #FFFFFF;
 }
 .price-btn-con> button:hover {
     background-color: #FFFFFF;
-    border: 1px solid #b34561;
+    border: 1px solid #a64b66;
+    color: #a64b66;
 }
 .price-btn-con> button:hover i {
-    color: #b34561;
+    color: #a64b66;
 }
 .view-all-btn {
     max-width: fit-content;
     margin: 8px 16px 16px auto;
-    color: #b34561;
+    color: #a64b66;
     transition: 0.3s ease;
 }
 .view-all-btn:hover {
@@ -130,7 +160,7 @@
         gap: 32px;
         justify-content: flex-start;
     }
-    .upper-con ul li div {
+    .upper-con> ul> li> div {
         flex-direction: row;
         flex-grow: 1;
         gap: 24px;
@@ -145,22 +175,29 @@
     .lower-con ul {
         gap: 0;
     }
+    .lower-con> ul> li> div {
+        padding: 1rem 0 0 0;
+    }
     .lower-con ul li {
         margin: 2rem;
+    }
+    .price-btn-con {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 8px 0 0 0;
     }
     .view-all-btn {
         display: none;
     }
 }
-@media (min-width: 541px) and (max-width: 640px) {
-    .upper-con ul {
-        justify-content: flex-start;
-        grid-template-columns: repeat(2, auto);
-    }
-}
-@media (min-width: 641px) and (max-width: 920px) {
+
+@media (min-width: 541px) and (max-width: 920px) {
     .lower-con ul {
         padding: 2rem;
+    }
+    .lower-con> ul> li> div {
+        padding: 1rem 0 0 0;
     }
     .view-all-btn {
         margin: 8px 16px 0 auto;
@@ -170,5 +207,10 @@
     .index-second-sec {
         max-width: 1400px;
         margin: 0 auto;
+    }
+}
+@media (min-width: 1921px) and (max-width: 2560px) {
+    .lower-con> ul> li> div> p {
+        min-height: 3rem;
     }
 }
