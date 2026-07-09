@@ -56,10 +56,27 @@ async function fetchHTML() {
         `;
     }
     displayNav();
+    sectionsInterSectiongs();
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
 
 function sectionsInterSectiongs() {
-    
+    const interSectItems = document.querySelectorAll(".intersect-items");
+    if(!interSectItems) return;
+    const oberver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("intersect");
+                } else {
+                    entry.target.classList.remove("intersect");
+                }
+            });
+        },
+        {
+            threshold: 0.1
+        }
+    );
+    interSectItems.forEach((item) => oberver.observe(item));
 }
