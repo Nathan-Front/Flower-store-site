@@ -59,3 +59,7 @@ async function fetchHTML() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
+
+function sectionsInterSectiongs() {
+    
+}

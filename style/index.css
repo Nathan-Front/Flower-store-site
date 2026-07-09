@@ -232,7 +232,7 @@ nav {
         background-image: linear-gradient(
         rgba(255, 255, 255, 0.45),
         rgba(255, 255, 255, 0.45)), 
-        url("../images/navigation/nav-background.png");
+        url("../images/navigation/nav-background.webp");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover; 
