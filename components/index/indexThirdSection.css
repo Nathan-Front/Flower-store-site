@@ -4,6 +4,7 @@
     flex-direction: column;
     gap: 1rem;
     padding: 3rem 0;
+    background-color: #FDF7F9;
 }
 .third-upper-con,
 .third-lower-con {
@@ -15,7 +16,6 @@
     position: relative;
 }
 .third-sec-con {
-    background-color: #FFF2DB;
     padding: 32px 0;
 }
 .third-upper-con {
@@ -160,6 +160,7 @@
     }
     .occasion-list {
         gap: 0;
+        grid-template-columns: 1fr;
     }
     .occasion-list li {
         margin: 2rem;

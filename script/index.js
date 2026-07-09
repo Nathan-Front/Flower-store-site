@@ -33,6 +33,7 @@ async function fetchHTML() {
                 fetch("./components/index/indexFirstSection.html").then(res => res.text()),
                 fetch("./components/index/indexSecondSection.html").then(res => res.text()),
                 fetch("./components/index/indexThirdSection.html").then(res => res.text()),
+                fetch("./components/index/indexFourthSection.html").then(res => res.text()),
             ]);
         }
           
