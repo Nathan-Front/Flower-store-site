@@ -8,9 +8,11 @@ function displayNav() {
         if (nav.classList.contains("openNav")) {
             imageBtn.classList.remove("fa-bars");
             imageBtn.classList.add("fa-xmark");
+            document.body.classList.add("no-scroll");
         } else {
             imageBtn.classList.remove("fa-xmark");
             imageBtn.classList.add("fa-bars");
+            document.body.classList.remove("no-scroll");
         }
     });
 }
