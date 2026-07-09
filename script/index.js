@@ -63,14 +63,13 @@ document.addEventListener("DOMContentLoaded", fetchHTML);
 
 function sectionsInterSectiongs() {
     const interSectItems = document.querySelectorAll(".intersect-items");
-    if(!interSectItems) return;
+    if (interSectItems.length === 0) return;
     const oberver = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("intersect");
-                } else {
-                    entry.target.classList.remove("intersect");
+                    observer.unobserve(entry.target);
                 }
             });
         },
