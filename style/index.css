@@ -207,7 +207,6 @@ nav {
 }
 @media only screen and (max-width: 640px) {
     nav {
-        position: relative;
         height: var(--nav-height-mobile);
         overflow: hidden;
     }
@@ -401,28 +400,28 @@ nav {
         margin: 0 10px;
     }
 }
-/*loading*/
+/*Spinner*/
 .loading {
     min-height: 50vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color:#a64b66;
     margin-top: calc(var(--nav-height-desk) + 70px);
 }
 .spinner {
-    width:60px;
-    height:60px;
-    border:5px solid rgba(162, 162, 161, 0.3);
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(162, 162, 161, 0.3);
     border-top-color:#a64b66;
-    border-radius:50%;
+    border-radius: 50%;
     margin-top: calc(var(--nav-height-desk) + 70px);
-    animation:spin 1s linear infinite;
+    animation: spin 1s linear infinite;
 }
 @keyframes spin {
     to {
-        transform:rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 @media (max-width: 640px) {

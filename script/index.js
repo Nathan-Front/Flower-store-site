@@ -36,6 +36,11 @@ async function fetchHTML() {
                 fetch("./components/index/indexFourthSection.html").then(res => res.text()),
             ]);
         }
+        if (page === "shop") {
+            sections = await Promise.all([
+                fetch("./components/shop/shopFirstSection.html").then(res => res.text()),
+            ]);
+        }
           
         //clear app content
         app.innerHTML = "";
