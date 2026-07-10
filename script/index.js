@@ -56,16 +56,16 @@ async function fetchHTML() {
         `;
     }
     displayNav();
-    sectionsInterSectiongs();
+    sectionsInterSections();
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
 
-function sectionsInterSectiongs() {
+function sectionsInterSections() {
     const interSectItems = document.querySelectorAll(".intersect-items");
-    if (interSectItems.length === 0) return;
-    const oberver = new IntersectionObserver(
-        (entries) => {
+    if (!interSectItems.length) return;
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("intersect");
@@ -77,5 +77,5 @@ function sectionsInterSectiongs() {
             threshold: 0.1
         }
     );
-    interSectItems.forEach((item) => oberver.observe(item));
+    interSectItems.forEach((item) => observer.observe(item));
 }

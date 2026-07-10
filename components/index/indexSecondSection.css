@@ -32,6 +32,7 @@
 .upper-con ul li div {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 .upper-con ul li div span {
     font-weight: 600;
@@ -47,12 +48,15 @@
 .lower-con h3 {
     font-size: clamp(2rem, 4vw, 3rem);
     padding: 32px 0 48px 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1.5px;
 }
 .lower-con ul {
     width: 98%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    padding-bottom: 32px;
 }
 .lower-con ul li {
     display: flex;
