@@ -401,7 +401,36 @@ nav {
         margin: 0 10px;
     }
 }
-
+/*loading*/
+.loading {
+    min-height: 50vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#a64b66;
+    margin-top: calc(var(--nav-height-desk) + 70px);
+}
+.spinner {
+    width:60px;
+    height:60px;
+    border:5px solid rgba(162, 162, 161, 0.3);
+    border-top-color:#a64b66;
+    border-radius:50%;
+    margin-top: calc(var(--nav-height-desk) + 70px);
+    animation:spin 1s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform:rotate(360deg);
+    }
+}
+@media (max-width: 640px) {
+    .loading,
+    .spinner {
+        margin-top: calc(var(--nav-height-mobile) + 50px);
+    } 
+}
 /*Index intersecting items*/
 .intersect-items {
     transform: translateY(100px);
