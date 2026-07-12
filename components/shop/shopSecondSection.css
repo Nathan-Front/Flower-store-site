@@ -4,7 +4,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    background-color: #FDF7F9;
+    background-color: #ead9df;
 }
 .left-con {
     grid-column: 1 / 2;
@@ -19,7 +19,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    gap: 16px;
+    gap: 8px;
     background-color: rgb(252, 244, 235);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     margin: 0 1rem;
@@ -38,8 +38,6 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
-    margin-bottom: 16px;
-    border-bottom: 1px rgba(139, 139, 139, 0.4) solid;
 }
 .category-title:hover {
     cursor: pointer;
@@ -256,18 +254,72 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: #ead9df;
+    background-color: #FDF7F9;
     border-radius: 0.5rem;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+    transition: 0.3s ease;
+}
+.bouquet-con ul li:hover {
+    transform: translateY(-8px);
+}
+.flower-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    background:rgba(255,255,255,.75);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255, 0.6);
+    color:#b45a74;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+/*
+.flower-badge::after{
+    content:"✦";
+    position:absolute;
+
+    top:-5px;
+    right:-4px;
+
+    color:#ffd97a;
+
+    animation:twinkle 1.8s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        transform:scale(.8) rotate(0deg);
+        opacity:.4;
+    }
+
+    50%{
+        transform:scale(1.3) rotate(20deg);
+        opacity:1;
+    }
+}*/
+.flower-grid li img {
+    transition: 0.3s ease;
+}
+.flower-grid> li> img:hover {
+    transform: scale(1.05);
 }
 .flower-info {
     width: 100%;
     display: flex;
     flex-direction: column;
     padding: 16px 0;
-    gap: 16px;
+    gap: 8px;
 }
-.flower-info div {
+.product-name,
+.product-price {
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -279,6 +331,25 @@
     position: absolute;
     top: 8px;
     right: 8px;
+}
+.product-rating {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.15rem;
+}
+.product-rating i {
+    font-size: 0.8rem;
+    color: #ddd;
+}
+.product-rating i.active {
+    color: #f4b400;
+}
+.product-rating span {
+    margin-left: 0.35rem;
+    font-size: 0.7rem;
+    color: #777;
 }
 .flower-price {
     font-size: clamp(1rem, 1.3vw, 1.5rem);

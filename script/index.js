@@ -1,3 +1,4 @@
+import { productRatings } from "../../components/shop/flowers.js";
 async function fetchHTML() {
     const page = document.body.dataset.page;
     const app = document.getElementById("app");//For page loader callback
@@ -61,6 +62,7 @@ async function fetchHTML() {
             </div>
         `;
     }
+    displayProductRating(productRatings[0]);
     displayNav();
     sectionsInterSections();
     createPagination();
@@ -108,7 +110,6 @@ function createPagination() {
     if (!paginationContainer) return;
     const cardsPerPage = getCardsPerPage();
     const totalPages = Math.ceil(cards.length / cardsPerPage);
-    console.log(getCardsPerPage())
     paginationContainer.innerHTML = "";
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement("button");
@@ -142,6 +143,7 @@ function updateActivePage() {
         );
     });
 }
+//Display total item per page counter
 function displayCountPerPage() {
     const products = document.querySelectorAll(".flower-grid li");
     const productTotal = products.length;
@@ -156,8 +158,7 @@ function displayCountPerPage() {
     totalFlowers.textContent = productTotal;
 }
 
-
-
+//Display categories selection
 function displayCategory() {
     const categoryTitles = document.querySelectorAll(".category-title");
     const priceFilter = document.querySelector(".price-filter");
@@ -174,7 +175,7 @@ function displayCategory() {
 }   
 
 
-
+//price range slider
 function updateSliderTrack() {
     const track = document.querySelector(".slider-track");
     const minSlider = document.getElementById("min-price");
@@ -221,4 +222,30 @@ const displayFilters = document.querySelector(".left-con");
 displayInput.addEventListener("click", () => {
     displayFilters.classList.toggle("show-filters");
 });
+}
+
+//Generate the star rating
+function getProductRatings(rating) {
+    let html = "";
+    for (let i = 1; i <= 5; i++) {
+        if (rating >= i) {
+            html += '<i class="fa-solid fa-star active"></i>';
+        } else if (rating >= i - 0.5) {
+            html += '<i class="fa-solid fa-star-half-stroke active"></i>';
+        } else {
+            html += '<i class="fa-regular fa-star"></i>';
+        }
+    }
+     return html;
+}
+
+//Render the star rating
+function displayProductRating(star) {
+    const product = document.querySelector(".product-name h4");
+    const rateContainer = document.querySelector(".product-rating");
+        rateContainer.innerHTML = `
+        ${getProductRatings(star.rateTotal)}
+        <span>(${star.rate})</span>
+    `;
+    
 }
