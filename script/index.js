@@ -97,7 +97,7 @@ function sectionsInterSections() {
 let currentPage = 1;
 //get cards per page
 function getCardsPerPage() {
-    if (window.innerWidth <= 640) return 6;   // 1 × 6
+    if (window.innerWidth <= 540) return 6;   // 1 × 6
     if (window.innerWidth <= 920) return 8;   // 2 × 4
     return 12;                                // 4 × 3
 }
@@ -108,6 +108,7 @@ function createPagination() {
     if (!paginationContainer) return;
     const cardsPerPage = getCardsPerPage();
     const totalPages = Math.ceil(cards.length / cardsPerPage);
+    console.log(getCardsPerPage())
     paginationContainer.innerHTML = "";
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement("button");
@@ -130,6 +131,7 @@ function displayPage(page) {
         card.style.display = index >= start && index < end ? "flex" : "none";
     });
     updateActivePage();
+    displayCountPerPage();
 }
 //Highlight the active page button
 function updateActivePage() {
@@ -140,17 +142,32 @@ function updateActivePage() {
         );
     });
 }
+function displayCountPerPage() {
+    const products = document.querySelectorAll(".flower-grid li");
+    const productTotal = products.length;
+    const productsPerPage = getCardsPerPage();
+    const start = (currentPage - 1) * productsPerPage + 1;
+    const end = Math.min(currentPage * productsPerPage, productTotal)
+    const startCount = document.querySelector(".start-flower-count-per-page")
+    const endCount = document.querySelector(".end-flower-count-per-page")
+    const totalFlowers = document.querySelector(".total-fowers")
+    startCount.textContent = start;
+    endCount.textContent = end;
+    totalFlowers.textContent = productTotal;
+}
 
 
 
 function displayCategory() {
     const categoryTitles = document.querySelectorAll(".category-title");
+    const priceFilter = document.querySelector(".price-filter");
     categoryTitles.forEach((titleBtn) => {
        titleBtn.addEventListener("click", () => {
         const allCategoryLists = titleBtn.closest("li").querySelector("div");
         const titleIcon = titleBtn.querySelector("span");
         titleIcon.innerHTML = titleIcon.innerHTML === "+" ? "−" : "+";
         allCategoryLists.classList.toggle("showCategory");
+        priceFilter.classList.add("price-filter-pad");
        });
     
     });

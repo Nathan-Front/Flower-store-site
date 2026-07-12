@@ -45,63 +45,63 @@
                   value="all-section"
                   checked
                 />
-                <span class="checkmark"></span>
-                All Occasions
+                <span class="ocassion-category">All Occasions</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Birthday
+                <span class="ocassion-category">Birthday</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Anniversary
+                <span class="ocassion-category">Anniversary</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Valentine's Day
+                <span class="ocassion-category">Valentine's Day</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Mother's Day
+                <span class="ocassion-category">Mother's Day</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Get Well Soon
+                <span class="ocassion-category">Get Well Soon</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Thank You
+                <span class="ocassion-category">Thank You</span>
               </label>
               <label>
                 <input type="radio" name="occasions" value="all-section" />
-                <span class="checkmark"></span>
-                Congratulations
+                <span class="ocassion-category">Congratulations</span>
               </label>
             </div>
           </fieldset>
         </li>
         <li class="left-category">
-          <h3 class="category-title">Price Range</h3>
-          <div class="price-filter">
+          <h3 class="category-title">Price Range<span>+</span></h3>
+          <div class="category-list price-filter">
             <div class="price-values">
               <span>$<span id="min-value">20</span></span>
               <span>$<span id="max-value">120</span></span>
             </div>
             <div class="range-slider">
               <div class="slider-track"></div>
-              <input type="range" id="min-price" min="0" max="200" value="20" />
+              <input
+                type="range"
+                id="min-price"
+                min="0"
+                max="200"
+                value="20"
+                aria-label="min-price"
+              />
               <input
                 type="range"
                 id="max-price"
                 min="0"
                 max="200"
                 value="120"
+                aria-label="max-price"
               />
             </div>
           </div>
@@ -116,6 +116,7 @@
                 name="color"
                 value="all-section"
                 id="all-color"
+                aria-label="all-color"
                 checked
               />
               <span class="checkmark all-color"></span>
@@ -126,6 +127,7 @@
                 name="color"
                 value="all-section"
                 id="all-red"
+                aria-label="all-red"
               />
               <span class="checkmark red"></span>
             </label>
@@ -135,6 +137,7 @@
                 name="color"
                 value="all-section"
                 id="all-white"
+                aria-label="all-white"
               />
               <span class="checkmark white"></span>
             </label>
@@ -144,6 +147,7 @@
                 name="color"
                 value="all-section"
                 id="all-pink"
+                aria-label="all-pink"
               />
               <span class="checkmark pink"></span>
             </label>
@@ -153,6 +157,7 @@
                 name="color"
                 value="all-section"
                 id="all-black"
+                aria-label="all-black"
               />
               <span class="checkmark black"></span>
             </label>
@@ -162,6 +167,7 @@
                 name="color"
                 value="all-section"
                 id="all-purple"
+                aria-label="all-purple"
               />
               <span class="checkmark purple"></span>
             </label>
@@ -171,6 +177,7 @@
                 name="color"
                 value="all-section"
                 id="all-yellow"
+                aria-label="all-yellow"
               />
               <span class="checkmark yellow"></span>
             </label>
@@ -180,6 +187,7 @@
                 name="color"
                 value="all-section"
                 id="all-orange"
+                aria-label="all-orange"
               />
               <span class="checkmark orange"></span>
             </label>
@@ -203,12 +211,20 @@
         <button class="filter-btn">Filter</button>
       </div>
       <div class="right-top-con-header">
-        <span>Showing 1–12 of 50 results</span>
+        <span
+          >Showing <span class="start-flower-count-per-page">1</span>–<span
+            class="end-flower-count-per-page"
+            >0</span
+          >
+          of <span class="total-fowers">0</span> results</span
+        >
       </div>
       <div>
-        <select name="sort" id="sort">
-          <option value="default" selected>Default sorting</option>
-          <option value="newest">Newest Arrivals</option>
+        <select name="sort" id="sort" aria-label="Sort products">
+          <optgroup label="Sort By">
+            <option value="default" selected>Default sorting</option>
+            <option value="newest">Newest Arrivals</option>
+          </optgroup>
         </select>
       </div>
     </div>
