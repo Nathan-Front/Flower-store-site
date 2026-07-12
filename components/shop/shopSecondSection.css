@@ -270,11 +270,9 @@
     z-index: 2;
     padding: 0.3rem 0.6rem;
     border-radius: 999px;
-    background:rgba(255,255,255,.75);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255, 0.6);
-    color:#b45a74;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     font-size: 0.6rem;
     font-weight: 600;
@@ -305,6 +303,18 @@
         opacity:1;
     }
 }*/
+.new {
+    color: #9A4D66;
+    background: #EAD9DF;
+}
+.best {
+    color: #8A5A00;
+    background: #F7E7B5;
+}
+.limited {
+    color: #4E6A50;
+    background: #D9E8D8;
+}
 .flower-grid li img {
     transition: 0.3s ease;
 }

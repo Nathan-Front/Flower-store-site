@@ -1,4 +1,5 @@
-import { productRatings } from "../../components/shop/flowers.js";
+
+import { bouquets } from "../../components/shop/flowers.js";
 async function fetchHTML() {
     const page = document.body.dataset.page;
     const app = document.getElementById("app");//For page loader callback
@@ -62,7 +63,7 @@ async function fetchHTML() {
             </div>
         `;
     }
-    displayProductRating(productRatings[0]);
+    renderProducts(bouquets); //Must be loaded first
     displayNav();
     sectionsInterSections();
     createPagination();
@@ -70,6 +71,8 @@ async function fetchHTML() {
     displayCategory();
     initializePriceSlider();
     displayFilters();
+    
+   
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
@@ -224,6 +227,63 @@ displayInput.addEventListener("click", () => {
 });
 }
 
+
+//Render product list
+function renderProducts(bouquets) {
+    const cardContainer = document.querySelector(".flower-grid");
+    if (!cardContainer) return;
+    
+    bouquets.map((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+        ${ item.condition
+        ? `<small class="flower-badge ${item.condition}">${getProductBadge(item.condition)}</small>`
+        : ""}
+        <img
+            src="${item.image}"
+            alt="shop-right-bottom-1"
+        />
+        <div class="flower-info">
+          <div class="product-name">
+            <h4>${item.product}</h4>
+            <img
+              src="./images/shop/secondSection/heart-round.svg"
+              alt="heart-icon"
+              class="flower-heart-icon"
+            />
+          </div>
+          <div class="product-rating">
+         ${displayProductRating(item)}
+          </div>
+          <div class="product-price">
+            <span class="flower-price">${formatPrice(item.price)}</span>
+            <img
+              src="./images/shop/secondSection/cart-square.svg"
+              alt="cart-icon"
+              class="flower-cart-icon"
+            />
+          </div>
+        </div>
+    `;
+     cardContainer.append(li);
+    })
+    console.log(cardContainer)
+}
+//render badge
+function getProductBadge(condition) {
+    switch (condition) {
+        case "new":
+            return "New";
+        case "best":
+            return "Best Seller";
+        case "limited":
+            return "Limited";
+        case "sale":
+            return "Sale";
+        default:
+            return "";
+    }
+}
 //Generate the star rating
 function getProductRatings(rating) {
     let html = "";
@@ -238,14 +298,17 @@ function getProductRatings(rating) {
     }
      return html;
 }
-
-//Render the star rating
-function displayProductRating(star) {
-    const product = document.querySelector(".product-name h4");
-    const rateContainer = document.querySelector(".product-rating");
-        rateContainer.innerHTML = `
-        ${getProductRatings(star.rateTotal)}
-        <span>(${star.rate})</span>
+//pass the star ratings
+function displayProductRating(product) {
+    return `
+        ${getProductRatings(product.rateTotal)}
+        <span>(${product.review})</span>
     `;
-    
+}
+//pass the price format
+function formatPrice(price) {
+    const [whole, decimal] = price.toFixed(2).split(".");
+    return `
+        $${whole}<small>.${decimal}</small>
+    `;
 }
