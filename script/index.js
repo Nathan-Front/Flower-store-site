@@ -1,5 +1,5 @@
 
-import { bouquets } from "../../components/shop/flowers.js";
+import { bouquets } from "../components/shop/flowers.js";
 async function fetchHTML() {
     const page = document.body.dataset.page;
     const app = document.getElementById("app");//For page loader callback
