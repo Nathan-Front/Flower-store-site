@@ -189,9 +189,9 @@ function displayCategory() {
   const priceFilter = document.querySelector(".price-filter");
   if (!categoryTitles || !priceFilter) return;
   categoryTitles.forEach((titleBtn) => {
-    titleBtn.addEventListener("click", () => {
-      const allCategoryLists = titleBtn.closest("li").querySelector("div");
-      const titleIcon = titleBtn.querySelector("span");
+    const allCategoryLists = titleBtn.closest("li").querySelector("div");
+    const titleIcon = titleBtn.querySelector("span");
+    titleBtn.addEventListener("click", (e) => {
       titleIcon.innerHTML = titleIcon.innerHTML === "+" ? "−" : "+";
       allCategoryLists.classList.toggle("showCategory");
       priceFilter.classList.add("price-filter-pad");
@@ -245,6 +245,14 @@ function displayFilters() {
   if (!displayInput || !displayFilters) return;
   displayInput.addEventListener("click", () => {
     displayFilters.classList.toggle("show-filters");
+  });
+  document.addEventListener("click", (e) => {
+    if (
+      !displayFilters.contains(e.target) &&
+      !displayInput.contains(e.target)
+    ) {
+      displayFilters.classList.remove("show-filters");
+    }
   });
 }
 
