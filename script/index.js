@@ -77,9 +77,27 @@ async function fetchHTML() {
             </div>
         `;
   }
-  renderProducts(bouquets); //Must be loaded first
+  //renderProducts(bouquets); //Must be loaded first
+
   displayNav();
   sectionsInterSections();
+  goToShopFiltered();
+  //load filter first since its from index html
+  document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
+    radio.addEventListener("change", filterProducts);
+  });
+  const params = new URLSearchParams(window.location.search);
+  const selectedCategory = params.get("category");
+  if (selectedCategory) {
+    const radio = document.querySelector(
+      `input[name="occasions"][value="${selectedCategory}"]`,
+    );
+    if (radio) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event("change"));
+    }
+  }
+  filterProducts();
   createPagination();
   displayPage(1); //start of page
   displayCategory();
@@ -109,6 +127,20 @@ function sectionsInterSections() {
   interSectItems.forEach((item) => observer.observe(item));
 }
 
+//Selecting card from index html
+function goToShopFiltered() {
+  const filterBtn = document.querySelectorAll(".to-shop-filter-item");
+
+  filterBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.closest("li");
+      const category = btn.querySelector("span").textContent.trim();
+      window.location.href = `shop.html?category=${encodeURIComponent(category)}`;
+    });
+  });
+}
+
+//shop.html
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -183,7 +215,7 @@ function displayCountPerPage() {
   totalFlowers.textContent = productTotal;
 }
 
-//Display categories selection
+//Display category's selections
 function displayCategory() {
   const categoryTitles = document.querySelectorAll(".category-title");
   const priceFilter = document.querySelector(".price-filter");
@@ -239,6 +271,7 @@ function initializePriceSlider() {
   updateSliderTrack();
 }
 
+//To display filter categories
 function displayFilters() {
   const displayInput = document.querySelector(".filter-btn");
   const displayFilters = document.querySelector(".left-con");
@@ -257,10 +290,11 @@ function displayFilters() {
 }
 
 //Render product list
-function renderProducts(bouquets) {
+function renderProducts(filtered) {
   const cardContainer = document.querySelector(".flower-grid");
   if (!cardContainer) return;
-  bouquets.map((item) => {
+  cardContainer.innerHTML = "";
+  filtered.map((item) => {
     const li = document.createElement("li");
     li.innerHTML = `
         ${
@@ -295,9 +329,27 @@ function renderProducts(bouquets) {
           </div>
         </div>
     `;
+
     cardContainer.append(li);
   });
 }
+//filter out
+function filterProducts(category) {
+  const checkedRadio = document.querySelector(
+    'input[name="occasions"]:checked',
+  );
+
+  const activeCategory = checkedRadio ? checkedRadio.value : null;
+  const productsToRender =
+    activeCategory && activeCategory !== "all-section"
+      ? bouquets.filter((item) => item.occasion.includes(activeCategory))
+      : bouquets;
+
+  renderProducts(productsToRender);
+  createPagination();
+  displayPage(1);
+}
+
 //render badge
 function getProductBadge(condition) {
   switch (condition) {
