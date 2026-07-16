@@ -147,6 +147,9 @@
     line-height: 1.2;
 }
 @media (max-width: 640px) {
+    .index-fourth-sec {
+        padding: 24px 0;
+    }
     .fourth-sec-con> span,
     .fourth-sec-con> h3,
     .fourth-sec-con p  {

@@ -113,10 +113,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 0;
-    margin-top: 16px;
+    
 }
-.price-btn-con span {
+.price {
    font-weight: 600;
+   color: #a64b66;
 }
 .price-btn-con> button {
     display: flex;
@@ -124,7 +125,7 @@
     font-size: clamp(0.9rem, 1.1vw, 1.3rem);
     background-color: #a64b66;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 0.5rem;
     border: 1px solid #a64b66;
     color: #FFFFFF;
 }
@@ -151,6 +152,7 @@
 @media only screen and (max-width: 640px) {
     .index-second-sec {
         height: auto;
+        padding: 0;
     }
     .lower-con h3 {
         padding: 40px 0 24px 0;
@@ -190,6 +192,11 @@
         align-items: flex-start;
         gap: 16px;
         padding: 8px 0 0 0;
+        margin-top: 0;
+    }
+    .price-btn-con> button {
+        width: 100%;
+        justify-content: center;
     }
     .view-all-btn {
         display: none;

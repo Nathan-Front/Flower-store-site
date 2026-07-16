@@ -63,7 +63,7 @@
 }
 .index-third-sec p {
     width: 90%;
-    margin: 32px auto 0 auto;
+    margin: 8px auto 0 auto;
     text-align: center;
 }
 .lower-third-sec-con {
@@ -142,7 +142,7 @@
 }
 .occasion-list li small {
     position: absolute;
-    bottom: 12px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     display: none;
@@ -155,6 +155,9 @@
     color: #b24f6d;
 }
 @media only screen and (max-width: 640px) {
+    .index-third-sec  {
+        padding: 24px 0 0 0;
+    }
     .third-sec-con {
         padding: 24px 0;
     }
@@ -164,9 +167,18 @@
     .occasion-list {
         gap: 0;
         grid-template-columns: 1fr;
+        padding-bottom: 24px;
     }
     .occasion-list li {
         margin: 2rem;
+    }
+    .occasion-list li span {
+        margin: 32px 0 8px 0;
+    }
+    .occasion-list li small {
+        display: flex;
+        color: #b24f6d;
+        bottom: 16px;
     }
 }
 @media (min-width: 641px) and (max-width: 920px) {
