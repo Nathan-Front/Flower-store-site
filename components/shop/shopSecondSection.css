@@ -3,7 +3,7 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 64px 0;
-    gap: 2rem;
+    gap: 1.5rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     background-color: #ead9df;
@@ -218,7 +218,7 @@
     margin: 0 auto;
 }
 .left-bottom-con h3 {
-    font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
 }
 .left-bottom-con p {
     font-size: clamp(0.7rem, 1.1vw, 1.3rem);
@@ -241,7 +241,8 @@
 }
 .right-top-con {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 16px 0 32px 0;
 }
 /*Bouquet list*/
@@ -252,7 +253,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 .bouquet-con ul li {
     display: flex;
@@ -330,12 +331,12 @@
     display: flex;
     flex-direction: column;
     padding: 16px 0;
-    gap: 8px;
+    gap: 16px;
     align-items: stretch;
     flex: 1;
 }
 .product-name h4 {
-    font-size: clamp(1.1rem, 1.2vw, 1.5rem);
+    font-size: clamp(1.2rem, 1.3vw, 1.5rem);
 }
 .product-name,
 .product-description,
@@ -385,10 +386,35 @@
 .flower-price small {
     font-size: 0.7rem;
 }
+.cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
+    margin: 0;
+    background: transparent !important;
+}
+.cart-btn::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 2px solid #a64b66;
+    border-radius: 0.5rem;
+
+    transform: scale(0);
+    opacity: 0;
+    transition: 0.35s ease;
+}
+.cart-btn:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
 .flower-cart-icon {
     width: 35px;
-    border: 2px #a64b66 solid;
-    border-radius: 0.25rem;
+}
+.flower-cart-icon:hover {
+    cursor: pointer;
 }
 .pagination {
     padding: 32px 0;
@@ -498,10 +524,6 @@
         gap: 0;
     }
 
-
-    .right-top-con-header {
-        display: none;
-    }
     .mobile-filter {
         display: flex;
     }

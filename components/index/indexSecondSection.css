@@ -98,7 +98,7 @@
     font-weight: 600;
 }
 .lower-con ul> li> div> span {
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
     font-weight: 1000;
     margin-top: 8px;
     font-family: "Cormorant Garamond", sans-serif;

@@ -119,7 +119,7 @@ async function fetchHTML() {
   displayCategory();
   initializePriceSlider();
   displayFilters();
-  renderSelectedProduct();
+  //renderSelectedProduct();
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
@@ -298,17 +298,21 @@ function renderProducts(filtered) {
           </div>
           <div class="product-price">
             <span class="flower-price">${formatPrice(item.price)}</span>
-            <img
-              src="./images/shop/secondSection/cart-square.svg"
-              alt="cart-icon"
-              class="flower-cart-icon"
-            />
+            <div class="cart-btn">
+              <img
+                src="./images/shop/secondSection/cart-square.svg"
+                alt="cart-icon"
+                class="flower-cart-icon"
+              />
+              <span>Add To Cart</span>
+            </div>
           </div>
         </div>
     `;
 
     cardContainer.append(li);
   });
+  renderSelectedProduct();
 }
 
 //filter by occasion
