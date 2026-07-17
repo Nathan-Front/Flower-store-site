@@ -82,10 +82,15 @@ async function fetchHTML() {
   displayNav();
   sectionsInterSections();
   goToShopFiltered();
-  //load filter first since its from index html
-  document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
-    radio.addEventListener("change", filterProducts);
+  //Category filter
+  document.querySelectorAll('input[name="category"]').forEach((radio) => {
+    radio.addEventListener("change", filterProduct);
   });
+  //Occasion filter
+  document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
+    radio.addEventListener("change", filterProduct);
+  });
+  //load filter first since its from index html
   const params = new URLSearchParams(window.location.search);
   const selectedCategory = params.get("category");
   if (selectedCategory) {
@@ -97,9 +102,20 @@ async function fetchHTML() {
       radio.dispatchEvent(new Event("change"));
     }
   }
-  filterProducts();
-  createPagination();
-  displayPage(1); //start of page
+  //Price filter
+  const minSlider = document.getElementById("min-price");
+  const maxSlider = document.getElementById("max-price");
+  minSlider.addEventListener("input", filterProduct);
+  maxSlider.addEventListener("input", filterProduct);
+
+  //Color filter
+  document.querySelectorAll('input[name="color"]').forEach((radio) => {
+    radio.addEventListener("change", filterProduct);
+  });
+  //filterCategory();
+  filterProduct();
+  //createPagination();
+  //displayPage(1); //start of page
   displayCategory();
   initializePriceSlider();
   displayFilters();
@@ -165,6 +181,7 @@ function createPagination() {
   if (!cards || !paginationContainer) return;
   const cardsPerPage = getCardsPerPage();
   const totalPages = Math.ceil(cards.length / cardsPerPage);
+  currentPage = Math.min(currentPage, totalPages || 1); //always return the smaller number of the two
   paginationContainer.innerHTML = "";
   for (let i = 1; i <= totalPages; i++) {
     const button = document.createElement("button");
@@ -231,46 +248,6 @@ function displayCategory() {
   });
 }
 
-//price range slider
-function updateSliderTrack() {
-  const track = document.querySelector(".slider-track");
-  const minSlider = document.getElementById("min-price");
-  const maxSlider = document.getElementById("max-price");
-  const minValue = document.getElementById("min-value");
-  const maxValue = document.getElementById("max-value");
-  if (!track || !minSlider || !maxSlider) return;
-  const min = Number(minSlider.value);
-  const max = Number(maxSlider.value);
-  //Prevent the sliders from crossing
-  if (min > max) {
-    minSlider.value = max;
-    return updateSliderTrack();
-  }
-  //Update displayed values
-  minValue.textContent = min;
-  maxValue.textContent = max;
-  //Update track
-  const left = (min / Number(minSlider.max)) * 100;
-  const right = (max / Number(maxSlider.max)) * 100;
-  track.style.background = `
-        linear-gradient(
-            to right,
-            #ead9df ${left}%,
-            #a64b66 ${left}%,
-            #a64b66 ${right}%,
-            #ead9df ${right}%
-        )
-    `;
-}
-function initializePriceSlider() {
-  const minSlider = document.getElementById("min-price");
-  const maxSlider = document.getElementById("max-price");
-  if (!minSlider || !maxSlider) return;
-  minSlider.addEventListener("input", updateSliderTrack);
-  maxSlider.addEventListener("input", updateSliderTrack);
-  updateSliderTrack();
-}
-
 //To display filter categories
 function displayFilters() {
   const displayInput = document.querySelector(".filter-btn");
@@ -333,21 +310,46 @@ function renderProducts(filtered) {
     cardContainer.append(li);
   });
 }
-//filter out
-function filterProducts(category) {
-  const checkedRadio = document.querySelector(
+
+//filter by occasion
+function filterProduct() {
+  const checkedCategory = document.querySelector(
+    'input[name="category"]:checked',
+  )?.value;
+  const checkedOccasion = document.querySelector(
     'input[name="occasions"]:checked',
-  );
+  )?.value;
+  const checkedColor = document.querySelector(
+    'input[name="color"]:checked',
+  )?.value;
 
-  const activeCategory = checkedRadio ? checkedRadio.value : null;
-  const productsToRender =
-    activeCategory && activeCategory !== "all-section"
-      ? bouquets.filter((item) => item.occasion.includes(activeCategory))
-      : bouquets;
+  let filtered = bouquets; //get the product array
 
-  renderProducts(productsToRender);
-  createPagination();
-  displayPage(1);
+  //Category filter
+  if (checkedCategory && checkedCategory !== "all-bouquets") {
+    filtered = filtered.filter((item) => item.category === checkedCategory);
+  }
+  //Occasions filter
+  if (checkedOccasion && checkedOccasion !== "all-section") {
+    filtered = filtered.filter((item) =>
+      item.occasion.includes(checkedOccasion),
+    );
+  }
+  //Price filter
+  const min = Number(document.getElementById("min-price").value);
+  const max = Number(document.getElementById("max-price").value);
+  filtered = filtered.filter((item) => item.price >= min && item.price <= max);
+
+  //Color filter
+  if (checkedColor && checkedColor !== "all-color") {
+    filtered = filtered.filter((item) => item.color === checkedColor);
+  }
+
+  renderProducts(filtered);
+
+  currentPage = 1; //need to re-declare inside this function to be able to reset the counter start to 1
+  createPagination(); //recreate the page buttons
+  displayPage(currentPage); //updates the page content
 }
 
 //render badge
@@ -379,6 +381,47 @@ function getProductRatings(rating) {
   }
   return html;
 }
+
+//price range slider
+function updateSliderTrack() {
+  const track = document.querySelector(".slider-track");
+  const minSlider = document.getElementById("min-price");
+  const maxSlider = document.getElementById("max-price");
+  const minValue = document.getElementById("min-value");
+  const maxValue = document.getElementById("max-value");
+  if (!track || !minSlider || !maxSlider) return;
+  const min = Number(minSlider.value);
+  const max = Number(maxSlider.value);
+  //Prevent the sliders from crossing
+  if (min > max) {
+    minSlider.value = max;
+    return updateSliderTrack();
+  }
+  //Update displayed values
+  minValue.textContent = min;
+  maxValue.textContent = max;
+  //Update track
+  const left = (min / Number(minSlider.max)) * 100;
+  const right = (max / Number(maxSlider.max)) * 100;
+  track.style.background = `
+        linear-gradient(
+            to right,
+            #ead9df ${left}%,
+            #a64b66 ${left}%,
+            #a64b66 ${right}%,
+            #ead9df ${right}%
+        )
+    `;
+}
+function initializePriceSlider() {
+  const minSlider = document.getElementById("min-price");
+  const maxSlider = document.getElementById("max-price");
+  if (!minSlider || !maxSlider) return;
+  minSlider.addEventListener("input", updateSliderTrack);
+  maxSlider.addEventListener("input", updateSliderTrack);
+  updateSliderTrack();
+}
+
 //pass the star ratings
 function displayProductRating(product) {
   return `

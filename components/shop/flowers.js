@@ -1,7 +1,6 @@
 export const bouquets = [
   {
     no: 1,
-    color: "",
     product: "Blush Romance",
     price: 49.99,
     description: "Soft pink roses with elegant blooms.",
@@ -16,7 +15,6 @@ export const bouquets = [
   },
   {
     no: 2,
-    color: "",
     product: "Sunny Day",
     price: 49.99,
     description: "Bright sunflowers full of cheerful charm.",
@@ -31,7 +29,6 @@ export const bouquets = [
   },
   {
     no: 3,
-    color: "",
     product: "lavender Breeze",
     price: 54.99,
     description: "Relaxing lavender tones with fresh flowers.",
@@ -46,7 +43,6 @@ export const bouquets = [
   },
   {
     no: 4,
-    color: "",
     product: "Tulip Delight",
     price: 47.99,
     description: "Colorful tulips for joyful celebrations.",
@@ -61,7 +57,6 @@ export const bouquets = [
   },
   {
     no: 5,
-    color: "",
     product: "Ocean Whisper",
     price: 49.99,
     description: "Cool blue blooms with calming elegance.",
@@ -76,7 +71,6 @@ export const bouquets = [
   },
   {
     no: 6,
-    color: "",
     product: "Passion Bloom",
     price: 59.99,
     description: "Bold red flowers expressing deep love.",
@@ -91,7 +85,6 @@ export const bouquets = [
   },
   {
     no: 7,
-    color: "",
     product: "Peach Charm",
     price: 46.99,
     description: "Warm peach blossoms with gentle beauty.",
@@ -112,7 +105,6 @@ export const bouquets = [
   },
   {
     no: 8,
-    color: "",
     product: "Wildflower",
     price: 42.99,
     description: "Fresh meadow flowers with natural appeal.",
@@ -127,7 +119,6 @@ export const bouquets = [
   },
   {
     no: 9,
-    color: "",
     product: "Eternal Love",
     price: 58.99,
     description: "Romantic bouquet crafted for lasting memories.",
@@ -148,7 +139,6 @@ export const bouquets = [
   },
   {
     no: 10,
-    color: "",
     product: "Sweetheart",
     price: 45.99,
     description: "A lovely gift for someone special.",
@@ -169,7 +159,6 @@ export const bouquets = [
   },
   {
     no: 11,
-    color: "",
     product: "lily Grace",
     price: 52.99,
     description: "Elegant lilies with timeless sophistication.",
@@ -184,7 +173,6 @@ export const bouquets = [
   },
   {
     no: 12,
-    color: "",
     product: "Citrus Splash",
     price: 48.99,
     description: "Vibrant yellow blooms bursting with energy.",
@@ -205,7 +193,6 @@ export const bouquets = [
   },
   {
     no: 13,
-    color: "",
     product: "Midnight Beauty",
     price: 61.99,
     description: "Dark dramatic flowers with luxurious style.",
@@ -220,7 +207,6 @@ export const bouquets = [
   },
   {
     no: 14,
-    color: "",
     product: "Rainbow Joy",
     price: 53.99,
     description: "A colorful mix for every occasion.",
@@ -242,7 +228,6 @@ export const bouquets = [
   },
   {
     no: 15,
-    color: "",
     product: "Golden Hour",
     price: 50.99,
     description: "Golden blooms inspired by sunset skies.",
@@ -265,7 +250,6 @@ export const bouquets = [
   },
   {
     no: 16,
-    color: "",
     product: "Classic White",
     price: 44.99,
     description: "Pure white flowers with graceful elegance.",
@@ -286,7 +270,6 @@ export const bouquets = [
   },
   {
     no: 17,
-    color: "",
     product: "Berry Bliss",
     price: 49.99,
     description: "Rich berry shades with floral charm.",
@@ -309,7 +292,6 @@ export const bouquets = [
   },
   {
     no: 18,
-    color: "",
     product: "Soft Pastel",
     price: 47.99,
     description: "Gentle pastel flowers with delicate beauty.",
@@ -332,7 +314,6 @@ export const bouquets = [
   },
   {
     no: 19,
-    color: "",
     product: "Autumn Glow",
     price: 51.99,
     description: "Warm autumn colors in full bloom.",
@@ -355,7 +336,6 @@ export const bouquets = [
   },
   {
     no: 20,
-    color: "",
     product: "Snowflake",
     price: 48.99,
     description: "Crisp white bouquet with winter elegance.",
@@ -376,7 +356,6 @@ export const bouquets = [
   },
   {
     no: 21,
-    color: "",
     product: "Blush Romance 2",
     price: 59.99,
     description: "A luxurious take on our bestseller.",
@@ -399,7 +378,6 @@ export const bouquets = [
   },
   {
     no: 22,
-    color: "",
     product: "Pure Lily Grace",
     price: 49.99,
     description: "Premium lilies with fresh white petals.",
@@ -414,7 +392,6 @@ export const bouquets = [
   },
   {
     no: 23,
-    color: "",
     product: "Timeless Love",
     price: 69.99,
     description: "Luxury roses for unforgettable moments.",
@@ -429,7 +406,6 @@ export const bouquets = [
   },
   {
     no: 24,
-    color: "",
     product: "Sweet Delight",
     price: 54.99,
     description: "Charming blooms with a sweet touch.",
@@ -450,7 +426,6 @@ export const bouquets = [
   },
   {
     no: 25,
-    color: "",
     product: "Sunny Day 2",
     price: 44.99,
     description: "Bright blooms that spread happiness.",
@@ -471,7 +446,6 @@ export const bouquets = [
   },
   {
     no: 26,
-    color: "",
     product: "Purple Elegance",
     price: 49.99,
     description: "Elegant purple flowers with refined beauty.",
@@ -492,7 +466,6 @@ export const bouquets = [
   },
   {
     no: 27,
-    color: "",
     product: "Garden Bliss",
     price: 59.99,
     description: "Fresh garden flowers in vibrant colors.",
@@ -513,7 +486,6 @@ export const bouquets = [
   },
   {
     no: 28,
-    color: "",
     product: "Peach Dream",
     price: 49.99,
     description: "Dreamy peach blossoms with soft charm.",
@@ -536,7 +508,6 @@ export const bouquets = [
   },
   {
     no: 29,
-    color: "",
     product: "White WHisper",
     price: 54.99,
     description: "Soft white bouquet with peaceful elegance.",
@@ -557,7 +528,6 @@ export const bouquets = [
   },
   {
     no: 30,
-    color: "",
     product: "Happy Vibes",
     price: 59.99,
     description: "Bright flowers made to lift spirits.",
@@ -580,7 +550,6 @@ export const bouquets = [
   },
   {
     no: 31,
-    color: "",
     product: "Pink Perfection",
     price: 64.99,
     description: "Premium pink blooms with timeless elegance.",
@@ -603,7 +572,6 @@ export const bouquets = [
   },
   {
     no: 32,
-    color: "",
     product: "Ocean Breeze",
     price: 54.99,
     description: "Refreshing blue bouquet inspired by the sea.",
@@ -626,7 +594,6 @@ export const bouquets = [
   },
   {
     no: 33,
-    color: "",
     product: "Red Passion",
     price: 59.99,
     description: "Classic red roses for heartfelt romance.",
@@ -647,7 +614,6 @@ export const bouquets = [
   },
   {
     no: 34,
-    color: "",
     product: "Green Harmony",
     price: 49.99,
     description: "Lush greenery with fresh floral accents.",
@@ -669,7 +635,6 @@ export const bouquets = [
   },
   {
     no: 35,
-    color: "",
     product: "Golden Tulips",
     price: 44.99,
     description: "Golden tulips full of joyful warmth.",
@@ -684,7 +649,6 @@ export const bouquets = [
   },
   {
     no: 36,
-    color: "",
     product: "Lavender Dream",
     price: 59.99,
     description: "Elegant lavender bouquet with soothing charm.",
@@ -705,7 +669,6 @@ export const bouquets = [
   },
   {
     no: 37,
-    color: "",
     product: "Daisy Charm",
     price: 39.99,
     description: "Simple daisies with cheerful countryside beauty.",
@@ -727,7 +690,6 @@ export const bouquets = [
   },
   {
     no: 38,
-    color: "",
     product: "Vibrant Joy",
     price: 49.99,
     description: "A lively bouquet bursting with color.",
