@@ -64,6 +64,9 @@ async function fetchHTML() {
         fetch("./components/about/aboutFirstSection.html").then((res) =>
           res.text(),
         ),
+        fetch("./components/about/aboutSecondSection.html").then((res) =>
+          res.text(),
+        ),
       ]);
     }
     //clear app content
