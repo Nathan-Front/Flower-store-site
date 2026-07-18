@@ -282,6 +282,7 @@ function renderProducts(filtered) {
         <img
             src="${item.image}"
             alt="${item.imgAlt}-image"
+            class="bouquet-img"
         />
         <div class="flower-info">
           <div class="product-name">
@@ -298,14 +299,10 @@ function renderProducts(filtered) {
           </div>
           <div class="product-price">
             <span class="flower-price">${formatPrice(item.price)}</span>
-            <div class="cart-btn">
-              <img
-                src="./images/shop/secondSection/cart-square.svg"
-                alt="cart-icon"
-                class="flower-cart-icon"
-              />
+            <button class="cart-btn">
+              <i class="fa-solid fa-cart-shopping cart-icon"></i>
               <span>Add To Cart</span>
-            </div>
+            </button>
           </div>
         </div>
     `;
@@ -443,7 +440,7 @@ function formatPrice(price) {
 
 //Selected product detail modal
 function renderSelectedProduct() {
-  const addToCartBtn = document.querySelectorAll(".flower-cart-icon");
+  const addToCartBtn = document.querySelectorAll(".cart-btn");
   if (!addToCartBtn) return;
 
   addToCartBtn.forEach((btn) => {

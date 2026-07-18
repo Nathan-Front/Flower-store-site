@@ -149,7 +149,8 @@
 }
 .color-category {
     width: 95%;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0 2px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20px, max-content));
     gap: 8px;
@@ -308,6 +309,10 @@
         opacity:1;
     }
 }*/
+.bouquet-img {
+    width: 100%;
+   
+}
 .new {
     color: #9A4D66;
     background: #EAD9DF;
@@ -381,7 +386,9 @@
     color: #777;
 }
 .flower-price {
-    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    font-weight: 600;
+    color: #a64b66;
 }
 .flower-price small {
     font-size: 0.7rem;
@@ -393,25 +400,24 @@
     justify-content: center;
     padding: 0 2px;
     margin: 0;
-    background: transparent !important;
-}
-.cart-btn::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border: 2px solid #a64b66;
+    gap: 4px;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+    background-color: #a64b66 !important;
+    padding: 6px;
     border-radius: 0.5rem;
-
-    transform: scale(0);
-    opacity: 0;
-    transition: 0.35s ease;
+    border: 1px solid #a64b66;
+    color: #FFFFFF;
 }
-.cart-btn:hover::before {
-    transform: scale(1);
-    opacity: 1;
+.cart-btn:hover {
+    background-color: #FFFFFF !important;
+    border: 1px solid #a64b66;
+    color: #a64b66;
 }
-.flower-cart-icon {
-    width: 35px;
+.cart-btn i {
+    color: white;
+}
+.cart-btn:hover i {
+    color: #a64b66;
 }
 .flower-cart-icon:hover {
     cursor: pointer;

@@ -146,7 +146,7 @@ nav {
     width: auto;
     margin-left: 1rem;
 }
-.cart-btn {
+.cart-button {
     margin: 0 1rem 0 3rem;
     padding-right: 12px;
     padding-top: 8px;
@@ -156,7 +156,7 @@ nav {
     background:#f6eee5;
     transition: 0.4s ease;
 }
-.cart-btn:hover {
+.cart-button:hover {
     cursor: pointer;
     background:#c48b71;
 }
@@ -180,10 +180,10 @@ nav {
 .fa-cart-shopping {
     color: #c48b71;
 }
-.cart-btn:hover .fa-cart-shopping {
+.cart-button:hover .fa-cart-shopping {
     color: #f6eee5;
 }
-.cart-btn:hover .cart-count {
+.cart-button:hover .cart-count {
     background: #f6eee5;
     color: #c48b71;
 }
@@ -205,7 +205,7 @@ nav {
     background:#c48b71;
     color: #f6eee5;
 }
-.cart-btn,
+.cart-button,
 .menu-btn {
     border: none;
 }
