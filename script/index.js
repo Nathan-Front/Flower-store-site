@@ -1,4 +1,5 @@
 import { bestSeller } from "../components/index/bestSeller.js";
+import { occasions } from "../components/index/occasions.js";
 import { bouquets } from "../components/shop/flowers.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
@@ -80,6 +81,7 @@ async function fetchHTML() {
   }
   //renderProducts(bouquets); //Must be loaded first
   renderBestSellers();
+  renderOccasionCards();
   displayNav();
   sectionsInterSections();
   goToShopFiltered();
@@ -149,6 +151,33 @@ function renderBestSellers() {
           </div>
         </div>
   `;
+    cards.append(li);
+  });
+}
+function renderOccasionCards() {
+  const cards = document.querySelector(".occasion-list");
+  if (!cards) return;
+
+  occasions.map((item) => {
+    const li = document.createElement("li");
+    li.classList.add("to-shop-filter-item");
+    li.innerHTML = `
+      <div class="image-wrapper">
+          <img
+            src=${item.mainImg}
+            alt="bouquet ${item.no}"
+            class="bouquet-img"
+          />
+          <img
+            src=${item.circleImg}
+            alt="image-icon-${item.no}"
+            class="round-images"
+          />
+        </div>
+        <span>${item.cardTitle}</span>
+        <p>${item.cardText}</p>
+        <small>Explore More</small>
+    `;
     cards.append(li);
   });
 }
