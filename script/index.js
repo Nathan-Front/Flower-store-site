@@ -59,7 +59,13 @@ async function fetchHTML() {
         ),
       ]);
     }
-
+    if (page === "about") {
+      sections = await Promise.all([
+        fetch("./components/about/aboutFirstSection.html").then((res) =>
+          res.text(),
+        ),
+      ]);
+    }
     //clear app content
     app.innerHTML = "";
     //render sections based on page
