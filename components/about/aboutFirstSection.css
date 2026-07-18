@@ -1,0 +1,140 @@
+.about-first-sec {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+.about-banner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.about-first-sec h2 {
+    display: flex;
+    gap: 1rem;
+    font-size: clamp(3rem, 5vw, 6rem); 
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: #5f5b57;
+    letter-spacing: 1.5px;
+    margin: 0 0 0 80px;
+}
+.image-divider {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 0 200px;
+    position: relative;
+    width: 50px;
+}
+.image-divider img {
+    width: 100%;
+}
+.image-divider::before,
+.image-divider::after  {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 1px;
+    background-color: #a64b66;
+    top: 50%;
+    transform: translateX(-50%);
+    border-radius: 0.25rem;
+}
+.image-divider::before {
+    left: -60px;
+}
+.image-divider::after {
+    right: -180px;
+}
+.about-first-sec span {
+    color: #a64b66;
+}
+.about-sub-title {
+    width: 40%;
+    font-size: clamp(1.1rem, 1.5vw, 2.5rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1.2px;
+    margin: 0 0 0 80px;
+    line-height: 1.5;
+}
+.about-description {
+    width: 40%;
+    font-size: clamp(1.1rem, 1.5vw, 2.5rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1.2px;
+    margin: 0 0 0 80px;
+}
+.about-description span{
+    display: block;
+    color: black;
+}
+@media only screen and (max-width: 640px) {
+    .about-first-sec {
+        height: fit-content;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 24px;
+        aspect-ratio: unset;
+        padding: 24px 0 40px 0;
+    }
+    .about-first-sec h2 {
+        margin: 80px 0 0 0;
+    }
+    .image-divider {
+        margin: 0 0 0 0;
+    }
+    .about-first-sec p,
+    .about-sub-title {
+        width: 90%;
+        margin: 0 0 0 0;
+        text-align: center;
+    }
+    .about-banner {
+        filter: blur(4px);
+        transform: scale(1.03);
+        background: rgba(255,255,255,.35);
+    }
+}
+@media (min-width: 641px) and (max-width: 950px) {
+    .about-first-sec {
+        height: 60dvh;
+        gap: 32px;
+    }
+    .about-banner {
+        filter: blur(2px);
+        transform: scale(1.03);
+        background: rgba(255,255,255,.35);
+    }
+    .about-first-sec h2,
+    .about-first-sec p,
+    .about-sub-title {
+        margin: 0 0 0 48px;
+    }
+    .about-sub-title,
+    .about-description {
+        width: 50%;
+    } 
+    .image-divider {
+        margin: 0 0 0 130px;
+    }
+    .image-divider::before,
+    .image-divider::after  {
+        width: 80px;
+    }
+    .image-divider::before {
+        left: -40px;
+    }
+    .image-divider::after {
+        right: -120px;
+    }
+}
+@media (min-width: 1536px) and (max-width: 2560px) {
+    
+}
