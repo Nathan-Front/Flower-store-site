@@ -1,3 +1,4 @@
+import { bestSeller } from "../components/index/bestSeller.js";
 import { bouquets } from "../components/shop/flowers.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
@@ -78,7 +79,7 @@ async function fetchHTML() {
         `;
   }
   //renderProducts(bouquets); //Must be loaded first
-
+  renderBestSellers();
   displayNav();
   sectionsInterSections();
   goToShopFiltered();
@@ -105,6 +106,7 @@ async function fetchHTML() {
   //Price filter
   const minSlider = document.getElementById("min-price");
   const maxSlider = document.getElementById("max-price");
+  if (!minSlider || !maxSlider) return;
   minSlider.addEventListener("input", filterProduct);
   maxSlider.addEventListener("input", filterProduct);
 
@@ -124,6 +126,32 @@ async function fetchHTML() {
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
 
+//Render index cards
+function renderBestSellers() {
+  const cards = document.querySelector(".best-seller-cards");
+  if (!cards) return;
+
+  //li.innerHTML = "";
+  bestSeller.map((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+    <img src=${item.image} alt="bouquet-1" />
+        <div>
+          <small>Best Seller</small>
+          <span>${item.product}</span>
+          <p>${item.description}</p>
+          <div class="price-btn-con">
+            <span class="price">${formatPrice(item.price)}</span>
+            <button aria-label="Add to cart" class="add-to-cart-btn">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Add to Cart →
+            </button>
+          </div>
+        </div>
+  `;
+    cards.append(li);
+  });
+}
 function sectionsInterSections() {
   const interSectItems = document.querySelectorAll(".intersect-items");
   if (!interSectItems.length) return;
