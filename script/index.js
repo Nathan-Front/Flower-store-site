@@ -1,5 +1,6 @@
 import { bestSeller } from "../components/index/bestSeller.js";
 import { occasions } from "../components/index/occasions.js";
+import { cards } from "../components/index/cards.js";
 import { bouquets } from "../components/shop/flowers.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
@@ -82,6 +83,7 @@ async function fetchHTML() {
   //renderProducts(bouquets); //Must be loaded first
   renderBestSellers();
   renderOccasionCards();
+  renderCards();
   displayNav();
   sectionsInterSections();
   goToShopFiltered();
@@ -129,6 +131,7 @@ async function fetchHTML() {
 document.addEventListener("DOMContentLoaded", fetchHTML);
 
 //Render index cards
+//firstSection content
 function renderBestSellers() {
   const cards = document.querySelector(".best-seller-cards");
   if (!cards) return;
@@ -154,10 +157,10 @@ function renderBestSellers() {
     cards.append(li);
   });
 }
+//secondSection content
 function renderOccasionCards() {
   const cards = document.querySelector(".occasion-list");
   if (!cards) return;
-
   occasions.map((item) => {
     const li = document.createElement("li");
     li.classList.add("to-shop-filter-item");
@@ -179,6 +182,27 @@ function renderOccasionCards() {
         <small>Explore More</small>
     `;
     cards.append(li);
+  });
+}
+//thirdSection content
+function renderCards() {
+  const cardTiles = document.querySelector(".why-us-list");
+  if (!cardTiles) return;
+  cards.map((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <img
+        src=${item.mainImage}
+        alt=${item.mainImgAlt}
+        class="why-us-icon"
+      />
+      <span>${item.cardTitle}</span>
+      <div class="heart-con">
+        <img src="./images/index/fourthSection/heart.svg" alt="heart-image" />
+      </div>
+      <p>${item.cardText}</p>
+    `;
+    cardTiles.append(li);
   });
 }
 function sectionsInterSections() {
