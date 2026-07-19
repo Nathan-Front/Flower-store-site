@@ -5,14 +5,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    padding: 40px 0;  
+    padding: 80px 0;  
 }
 .hero-con {
     grid-column: 1 / 2;
     padding: 32px;
     display: flex;
     justify-content: center;
-    
 }
 .hero-con img {
     width: clamp(300px, 40vw, 700px);
@@ -29,6 +28,7 @@
 .about-us-con> span {
     font-size: clamp(1.1rem, 2vw, 2rem);
     color: #a64b66;
+    text-transform: uppercase;
 }
 .about-us-con> h3 {
     font-size: clamp(1.5rem, 3vw, 2.5rem);

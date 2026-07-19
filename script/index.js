@@ -2,7 +2,7 @@ import { bestSeller } from "../components/index/bestSeller.js";
 import { occasions } from "../components/index/occasions.js";
 import { cards } from "../components/index/cards.js";
 import { bouquets } from "../components/shop/flowers.js";
-import { renderAboutCards } from "./about.js";
+import { renderAboutCards, renderWhyUs } from "./about.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -71,6 +71,9 @@ async function fetchHTML() {
         fetch("./components/about/aboutThirdSection.html").then((res) =>
           res.text(),
         ),
+        fetch("./components/about/aboutFourthSection.html").then((res) =>
+          res.text(),
+        ),
       ]);
     }
     //clear app content
@@ -103,6 +106,7 @@ async function fetchHTML() {
 
   //about contents
   renderAboutCards();
+  renderWhyUs();
   //Category filter
   document.querySelectorAll('input[name="category"]').forEach((radio) => {
     radio.addEventListener("change", filterProduct);
