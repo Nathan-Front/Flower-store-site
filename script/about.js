@@ -1,4 +1,4 @@
-import { aboutCards } from "../components/about/aboutCard.js";
+import { aboutCards, aboutBottomCards } from "../components/about/aboutCard.js";
 import { whyChooseUs } from "../components/about/whyUs.js";
 export function renderAboutCards() {
   const cards = document.querySelector(".about-card-list");
@@ -15,7 +15,7 @@ export function renderAboutCards() {
     cards.append(li);
   });
 }
-
+//Render upper cards
 export function renderWhyUs() {
   const cards = document.querySelector(".about-why-us-list");
   if (!cards) return;
@@ -28,7 +28,23 @@ export function renderWhyUs() {
     cards.append(li);
   });
 }
-
+//render lower cards
+export function renderOurPromise() {
+  const cards = document.querySelector(".about-card-bot-list");
+  if (!cards) return;
+  aboutBottomCards.map((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+            <img src=${item.cardImg} alt=${item.cardImgAlt} />
+            <div>
+              <span>${item.cardTitle}</span>
+              <p>${item.cardText}</p>
+            </div>
+        `;
+    cards.append(li);
+  });
+}
+//Intersection function
 export function aboutIntersection() {
   const interSect = document.querySelectorAll(".about-intersecting");
   if (!interSect.length) return;
