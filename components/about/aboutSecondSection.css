@@ -1,5 +1,7 @@
 .about-second-sec {
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
@@ -8,29 +10,30 @@
 .hero-con {
     grid-column: 1 / 2;
     padding: 32px;
+    display: flex;
+    justify-content: center;
+    
 }
 .hero-con img {
-    width: 100%;
+    width: clamp(300px, 40vw, 700px);
     border-radius: 0.5rem;
 }
 .about-us-con {
     grid-column: 2 / 3;
+    width: 95%;
     padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
-.about-us-con> h3 {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;  
-}
-.about-us-con> h3> span:first-child {
+.about-us-con> span {
+    font-size: clamp(1.1rem, 2vw, 2rem);
     color: #a64b66;
 }
-.about-us-con> h3> span:last-child {
+.about-us-con> h3 {
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    margin-top: -20px;
 }
 @media only screen and (max-width: 799px) {
     .about-second-sec {
