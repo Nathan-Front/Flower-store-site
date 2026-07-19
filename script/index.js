@@ -84,6 +84,13 @@ async function fetchHTML() {
         ),
       ]);
     }
+    if (page === "contact") {
+      sections = await Promise.all([
+        fetch("./components/contact/contactFirstSection.html").then((res) =>
+          res.text(),
+        ),
+      ]);
+    }
     //clear app content
     app.innerHTML = "";
     //render sections based on page

@@ -1,4 +1,4 @@
-.about-first-sec {
+.contact-first-sec {
     width: 100%;
     height: 100dvh;
     display: flex;
@@ -9,7 +9,7 @@
     aspect-ratio: 1;
     overflow: hidden;
 }
-.about-banner {
+.contact-banner {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -17,27 +17,29 @@
     left: 0;
     z-index: -1;
 }
-.about-first-sec h2 {
+.contact-first-sec h2 {
     display: flex;
     gap: 1rem;
     font-size: clamp(3rem, 5vw, 6rem); 
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     color: #5f5b57;
     letter-spacing: 1.5px;
-    margin: 0 0 0 80px;
 }
-.image-divider {
+.contact-first-sec h2 span {
+    color: #a64b66;
+}
+.contact-banner-divider {
     display: flex;
     justify-content: center;
     margin: 0 0 0 200px;
     position: relative;
     width: 50px;
 }
-.image-divider img {
+.contact-banner-divider img {
     width: 100%;
 }
-.image-divider::before,
-.image-divider::after  {
+.contact-banner-divider::before,
+.contact-banner-divider::after {
     content: "";
     position: absolute;
     width: 120px;
@@ -47,36 +49,49 @@
     transform: translateX(-50%);
     border-radius: 0.25rem;
 }
-.image-divider::before {
+.contact-banner-divider::before {
     left: -60px;
 }
-.image-divider::after {
+.contact-banner-divider::after {
     right: -180px;
 }
-.about-first-sec span {
+.contact-first-sec p {
+    width: 45%;
+    font-size: clamp(1.1rem, 1.5vw, 2.5rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1.2px;
+}
+.contact-first-sec a {
+    width: fit-content;
+    background-color: #a64b66;
+    padding: 0.5rem 1rem;
+    font-size: clamp(1.3rem, 1.6vw, 1.8rem);
+    border-radius: 0.5rem;
+    border: 1px solid #a64b66;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s ease;
+}
+.contact-first-sec a:hover {
+    background-color: white;
     color: #a64b66;
 }
-.about-sub-title {
-    width: 40%;
-    font-size: clamp(1.1rem, 1.5vw, 2.5rem);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1.2px;
-    margin: 0 0 0 80px;
-    line-height: 1.5;
+.contact-first-sec a img {
+    width: 30px;
 }
-.about-description {
-    width: 40%;
-    font-size: clamp(1.1rem, 1.5vw, 2.5rem);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1.2px;
-    margin: 0 0 0 80px;
+.contact-first-sec a:hover img {
+    filter: brightness(0) saturate(100%) invert(37%) sepia(18%) saturate(1392%)
+        hue-rotate(290deg) brightness(93%) contrast(95%);
 }
-.about-description span{
-    display: block;
-    color: black;
+.contact-first-sec h2,
+.contact-first-sec p,
+.contact-first-sec a {
+    margin: 0 0 0 80px;
 }
 @media only screen and (max-width: 640px) {
-    .about-first-sec {
+    .contact-first-sec {
         height: fit-content;
         justify-content: flex-start;
         align-items: center;
@@ -84,54 +99,59 @@
         aspect-ratio: unset;
         padding: 24px 0 40px 0;
     }
-    .about-first-sec h2 {
+    .contact-first-sec h2 {
+        width: 90%;
         margin: 80px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    .image-divider {
+    .contact-banner-divider {
         margin: 0 0 0 0;
     }
-    .about-first-sec p,
-    .about-sub-title {
+    .contact-first-sec p {
         width: 90%;
         margin: 0 0 0 0;
         text-align: center;
     }
-    .about-banner {
+    .contact-first-sec a {
+        margin: 0 0 0 0;
+    }
+    .contact-banner  {
         filter: blur(4px);
         transform: scale(1.03);
         background: rgba(255,255,255,.35);
     }
 }
 @media (min-width: 641px) and (max-width: 950px) {
-    .about-first-sec {
+    .contact-first-sec {
         height: 60dvh;
         gap: 32px;
     }
-    .about-banner {
+    .contact-banner {
         filter: blur(2px);
         transform: scale(1.03);
         background: rgba(255,255,255,.35);
     }
-    .about-first-sec h2,
-    .about-first-sec p,
-    .about-sub-title {
+    .contact-first-sec h2,
+    .contact-first-sec p,
+    .contact-first-sec a {
         margin: 0 0 0 48px;
     }
-    .about-sub-title,
-    .about-description {
+    .contact-first-sec p {
         width: 50%;
-    } 
-    .image-divider {
+    }
+    .contact-banner-divider {
         margin: 0 0 0 130px;
     }
-    .image-divider::before,
-    .image-divider::after  {
+    .contact-banner-divider::before,
+    .contact-banner-divider::after  {
         width: 80px;
     }
-    .image-divider::before {
+    .contact-banner-divider::before {
         left: -40px;
     }
-    .image-divider::after {
+    .contact-banner-divider::after {
         right: -120px;
     }
 }
