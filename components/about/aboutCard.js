@@ -1,7 +1,7 @@
 export const aboutCards = [
   {
     no: 1,
-    cardImg: "./images/about/thirdSection/flower-circle.png",
+    cardImg: "./images/about/thirdSection/flower-circle.webp",
     cardImgAlt: "flower-icon",
     cardTitle: "Fresh & Handpicked",
     cardText:
@@ -9,7 +9,7 @@ export const aboutCards = [
   },
   {
     no: 2,
-    cardImg: "./images/about/thirdSection/heart-circle.png",
+    cardImg: "./images/about/thirdSection/heart-circle.webp",
     cardImgAlt: "heart-icon",
     cardTitle: "Made with Love",
     cardText:
@@ -17,7 +17,7 @@ export const aboutCards = [
   },
   {
     no: 3,
-    cardImg: "./images/about/thirdSection/leave-circle.png",
+    cardImg: "./images/about/thirdSection/leave-circle.webp",
     cardImgAlt: "leaves-icon",
     cardTitle: "Sustainable Choices",
     cardText:
@@ -25,7 +25,7 @@ export const aboutCards = [
   },
   {
     no: 4,
-    cardImg: "./images/about/thirdSection/gift-circle.png",
+    cardImg: "./images/about/thirdSection/gift-circle.webp",
     cardImgAlt: "gift-icon",
     cardTitle: "Customer Happiness",
     cardText:
