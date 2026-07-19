@@ -71,7 +71,6 @@
     top: 0;
     left: 0;
     z-index: -1;  
-    filter: blur(1px);
 }
 @media only screen and (max-width: 640px) {
     .about-fourth-sec {
@@ -96,6 +95,12 @@
     .about-why-us-cover {
         filter: blur(4px);
         transform: scale(1.03);
+        background: rgba(255,255,255,.35);
+    }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+    .about-why-us-cover {
+        filter: blur(2px);
         background: rgba(255,255,255,.35);
     }
 }
