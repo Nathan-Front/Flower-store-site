@@ -28,3 +28,22 @@ export function renderWhyUs() {
     cards.append(li);
   });
 }
+
+export function aboutIntersection() {
+  const interSect = document.querySelectorAll(".about-intersecting");
+  if (!interSect.length) return;
+  const observer = new IntersectionObserver(
+    (entries, observe) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("about-intersect");
+          observe.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    },
+  );
+  interSect.forEach((item) => observer.observe(item));
+}
