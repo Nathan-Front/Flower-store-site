@@ -53,7 +53,7 @@ export const aboutBottomCards = [
     cardImg: "./images/about/fifthSection/heart.svg",
     cardImgAlt: "heart-icon",
     cardTitle: "100% Satisfaction",
-    cardText: "Not happy with the anything? We'll make it right for you.",
+    cardText: "Not happy with the flower? We'll make it right for you.",
   },
   {
     no: 4,

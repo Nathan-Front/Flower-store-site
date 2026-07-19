@@ -69,7 +69,7 @@
     top: 25%;
     height: 60%; 
     width: 1px;
-    background: #D69AAA;
+    background: rgba(214, 154, 170, 0.35);
     border-radius: 1rem;
 }
 .about-card-list li img {
