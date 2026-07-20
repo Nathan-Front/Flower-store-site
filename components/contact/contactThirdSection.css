@@ -179,5 +179,48 @@ form div textarea:focus {
     visibility: hidden;
 }
 .third-form-con p {
+    width: 90%;
+    margin: 0 auto;
     text-align: center;
+}
+@media only screen and (max-width: 640px) {
+    .contact-third-sec {
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 40px 0;
+    }
+    .third-details-con {
+        width: 90%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    .upper-divider {
+        margin: 0 auto;
+    }
+    .upper-divider::after {
+        content: "";
+        position: absolute;
+        width: 80px;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -83px;
+        height: 1px;
+        background-color: #a64b66;
+    }
+    .get-in-touch-title {
+        text-align: center;
+        margin-top: -32px;
+    }
+    .title-second {
+        text-align: center;
+    }
+    .get-in-touch-text {
+        text-align: center;
+    }
+    .contact-channels {
+        margin: 0 auto;
+    }
+    .third-form-con {
+        margin: 0 auto;
+    }
 }
