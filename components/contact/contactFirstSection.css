@@ -125,7 +125,6 @@
 }
 @media (min-width: 641px) and (max-width: 950px) {
     .contact-first-sec {
-        height: 60dvh;
         gap: 32px;
     }
     .contact-banner {

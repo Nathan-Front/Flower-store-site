@@ -1,6 +1,7 @@
 .about-fifth-sec {
     width: 100%;
     max-width: 1400px;
+    height: 100dvh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -34,7 +35,6 @@
     gap: 24px;
     padding: 16px 12px;
     text-align: center;
-    
 }
 .about-card-bot-list li:not(:last-child) {
     position: relative;
@@ -89,7 +89,7 @@
         background-color: transparent;
     }
     .about-card-bot-list li {
-        width: 90%;
+        width: 100%;
         align-items: center;
         flex-direction: row;
         text-align: left;
