@@ -89,6 +89,9 @@ async function fetchHTML() {
         fetch("./components/contact/contactFirstSection.html").then((res) =>
           res.text(),
         ),
+        fetch("./components/contact/contactSecondSection.html").then((res) =>
+          res.text(),
+        ),
       ]);
     }
     //clear app content
