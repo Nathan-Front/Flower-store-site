@@ -8,6 +8,7 @@ import {
   renderOurPromise,
   aboutIntersection,
 } from "./about.js";
+import { contactIntersection } from "./contact.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -117,7 +118,6 @@ async function fetchHTML() {
             </div>
         `;
   }
-  //renderProducts(bouquets); //Must be loaded first
   renderBestSellers();
   renderOccasionCards();
   renderCards();
@@ -130,6 +130,9 @@ async function fetchHTML() {
   renderWhyUs();
   renderOurPromise();
   aboutIntersection();
+
+  //contact contents
+  contactIntersection();
 
   //Category filter
   document.querySelectorAll('input[name="category"]').forEach((radio) => {

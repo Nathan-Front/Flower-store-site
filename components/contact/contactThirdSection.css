@@ -4,6 +4,7 @@
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    padding: 40px 100px;
 }
 .contact-sub-con {
     width: 100%;
@@ -54,7 +55,7 @@
     gap: 16px;
 }
 .contact-channels> li {
-    width: 40px;
+    width: clamp(30px, 5vw, 40px);
 }
 .contact-channels> li> a {
     width: 100%;
@@ -137,6 +138,10 @@ form div input {
     top: 8px;
     right: 8px;
 }
+.background-icon,
+.textarea-background-icon {
+    filter: invert(42%) sepia(13%) saturate(698%) hue-rotate(54deg) brightness(92%) contrast(92%);
+} 
 form div textarea {
     width: 100%;
     height: 120px;
@@ -189,11 +194,14 @@ form div textarea:focus {
     z-index: -1;
 }
 @media only screen and (max-width: 640px) {
+    .contact-third-sec {
+        padding: 32px 0;
+    }
     .contact-sub-con {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 40px 0;
+        padding: 0;
     }
     .third-details-con {
         width: 90%;
@@ -229,9 +237,16 @@ form div textarea:focus {
     .third-form-con {
         width: 90%;
         margin: 0 auto;
+        padding: 24px 0;
+    }
+    .third-form-con p {
+        width: 80%;
     }
 }
 @media (min-width: 641px) and (max-width: 950px) {
+    .contact-third-sec {
+        padding: 40px 0;
+    }
     .contact-sub-con {
         grid-template-columns: 1fr;
         justify-items: center;

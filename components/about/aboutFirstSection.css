@@ -135,3 +135,13 @@
         right: -120px;
     }
 }
+/*Intersect function*/
+.about-intersecting {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.about-intersecting.about-intersect {
+    transform: translateY(0);
+    opacity: 1;
+}
