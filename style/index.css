@@ -50,6 +50,7 @@ h1, h2, h3, h4 {
 }
 h1 {
     font-size: clamp(1.5rem, 3vw, 4rem);
+    color: #2c3e35;
 }
 h1> span {
     color: darksalmon;
@@ -111,7 +112,7 @@ nav {
 }
 .nav-links> li> a {
     font-weight: 700;
-    color: #3F3F3F;
+    color: #2c3e35;
     font-size: clamp(1.1rem, 2vw, 1.8rem);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -153,7 +154,7 @@ nav {
     position: relative;
     padding: 0.6rem 0.8rem;
     border-radius: 0.65rem;
-    background:#f6eee5;
+    background:#2c3e35;
     transition: 0.4s ease;
 }
 .cart-button:hover {
@@ -171,8 +172,8 @@ nav {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #c48b71;
-    color: white;
+    background: #2c3e35;
+    color: #c48b71;
     font-size: 0.75rem;
     width: 3ch; 
     transition: 0.4s ease;
@@ -181,11 +182,11 @@ nav {
     color: #c48b71;
 }
 .cart-button:hover .fa-cart-shopping {
-    color: #f6eee5;
+    color: #2c3e35;
 }
 .cart-button:hover .cart-count {
     background: #f6eee5;
-    color: #c48b71;
+    color: #2c3e35;
 }
 .menu-btn {
     background: transparent;
@@ -197,13 +198,14 @@ nav {
 .fa-xmark {
     padding: 0.75rem 0.8rem;
     border-radius: 0.65rem;
-    background:#f6eee5;
+    background:#2c3e35;
     color: #c48b71;
+    transition: 0.4s ease;
 }
 .fa-bars:hover,
 .fa-xmark:hover {
     background:#c48b71;
-    color: #f6eee5;
+    color: #2c3e35;
 }
 .cart-button,
 .menu-btn {
