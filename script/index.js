@@ -8,7 +8,7 @@ import {
   renderOurPromise,
   aboutIntersection,
 } from "./about.js";
-import { contactIntersection } from "./contact.js";
+import { contactIntersection, sendMessage } from "./contact.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -133,6 +133,7 @@ async function fetchHTML() {
 
   //contact contents
   contactIntersection();
+  sendMessage();
 
   //Category filter
   document.querySelectorAll('input[name="category"]').forEach((radio) => {

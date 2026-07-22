@@ -172,13 +172,13 @@ form div textarea:focus {
     color: #a64b66;
     background-color: white;
 }
-.spinner {
-    display: none;
-}
 .honeypot {
     position: absolute;
     left: 99999999;
     visibility: hidden;
+}
+#email.error {
+    border: 2px solid #ff4d4d;
 }
 .third-form-con p {
     width: 90%;
@@ -192,6 +192,50 @@ form div textarea:focus {
     top: 0;
     left: 0;
     z-index: -1;
+}
+/*overlay and spinner during form submit*/
+.contact-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 9;
+    transition: 0.4s ease;
+}
+.contact-overlay.activeOverlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.spinner {
+    display: none;
+}
+.spinner.activeSpinner {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border: 4px solid rgba(255,255,255,.4);
+    border-top-color: #a64b66;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin .8s linear infinite;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 100;
+}
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 @media only screen and (max-width: 640px) {
     .contact-third-sec {
