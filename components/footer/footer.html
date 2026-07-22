@@ -42,15 +42,18 @@
         first order.
       </p>
       <form class="newsletter-form" id="subscribe-form">
+        <input type="hidden" name="formType" value="subscribe" />
         <input
           type="email"
           name="email"
+          id="subscribe"
           autocomplete="email"
           placeholder="Your email address"
           required
           aria-label="Email address"
         />
-        <button type="submit">Join</button>
+        <input type="text" name="website" class="footer-honeypot" />
+        <button type="submit" id="subscribe-btn">Join</button>
       </form>
     </div>
   </div>

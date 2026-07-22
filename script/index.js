@@ -9,6 +9,7 @@ import {
   aboutIntersection,
 } from "./about.js";
 import { contactIntersection, sendMessage } from "./contact.js";
+import { newSubscriber } from "./footer.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -118,6 +119,9 @@ async function fetchHTML() {
             </div>
         `;
   }
+  //footer subscribe
+  newSubscriber();
+
   renderBestSellers();
   renderOccasionCards();
   renderCards();

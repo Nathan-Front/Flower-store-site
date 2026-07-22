@@ -26,7 +26,7 @@ export function sendMessage() {
   const sendBtn = document.querySelector(".send-button");
   emailInput.addEventListener("input", () => {
     if (validateEmail(emailInput.value)) {
-      emailInput.classList.remove("error"); //prevents the error border when typing
+      emailInput.classList.remove("error");
     }
   });
   let lastSent = 0;
@@ -43,10 +43,9 @@ export function sendMessage() {
     if (trap.value !== "") {
       return;
     }
-    //Setup timer to stop multi sending
+    //Setup timer to stop multi sending 30s
     const now = Date.now();
     if (now - lastSent < 30000) {
-      //30S
       alert("Please wait before sending another message!");
       return;
     }
@@ -65,14 +64,12 @@ export function sendMessage() {
       message: document.getElementById("message").value,
     };
     try {
-      const formData = new FormData();
-
+      const formData = new FormData(form); //form should be the value to be able to get the hidden input formType
       Object.entries(inputParams).forEach(([key, value]) => {
         formData.append(key, value);
       });
-
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycby_LSrUNhJmXmNJgou1TniC5pLoLiSDdzHKoQNzwunu2si--oZFrqfDDir5qzEGRlNR/exec",
+        "https://script.google.com/macros/s/AKfycbyNcdls_ikZMoc7rnJuZGukLEhBcHbVXx6WFGIAj-Z1bZBpi6MqTJ1b8RkhLrYUqKgf/exec",
         {
           method: "POST",
           body: formData,

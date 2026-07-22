@@ -108,14 +108,14 @@
 .form-divider img {
     width: 100%;
 }
-form {
+.contact-form {
     width: 100%;
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-form div {
+.contact-form div {
     width: 100%;
     position: relative;
 }
@@ -126,7 +126,7 @@ form div {
     transform: translateY(-50%);
     right: 8px;
 }
-form div input {
+.contact-form div input {
     width: 100%;
     padding: 10px 24px 10px 8px;
     border-radius: 0.5rem;
@@ -142,7 +142,7 @@ form div input {
 .textarea-background-icon {
     filter: invert(42%) sepia(13%) saturate(698%) hue-rotate(54deg) brightness(92%) contrast(92%);
 } 
-form div textarea {
+.contact-form div textarea {
     width: 100%;
     height: 120px;
     padding: 10px 24px 10px 8px;
@@ -153,8 +153,8 @@ input::placeholder,
 textarea::placeholder {
     font-family: "Cormorant Garamond", serif;
 }
-form div input:focus,
-form div textarea:focus {
+.contact-form div input:focus,
+.contact-form div textarea:focus {
     outline: none;
     border-color: #A64B66;
     box-shadow: 0 0 0 1px rgba(166, 75, 102, 0.15);
