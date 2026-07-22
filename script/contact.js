@@ -69,7 +69,7 @@ export function sendMessage() {
         formData.append(key, value);
       });
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbyNcdls_ikZMoc7rnJuZGukLEhBcHbVXx6WFGIAj-Z1bZBpi6MqTJ1b8RkhLrYUqKgf/exec",
+        "https://script.google.com/macros/s/AKfycbzAkNpSA8iPNT9MU4zIW5y0xqPOzhSqdmP9GVtHm_SrUSAQQ8kJ_xrotJgP1NRM_q-K/exec",
         {
           method: "POST",
           body: formData,
