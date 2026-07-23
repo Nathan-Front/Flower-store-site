@@ -1,4 +1,3 @@
-import { bouquets } from "../components/shop/flowers.js";
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -108,6 +107,64 @@ export function displayFilters() {
   });
 }
 
+//Retrieve products from google sheet
+let products = [];
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbzD_b_N3TEWmMTEHq8vPPE1tqmoaILMxakWVlXrf1NARpvIuZnl6Azwm01jQuh5Zijr/exec";
+async function loadProducts() {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    const data = await response.json();
+
+    products = formatProducts(data.products);
+    const productImages = data.productImages;
+
+    products.forEach((product) => {
+      product.modal = productImages
+        .filter((img) => Number(img.productId) === product.no)
+        .map((img) => ({
+          no: Number(img.order),
+          icon: img.image,
+          iconAlt: img.alt,
+        }));
+    });
+    //console.log(products); for checking captures
+    //console.log(productImages[0]); for debugging
+    //console.log(Object.keys(productImages[0])); for debugging
+    renderProducts(products);
+  } catch (error) {
+    console.error(error);
+  }
+}
+loadProducts();
+//change format back to number and strings
+function formatProducts(products) {
+  return products.map((product) => ({
+    no: Number(product.ID),
+    stock: Number(product.STOCK) || 0,
+
+    product: product.Product,
+    price: Number(product.Price),
+    description: product.Description,
+    image: product.Image,
+    imgAlt: product.ImageAlt,
+
+    review: Number(product.Review),
+    rateTotal: Number(product.Rating),
+
+    condition: product.Condition,
+    category: product.Category,
+    color: product.Color,
+
+    occasion: product.Occasion
+      ? product.Occasion.split(",").map((item) => item.trim())
+      : [],
+  }));
+}
+
 //Render product list
 function renderProducts(filtered) {
   const cardContainer = document.querySelector(".flower-grid");
@@ -115,6 +172,7 @@ function renderProducts(filtered) {
   cardContainer.innerHTML = "";
   filtered.map((item) => {
     const li = document.createElement("li");
+    li.dataset.id = item.no;
     li.innerHTML = `
         ${
           item.condition
@@ -166,7 +224,7 @@ export function filterProduct() {
     'input[name="color"]:checked',
   )?.value;
 
-  let filtered = bouquets; //get the product array
+  let filtered = products; //get the product array
 
   //Category filter
   if (checkedCategory && checkedCategory !== "all-bouquets") {
@@ -302,7 +360,7 @@ export function resetFilters() {
         priceFilter.classList.add("price-filter-pad");
       }
     });
-    let filtered = bouquets; //get the product array
+    let filtered = products; //get the product array
     initializePriceSlider(); //Reset the price range display
     renderProducts(filtered); //reset product rendered
     currentPage = 1; //need to re-declare inside this function to be able to reset the counter start to 1
@@ -330,19 +388,24 @@ function renderSelectedProduct() {
         .querySelector(".product-description p");
       const asideCon = document.createElement("aside");
       asideCon.classList = "aside-con";
-      console.log(product);
+      const id = Number(product.dataset.id);
+      const selectedProduct = products.find((item) => item.no === id);
       asideCon.innerHTML = `
-            <button class="close-modal-btn">Close</button>
+            <button type="button" class="close-modal-btn">Close</button>
             <div class="aside-product-image">
-            
                 <div class="aside-main-img">
                     <img src=${img.src} alt=${img.imgAlt} />
                 </div>
                 <ul class="aside-sub-img">
-                    <li><img src=${img.src} alt=${img.imgAlt} /></li>
-                    <li><img src=${img.src} alt=${img.imgAlt} /></li>
-                    <li><img src=${img.src} alt=${img.imgAlt} /></li>
-                    <li><img src=${img.src} alt=${img.imgAlt} /></li>
+                    ${selectedProduct.modal
+                      .map(
+                        (icon) => `
+                    <li class="modal-icons">
+                        <img src="${icon.icon}" alt="${icon.iconAlt}">
+                    </li>
+                    `,
+                      )
+                      .join("")}
                 </ul>
             </div>
              <div class="aside-product-details">
@@ -418,6 +481,7 @@ function renderSelectedProduct() {
           );
         });
       addMinusModal();
+      thumbnailIcons();
     });
   });
 }
@@ -444,4 +508,25 @@ function addMinusModal() {
     }
   });
   updateQty();
+}
+function thumbnailIcons() {
+  const mainImage = document.querySelector(".aside-main-img img");
+  const thumbnails = document.querySelectorAll(".modal-icons img");
+  const originalSrc = mainImage.src;
+  const originalAlt = mainImage.alt;
+  let currentSrc = mainImage.src;
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener("mouseenter", () => {
+      mainImage.src = thumbnail.src;
+    });
+
+    thumbnail.addEventListener("mouseleave", () => {
+      mainImage.src = currentSrc;
+    });
+    //For mobile
+    thumbnail.addEventListener("click", () => {
+      currentSrc = thumbnail.src;
+      mainImage.src = currentSrc;
+    });
+  });
 }

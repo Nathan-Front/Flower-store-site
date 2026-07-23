@@ -1,4 +1,4 @@
-export const bouquets = [
+/*export const bouquets = [
   {
     no: 1,
     product: "Blush Romance",
@@ -12,6 +12,12 @@ export const bouquets = [
     category: "rose",
     occasion: ["Birthday", "Valentine's Day", "Anniversary"],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 2,
@@ -26,6 +32,28 @@ export const bouquets = [
     category: "mix",
     occasion: ["Get Well Soon"],
     color: "mix",
+    modal: [
+      {
+        no: 1,
+        icon: "",
+        iconAlt: "first-thumbnail",
+      },
+      {
+        no: 2,
+        icon: "",
+        iconAlt: "second-thumbnail",
+      },
+      {
+        no: 3,
+        icon: "",
+        iconAlt: "third-thumnail",
+      },
+      {
+        no: 4,
+        icon: "",
+        iconAlt: "fourth-thumnail",
+      },
+    ],
   },
   {
     no: 3,
@@ -40,6 +68,12 @@ export const bouquets = [
     category: "rose",
     occasion: ["Birthday", "Valentine's Day", "Anniversary", "Congratulations"],
     color: "purple",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 4,
@@ -54,6 +88,12 @@ export const bouquets = [
     category: "tulip",
     occasion: ["Birthday", "Sympathy", "Congratulations"],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 5,
@@ -68,6 +108,12 @@ export const bouquets = [
     category: "mix",
     occasion: ["Birthday", "Sympathy", "Mother's Day"],
     color: "blue",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 6,
@@ -82,6 +128,12 @@ export const bouquets = [
     category: "rose",
     occasion: ["Birthday", "Valentine's Day", "Mother's Day", "Anniversary"],
     color: "red",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 7,
@@ -102,6 +154,12 @@ export const bouquets = [
       "Sympathy",
     ],
     color: "orange",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 8,
@@ -116,6 +174,12 @@ export const bouquets = [
     category: "mix",
     occasion: ["Birthday", "Mother's Day", "Anniversary", "Sympathy"],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 9,
@@ -136,6 +200,12 @@ export const bouquets = [
       "Sympathy",
     ],
     color: "red",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 10,
@@ -156,6 +226,12 @@ export const bouquets = [
       "Sympathy",
     ],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 11,
@@ -170,6 +246,12 @@ export const bouquets = [
     category: "lily",
     occasion: ["Birthday", "Mother's Day", "Get Well Soon", "Sympathy"],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 12,
@@ -190,6 +272,12 @@ export const bouquets = [
       "Congratulations",
     ],
     color: "green",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 13,
@@ -204,6 +292,12 @@ export const bouquets = [
     category: "rose",
     occasion: ["Anniversary", "Sympathy"],
     color: "black",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 14,
@@ -225,6 +319,12 @@ export const bouquets = [
       "Congratulations",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 15,
@@ -247,6 +347,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "orange",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 16,
@@ -267,6 +373,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 17,
@@ -289,6 +401,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 18,
@@ -311,6 +429,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 19,
@@ -333,6 +457,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "orange",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 20,
@@ -353,6 +483,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 21,
@@ -375,6 +511,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 22,
@@ -389,6 +531,12 @@ export const bouquets = [
     category: "lily",
     occasion: ["Mother's Day", "Sympathy", "Get Well Soon"],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 23,
@@ -403,6 +551,12 @@ export const bouquets = [
     category: "lily",
     occasion: ["Mother's Day", "Sympathy", "Get Well Soon"],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 24,
@@ -423,6 +577,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "red",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 25,
@@ -443,6 +603,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "yellow",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 26,
@@ -463,6 +629,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 27,
@@ -483,6 +655,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 28,
@@ -505,6 +683,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "orange",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 29,
@@ -525,6 +709,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 30,
@@ -547,6 +737,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 31,
@@ -569,6 +765,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "pink",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 32,
@@ -591,6 +793,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "blue",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 33,
@@ -611,6 +819,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 34,
@@ -632,6 +846,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 35,
@@ -646,6 +866,12 @@ export const bouquets = [
     category: "tulip",
     occasion: ["Birthday", "Mother's Day", "Sympathy", "Get Well Soon"],
     color: "yellow",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 36,
@@ -666,6 +892,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 37,
@@ -687,6 +919,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "white",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
   {
     no: 38,
@@ -709,5 +947,12 @@ export const bouquets = [
       "Get Well Soon",
     ],
     color: "mix",
+    modal: [
+      { no: 1, icon: "", iconAlt: "first-thumbnail" },
+      { no: 2, icon: "", iconAlt: "second-thumbnail" },
+      { no: 3, icon: "", iconAlt: "third-thumnail" },
+      { no: 4, icon: "", iconAlt: "fourth-thumnail" },
+    ],
   },
 ];
+*/

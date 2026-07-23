@@ -451,6 +451,7 @@
     border-radius: 0.5rem;
     border: 1px solid #a64b66;
     color: #FFFFFF;
+    transition: 0.4s ease;
 }
 .cart-btn:hover {
     background-color: #FFFFFF !important;
@@ -671,7 +672,8 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
-/*Selected product*/
+
+/*Selected product modal content*/
 .aside-con {
     display: flex;
     width: min(80%, 900px);
@@ -740,6 +742,11 @@
     width: 100%;
     border-radius: 0.5rem;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.35);
+    transition: 0.3s ease;
+}
+.aside-sub-img> li> img:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
 }
 .aside-product-details {
     flex: 1;
