@@ -1,8 +1,6 @@
 import { validateEmail } from "./emailValidator.js";
 export function newSubscriber() {
-  console.log("newSubscriber initialized");
   const form = document.getElementById("subscribe-form");
-  console.log("clicked");
   if (!form) return;
   const inputField = document.getElementById("subscribe");
   inputField.addEventListener("input", () => {
@@ -13,7 +11,6 @@ export function newSubscriber() {
   const sendBtn = document.getElementById("subscribe-btn");
   let lastSent = 0; //for the timer
   form.addEventListener("submit", async (e) => {
-    console.log("submit fired");
     e.preventDefault();
     //diable button
     //check email format
@@ -71,7 +68,7 @@ export function newSubscriber() {
       }
     } catch (error) {
       console.log("FAILED...", error);
-      alert("Oops looks like we have an error!");
+      alert("Oops looks like we encountered a problem!");
     } finally {
       spinner.classList.remove("footSpinner");
       overlay.classList.remove("footOverlay");

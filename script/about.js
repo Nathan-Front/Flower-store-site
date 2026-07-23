@@ -58,7 +58,7 @@ export function aboutIntersection() {
       });
     },
     {
-      threshold: 0.1,
+      threshold: 0.2,
     },
   );
   interSect.forEach((item) => observer.observe(item));

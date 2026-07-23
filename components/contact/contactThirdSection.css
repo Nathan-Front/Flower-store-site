@@ -62,6 +62,12 @@
 }
 .contact-channels> li> a> img {
     width: 100%;
+    transition: 0.3s ease;
+}
+.contact-channels> li> a:hover> img{
+    transform: translateY(-8px);
+    filter: brightness(0) saturate(100%) invert(37%) sepia(23%) saturate(1093%) 
+            hue-rotate(301deg) brightness(92%) contrast(89%);
 }
 /*Form container*/
 .third-form-con {
