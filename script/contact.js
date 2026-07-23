@@ -97,6 +97,7 @@ export function sendMessage() {
 
 export function FAQs() {
   const FAQContainer = document.querySelector(".accordion-card");
+  if (!FAQContainer) return;
   FAQContainer.addEventListener("click", (e) => {
     const btn = e.target.closest(".accordion-question");
     if (!btn) return;

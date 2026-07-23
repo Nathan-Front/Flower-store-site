@@ -202,6 +202,35 @@
     aspect-ratio: 1;
     border-radius: 50%;
 }
+.reset-filter {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #a64b66;
+    border-radius: 0.5rem;
+    padding: 4px;
+    font-size: clamp(1rem, 1.3vw, 1.6rem);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+.reset-filter::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    background-color: #a64b66;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+.reset-filter:hover {
+    color: white;
+}
+.reset-filter:hover::before {
+    width: 100%;
+}
 .left-bottom-con {
     display: flex;
     flex-direction: column;
@@ -224,12 +253,27 @@
 .left-bottom-con p {
     font-size: clamp(0.7rem, 1.1vw, 1.3rem);
 }
-.left-bottom-con span {
+.left-bottom-con a {
     font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+    color: #555;
+    background: linear-gradient(
+        to right,
+        #a64b66 50%,
+        #555 50%
+    );
+    background-size: 200% 100%;
+    background-position: right;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: background-position 0.4s ease;
+}
+.left-bottom-con a:hover {
+    background-position: left;
 }
 .left-bottom-con h3,
 .left-bottom-con p,
-.left-bottom-con span {
+.left-bottom-con a {
     width: 90%;
 }
 
