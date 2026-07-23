@@ -8,7 +8,7 @@ import {
   renderOurPromise,
   aboutIntersection,
 } from "./about.js";
-import { contactIntersection, sendMessage } from "./contact.js";
+import { contactIntersection, sendMessage, FAQs } from "./contact.js";
 import { newSubscriber } from "./footer.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
@@ -137,6 +137,7 @@ async function fetchHTML() {
 
   //contact contents
   contactIntersection();
+  FAQs();
   sendMessage();
 
   //Category filter

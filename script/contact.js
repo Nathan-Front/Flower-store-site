@@ -94,3 +94,24 @@ export function sendMessage() {
     }
   });
 }
+
+export function FAQs() {
+  const FAQContainer = document.querySelector(".accordion-card");
+  FAQContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest(".accordion-question");
+    if (!btn) return;
+    const currentAnswer = btn.nextElementSibling;
+    const allAnswer = FAQContainer.querySelectorAll(".accordion-answer");
+    allAnswer.forEach((answer) => {
+      if (answer === currentAnswer) {
+        if (answer.style.maxHeight) {
+          answer.style.maxHeight = null;
+        } else {
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      } else {
+        answer.style.maxHeight = null;
+      }
+    });
+  });
+}
