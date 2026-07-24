@@ -1,7 +1,8 @@
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
-  if (window.innerWidth <= 920) return 8; // 2 × 4
+  if (window.innerWidth <= 920) return 6; // 2 × 3 just to show grid style, can delete it if wanted
+  if (window.innerWidth <= 950) return 9; // 3 x 3
   return 12; // 4 × 3
 }
 let currentPage = 1;
@@ -30,6 +31,10 @@ function createPagination(products) {
     button.addEventListener("click", () => {
       currentPage = i;
       displayPage(currentPage);
+      document.querySelector(".shop-second-sec").scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     });
     paginationContainer.appendChild(button);
   }
@@ -40,6 +45,7 @@ function displayPage(page) {
   const start = (page - 1) * cardsPerPage;
   const end = start + cardsPerPage;
   const productsForPage = filteredProducts.slice(start, end);
+
   renderProducts(productsForPage);
   updateActivePage();
   displayCountPerPage(filteredProducts.length);
@@ -164,7 +170,7 @@ function renderProducts(filtered) {
   const cardContainer = document.querySelector(".flower-grid");
   if (!cardContainer) return;
   cardContainer.innerHTML = "";
-  filtered.map((item) => {
+  filtered.map((item, index) => {
     const li = document.createElement("li");
     li.dataset.id = item.no;
     li.innerHTML = `
@@ -202,6 +208,9 @@ function renderProducts(filtered) {
     `;
 
     cardContainer.append(li);
+    requestAnimationFrame(() => {
+      li.style.animationDelay = `${index * 0.05}s`;
+    });
   });
   renderSelectedProduct();
 }

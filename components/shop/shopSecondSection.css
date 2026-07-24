@@ -369,6 +369,21 @@
     color: #4E6A50;
     background: #D9E8D8;
 }
+.flower-grid li {
+  animation: cardReveal 0.5s ease forwards;
+  opacity: 0;
+}
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .flower-grid li img {
     transition: 0.3s ease;
 }
