@@ -331,7 +331,7 @@ function displayProductRating(product) {
     `;
 }
 //pass the price format
-function formatPrice(price) {
+export function formatPrice(price) {
   const [whole, decimal] = price.toFixed(2).split(".");
   return `
         $${whole}<small>.${decimal}</small>

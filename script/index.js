@@ -8,6 +8,7 @@ import {
   initializePriceSlider,
   displayFilters,
   resetFilters,
+  formatPrice,
 } from "./shop.js";
 import {
   renderAboutCards,
