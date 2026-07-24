@@ -3,6 +3,7 @@ import { occasions } from "../components/index/occasions.js";
 import { cards } from "../components/index/cards.js";
 
 import {
+  loadProducts,
   filterProduct,
   displayCategory,
   initializePriceSlider,
@@ -180,6 +181,7 @@ async function fetchHTML() {
   document.querySelectorAll('input[name="color"]').forEach((radio) => {
     radio.addEventListener("change", filterProduct);
   });
+  loadProducts();
   filterProduct();
   displayCategory();
   initializePriceSlider();

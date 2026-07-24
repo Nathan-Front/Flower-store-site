@@ -495,6 +495,31 @@
 .mobile-filter {
     display: none;
 }
+.product-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+}
+.product-spinner {
+    width: 45px;
+    height: 45px;
+    border: 5px solid #ddd;
+    border-top-color: #a64b66;
+    border-radius: 50%;
+    animation: productLoading .8s linear infinite;
+}
+.product-loading.loadingOff {
+    display: none;
+}
+
+@keyframes productLoading {
+    to {
+        transform: rotate(360deg);
+    }
+}
 @media (max-width: 600px) {
     .shop-second-sec {
         display: flex;

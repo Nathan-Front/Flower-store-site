@@ -16,12 +16,11 @@ window.addEventListener("resize", () => {
   }
 });
 //Create page
-function createPagination() {
-  const cards = document.querySelectorAll(".flower-grid li");
+function createPagination(products) {
   const paginationContainer = document.querySelector(".pagination");
-  if (!cards || !paginationContainer) return;
+  if (!paginationContainer) return;
   const cardsPerPage = getCardsPerPage();
-  const totalPages = Math.ceil(cards.length / cardsPerPage);
+  const totalPages = Math.ceil(products.length / cardsPerPage);
   currentPage = Math.min(currentPage, totalPages || 1); //always return the smaller number of the two
   paginationContainer.innerHTML = "";
   for (let i = 1; i <= totalPages; i++) {
@@ -37,16 +36,13 @@ function createPagination() {
 }
 //Display page
 function displayPage(page) {
-  const cards = document.querySelectorAll(".flower-grid li");
-  if (!cards) return;
   const cardsPerPage = getCardsPerPage();
   const start = (page - 1) * cardsPerPage;
   const end = start + cardsPerPage;
-  cards.forEach((card, index) => {
-    card.style.display = index >= start && index < end ? "flex" : "none";
-  });
+  const productsForPage = filteredProducts.slice(start, end);
+  renderProducts(productsForPage);
   updateActivePage();
-  displayCountPerPage();
+  displayCountPerPage(filteredProducts.length);
 }
 //Highlight the active page button
 function updateActivePage() {
@@ -57,20 +53,17 @@ function updateActivePage() {
   });
 }
 //Display total item per page counter
-function displayCountPerPage() {
-  const products = document.querySelectorAll(".flower-grid li");
-  if (!products) return;
-  const productTotal = products.length;
+function displayCountPerPage(totalProducts) {
   const productsPerPage = getCardsPerPage();
   const start = (currentPage - 1) * productsPerPage + 1;
-  const end = Math.min(currentPage * productsPerPage, productTotal);
+  const end = Math.min(currentPage * productsPerPage, totalProducts);
   const startCount = document.querySelector(".start-flower-count-per-page");
   const endCount = document.querySelector(".end-flower-count-per-page");
   const totalFlowers = document.querySelector(".total-fowers");
   if (!startCount || !endCount || !totalFlowers) return;
   startCount.textContent = start;
   endCount.textContent = end;
-  totalFlowers.textContent = productTotal;
+  totalFlowers.textContent = totalProducts;
 }
 
 //Display category's selections
@@ -109,19 +102,24 @@ export function displayFilters() {
 
 //Retrieve products from google sheet
 let products = [];
+let filteredProducts = []; //For pagination function
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzD_b_N3TEWmMTEHq8vPPE1tqmoaILMxakWVlXrf1NARpvIuZnl6Azwm01jQuh5Zijr/exec";
-async function loadProducts() {
+export async function loadProducts() {
+  const loading = document.getElementById("loading-product");
+  loading.classList.remove("loadingOff");
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-
     products = formatProducts(data.products);
+    filteredProducts = [...products]; //spread inside array
+    renderProducts(filteredProducts);
+    createPagination(filteredProducts);
+    displayPage(1);
     const productImages = data.productImages;
-
     products.forEach((product) => {
       product.modal = productImages
         .filter((img) => Number(img.productId) === product.no)
@@ -134,31 +132,27 @@ async function loadProducts() {
     //console.log(products); for checking captures
     //console.log(productImages[0]); for debugging
     //console.log(Object.keys(productImages[0])); for debugging
-    renderProducts(products);
   } catch (error) {
     console.error(error);
+  } finally {
+    loading.classList.add("loadingOff");
   }
 }
-loadProducts();
 //change format back to number and strings
 function formatProducts(products) {
   return products.map((product) => ({
     no: Number(product.ID),
     stock: Number(product.STOCK) || 0,
-
     product: product.Product,
     price: Number(product.Price),
     description: product.Description,
     image: product.Image,
     imgAlt: product.ImageAlt,
-
     review: Number(product.Review),
     rateTotal: Number(product.Rating),
-
     condition: product.Condition,
     category: product.Category,
     color: product.Color,
-
     occasion: product.Occasion
       ? product.Occasion.split(",").map((item) => item.trim())
       : [],
@@ -223,9 +217,7 @@ export function filterProduct() {
   const checkedColor = document.querySelector(
     'input[name="color"]:checked',
   )?.value;
-
   let filtered = products; //get the product array
-
   //Category filter
   if (checkedCategory && checkedCategory !== "all-bouquets") {
     filtered = filtered.filter((item) => item.category === checkedCategory);
@@ -245,11 +237,9 @@ export function filterProduct() {
   if (checkedColor && checkedColor !== "all-color") {
     filtered = filtered.filter((item) => item.color === checkedColor);
   }
-
-  renderProducts(filtered);
-
+  filteredProducts = filtered;
   currentPage = 1; //need to re-declare inside this function to be able to reset the counter start to 1
-  createPagination(); //recreate the page buttons
+  createPagination(filteredProducts); //recreate the page buttons
   displayPage(currentPage); //updates the page content
 }
 
@@ -360,11 +350,10 @@ export function resetFilters() {
         priceFilter.classList.add("price-filter-pad");
       }
     });
-    let filtered = products; //get the product array
+    filteredProducts = [...products];
     initializePriceSlider(); //Reset the price range display
-    renderProducts(filtered); //reset product rendered
     currentPage = 1; //need to re-declare inside this function to be able to reset the counter start to 1
-    createPagination(); //reset button creation
+    createPagination(filteredProducts); //reset button creation
     displayPage(currentPage); //reset product page
   });
 }
