@@ -1,5 +1,4 @@
 import { bestSeller } from "../components/index/bestSeller.js";
-import { occasions } from "../components/index/occasions.js";
 import { cards } from "../components/index/cards.js";
 
 import {
@@ -131,12 +130,13 @@ async function fetchHTML() {
   //footer subscribe
   newSubscriber();
 
+  loadFilterCards(); //I will change this into await in the future
   renderBestSellers();
-  renderOccasionCards();
+  //renderOccasionCards();
   renderCards();
   displayNav();
   sectionsInterSections();
-  goToShopFiltered();
+  goToShopFiltered(); //filter card of index
 
   //about contents
   renderAboutCards();
@@ -154,22 +154,30 @@ async function fetchHTML() {
   document.querySelectorAll('input[name="category"]').forEach((radio) => {
     radio.addEventListener("change", filterProduct);
   });
-  //Occasion filter
-  document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
-    radio.addEventListener("change", filterProduct);
-  });
   //load filter first since its from index html
   const params = new URLSearchParams(window.location.search);
-  const selectedCategory = params.get("category");
-  if (selectedCategory) {
-    const radio = document.querySelector(
-      `input[name="occasions"][value="${selectedCategory}"]`,
-    );
-    if (radio) {
-      radio.checked = true;
-      radio.dispatchEvent(new Event("change"));
+  //const selectedCategory = params.get("category");
+  async function initShop() {
+    //Occasion filter
+    document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
+      radio.addEventListener("change", filterProduct);
+    });
+    await loadProducts(); //apply the loading of product here since filter in index is async
+    const params = new URLSearchParams(window.location.search);
+    const selectedOccasion = params.get("occasion");
+
+    if (selectedOccasion) {
+      const radio = document.querySelector(
+        `input[name="occasions"][value="${selectedOccasion}"]`,
+      );
+
+      if (radio) {
+        radio.checked = true;
+        filterProduct();
+      }
     }
   }
+  initShop();
   //Price filter
   const minSlider = document.getElementById("min-price");
   const maxSlider = document.getElementById("max-price");
@@ -181,8 +189,8 @@ async function fetchHTML() {
   document.querySelectorAll('input[name="color"]').forEach((radio) => {
     radio.addEventListener("change", filterProduct);
   });
-  loadProducts();
-  filterProduct();
+
+  //filterProduct();
   displayCategory();
   initializePriceSlider();
   displayFilters();
@@ -196,7 +204,6 @@ document.addEventListener("DOMContentLoaded", fetchHTML);
 function renderBestSellers() {
   const cards = document.querySelector(".best-seller-cards");
   if (!cards) return;
-
   //li.innerHTML = "";
   bestSeller.map((item) => {
     const li = document.createElement("li");
@@ -218,22 +225,57 @@ function renderBestSellers() {
     cards.append(li);
   });
 }
+let filterCards = [];
+let filteringCard = [];
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbxUJ_DkojSxACQtgGQvsaaQ6HqwiS3Xz3w2JTpAlZEIFUlS-7PllkX3u8xlFDSiBRJ0/exec";
+async function loadFilterCards() {
+  try {
+    //const response = await fetch(API_URL); original fetching
+    const response = await fetch(`${API_URL}?type=index-filter-cards`); //send type to just fetch related files only
+    if (!response.ok) {
+      throw new Error("Failed to fetch filter-cards");
+    }
+    const data = await response.json();
+    console.log(data);
+    console.log(data.filterCards);
+    filterCards = formatFilterCards(data.filterCards); //data.name_of_data is from apps script
+    filteringCard = [...filterCards]; //spread inside array
+
+    renderOccasionCards(filteringCard);
+    console.log(filteringCard); //for checking captures
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function formatFilterCards(filterCards) {
+  return filterCards.map((card) => ({
+    no: Number(card.No),
+    filterValue: card.FilterValue,
+    mainImage: card.MainImage,
+    circleImage: card.CircleImage,
+    cardTitle: card.CardTitle,
+    cardText: card.CardText,
+  }));
+}
+
 //secondSection content
-function renderOccasionCards() {
+function renderOccasionCards(filteringCard) {
   const cards = document.querySelector(".occasion-list");
   if (!cards) return;
-  occasions.map((item) => {
+  filteringCard.map((item) => {
     const li = document.createElement("li");
     li.classList.add("to-shop-filter-item");
     li.innerHTML = `
       <div class="image-wrapper">
           <img
-            src=${item.mainImg}
+            src=${item.mainImage}
             alt="bouquet ${item.no}"
             class="bouquet-img"
           />
           <img
-            src=${item.circleImg}
+            src=${item.circleImage}
             alt="image-icon-${item.no}"
             class="round-images"
           />
@@ -293,7 +335,7 @@ function goToShopFiltered() {
     btn.addEventListener("click", () => {
       btn.closest("li");
       const category = btn.querySelector("span").textContent.trim();
-      window.location.href = `shop.html?category=${encodeURIComponent(category)}`;
+      window.location.href = `shop.html?occasion=${encodeURIComponent(category)}`;
     });
   });
 }

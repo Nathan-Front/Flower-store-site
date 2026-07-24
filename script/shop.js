@@ -110,12 +110,15 @@ export function displayFilters() {
 let products = [];
 let filteredProducts = []; //For pagination function
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzD_b_N3TEWmMTEHq8vPPE1tqmoaILMxakWVlXrf1NARpvIuZnl6Azwm01jQuh5Zijr/exec";
+  "https://script.google.com/macros/s/AKfycbyn16sgCxlrfSCXEgDHL-CEQsLsotmo8ezEyr3fm5V0ogXnWJHqnDriHmU0oPS4Rtey/exec";
 export async function loadProducts() {
   const loading = document.getElementById("loading-product");
-  loading.classList.remove("loadingOff");
+  if (loading) {
+    loading.classList.remove("loadingOff");
+  }
   try {
-    const response = await fetch(API_URL);
+    //const response = await fetch(API_URL); original fetching
+    const response = await fetch(`${API_URL}?type=products`); //send type to just fetch related files only
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -141,7 +144,9 @@ export async function loadProducts() {
   } catch (error) {
     console.error(error);
   } finally {
-    loading.classList.add("loadingOff");
+    if (loading) {
+      loading.classList.add("loadingOff");
+    }
   }
 }
 //change format back to number and strings
@@ -183,6 +188,7 @@ function renderProducts(filtered) {
             src="${item.image}"
             alt="${item.imgAlt}-image"
             class="bouquet-img"
+            loading="lazy"
         />
         <div class="flower-info">
           <div class="product-name">
@@ -191,6 +197,7 @@ function renderProducts(filtered) {
               src="./images/shop/secondSection/heart-round.svg"
               alt="heart-icon"
               class="flower-heart-icon"
+              loading="lazy"
             />
           </div>
           <div class="product-description"><p>${item.description}</p></div>
