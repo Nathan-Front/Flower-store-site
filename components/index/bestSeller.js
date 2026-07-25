@@ -1,4 +1,4 @@
-export const bestSeller = [
+/* export const bestSeller = [
   {
     no: 1,
     product: "Passion Bloom",
@@ -70,3 +70,4 @@ export const bestSeller = [
     color: "blue",
   },
 ];
+ */

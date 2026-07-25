@@ -1,5 +1,3 @@
-import { cards } from "../components/index/cards.js";
-
 import {
   loadProducts,
   filterProduct,
@@ -131,9 +129,8 @@ async function fetchHTML() {
 
   loadBestSellers();
   loadFilterCards(); //I will change this into await in the future
-  //renderBestSellers();
-  //renderOccasionCards();
-  renderCards();
+  loadWhyUsCards();
+
   displayNav();
   sectionsInterSections();
   //goToShopFiltered(); //filter card of index
@@ -201,9 +198,8 @@ document.addEventListener("DOMContentLoaded", fetchHTML);
 
 //fetch data from google sheet first
 let indexProducts = [];
-let productsArr = [];
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyTwM5p-9m53K0xG1FMwxQVI7WGDbc_YQzDtH0zG1WM7p0O9DtIs4v9bZFgRirhJLl7/exec";
+  "https://script.google.com/macros/s/AKfycbzLF_J0sW70rYHDivb38iWP8jHNMOjbcfjPIGi0uFH5qlky7g50oZs0KSD9l106qnm2/exec";
 async function fetchSpecificSheet(sheetType, key, dataFormatter) {
   try {
     const response = await fetch(`${API_URL}?type=${sheetType}`); //send type to just fetch related files only
@@ -211,43 +207,83 @@ async function fetchSpecificSheet(sheetType, key, dataFormatter) {
       throw new Error("Failed to fetch cards");
     }
     const data = await response.json();
-    //console.log(data); for debugging only
-    //console.log(data[key]); for debugging only
+    /* console.log(data); //for debugging only
+    console.log(data[key]); */ //for debugging only
     return dataFormatter(data[key]);
   } catch (error) {
     console.log(`Error fetching ${sheetType}:`, error);
     throw error; //Re-throw so the caller knows it failed
   }
 }
+
+//Shared spinner loaders
+function setSectionLoading(section, isLoading) {
+  if (!section) return;
+  const loading = section.querySelector(".product-loading");
+  if (loading) {
+    loading.hidden = !isLoading;
+  }
+}
+
+//loader for each section
 async function loadBestSellers() {
   //const response = await fetch(API_URL); original fetching
   /*  const response = await fetch(`${API_URL}?type=index-filter-cards`); 
     if (!response.ok) {
       throw new Error("Failed to fetch filter-cards");
     } */
-  indexProducts = await fetchSpecificSheet(
-    "best-seller-cards", //Case in apps script
-    "bestSellers", //Declared name in apps script
-    formatBestSellers,
-  );
-  //indexProducts = formatFilterCards(indexProducts.bestSellers); //data.name_of_data is from apps script
-  productsArr = [...indexProducts]; //spread inside array
-  renderBestSellers(productsArr);
-  //console.log(productsArr);
+  const secondSection = document.querySelector(".index-second-sec");
+  setSectionLoading(secondSection, true); //pass true
+  try {
+    indexProducts = await fetchSpecificSheet(
+      "best-seller-cards", //Case in apps script
+      "bestSellers", //Declared name in apps script
+      formatBestSellers, //spre
+    );
+    renderBestSellers(indexProducts);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setSectionLoading(secondSection, false);
+  }
 }
 async function loadFilterCards() {
-  indexProducts = await fetchSpecificSheet(
-    "index-filter-cards",
-    "filterCards",
-    formatFilterCards,
-  );
-  productsArr = [...indexProducts];
-  renderOccasionCards(productsArr);
+  const thirdSection = document.querySelector(".index-third-sec");
+  setSectionLoading(thirdSection, true);
+  try {
+    indexProducts = await fetchSpecificSheet(
+      "index-filter-cards",
+      "filterCards",
+      formatFilterCards,
+    );
+    renderOccasionCards(indexProducts);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setSectionLoading(thirdSection, false);
+  }
+}
+async function loadWhyUsCards() {
+  const fourthSection = document.querySelector(".index-fourth-sec");
+  setSectionLoading(fourthSection, true);
+  try {
+    indexProducts = await fetchSpecificSheet(
+      "why-us-cards",
+      "whyUsCards",
+      formatWhyUsCards,
+    );
+    renderCards(indexProducts);
+    console.log("fourth", indexProducts);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setSectionLoading(fourthSection, false);
+  }
 }
 //format back data to numbers and strings
 function formatBestSellers(data) {
   return data.map((card) => ({
-    no: Number(card.no),
+    no: Number(card.No),
     product: card.product,
     price: Number(card.price),
     description: card.description,
@@ -268,11 +304,20 @@ function formatFilterCards(data) {
     cardText: card.CardText,
   }));
 }
+function formatWhyUsCards(data) {
+  return data.map((card) => ({
+    no: Number(card.No),
+    mainImage: card.MainImage,
+    mainImageAlt: card.MainImageAlt,
+    cardTitle: card.CardTitle,
+    cardText: card.CardText,
+  }));
+}
 
 //Render index cards
-//firstSection content
+//secondSection content
 function renderBestSellers(bestSell) {
-  console.count("loadBestSellers");
+  console.count("loadBestSellerCards");
   const cards = document.querySelector(".best-seller-cards");
   if (!cards) return;
   //li.innerHTML = "";
@@ -285,7 +330,7 @@ function renderBestSellers(bestSell) {
           <span>${item.product}</span>
           <p>${item.description}</p>
           <div class="price-btn-con">
-            <span class="price">${formatPrice(item.price)}</span>
+            <span class="price">${formatPrice(item.price)}</span> 
             <button aria-label="Add to cart" class="add-to-cart-btn">
               <i class="fa-solid fa-cart-shopping"></i>
               Add to Cart →
@@ -297,7 +342,7 @@ function renderBestSellers(bestSell) {
   });
 }
 
-//secondSection content
+//thirdSection content
 function renderOccasionCards(filteringCard) {
   console.count("loadFilterCards");
   const cards = document.querySelector(".occasion-list");
@@ -326,11 +371,12 @@ function renderOccasionCards(filteringCard) {
   });
   goToShopFiltered();
 }
-//thirdSection content
-function renderCards() {
+//fourthSection content
+function renderCards(whyUsCards) {
+  console.count("loadWhyUsCards");
   const cardTiles = document.querySelector(".why-us-list");
   if (!cardTiles) return;
-  cards.map((item) => {
+  whyUsCards.map((item) => {
     const li = document.createElement("li");
     li.innerHTML = `
       <img
@@ -347,6 +393,8 @@ function renderCards() {
     cardTiles.append(li);
   });
 }
+
+//shared intersection
 function sectionsInterSections() {
   const interSectItems = document.querySelectorAll(".intersect-items");
   if (!interSectItems.length) return;

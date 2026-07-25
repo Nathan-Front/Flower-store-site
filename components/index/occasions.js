@@ -1,4 +1,4 @@
-export const occasions = [
+/* export const occasions = [
   {
     no: 1,
     mainImg: "./images/index/thirdSection/tulip-delight.webp",
@@ -42,3 +42,4 @@ export const occasions = [
     cardText: "Celebrate their achievement",
   },
 ];
+ */
