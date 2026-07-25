@@ -179,6 +179,7 @@ function renderProducts(filtered) {
     const li = document.createElement("li");
     li.dataset.id = item.no;
     li.innerHTML = `
+    <div class="hover-cards">
         ${
           item.condition
             ? `<small class="flower-badge ${item.condition}">${getProductBadge(item.condition)}</small>`
@@ -212,6 +213,7 @@ function renderProducts(filtered) {
             </button>
           </div>
         </div>
+      </div>
     `;
 
     cardContainer.append(li);

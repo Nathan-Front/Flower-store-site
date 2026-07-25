@@ -1,4 +1,3 @@
-import { bestSeller } from "../components/index/bestSeller.js";
 import { cards } from "../components/index/cards.js";
 
 import {
@@ -130,13 +129,14 @@ async function fetchHTML() {
   //footer subscribe
   newSubscriber();
 
+  loadBestSellers();
   loadFilterCards(); //I will change this into await in the future
-  renderBestSellers();
+  //renderBestSellers();
   //renderOccasionCards();
   renderCards();
   displayNav();
   sectionsInterSections();
-  goToShopFiltered(); //filter card of index
+  //goToShopFiltered(); //filter card of index
 
   //about contents
   renderAboutCards();
@@ -199,16 +199,87 @@ async function fetchHTML() {
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
 
+//fetch data from google sheet first
+let indexProducts = [];
+let productsArr = [];
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyTwM5p-9m53K0xG1FMwxQVI7WGDbc_YQzDtH0zG1WM7p0O9DtIs4v9bZFgRirhJLl7/exec";
+async function fetchSpecificSheet(sheetType, key, dataFormatter) {
+  try {
+    const response = await fetch(`${API_URL}?type=${sheetType}`); //send type to just fetch related files only
+    if (!response.ok) {
+      throw new Error("Failed to fetch cards");
+    }
+    const data = await response.json();
+    //console.log(data); for debugging only
+    //console.log(data[key]); for debugging only
+    return dataFormatter(data[key]);
+  } catch (error) {
+    console.log(`Error fetching ${sheetType}:`, error);
+    throw error; //Re-throw so the caller knows it failed
+  }
+}
+async function loadBestSellers() {
+  //const response = await fetch(API_URL); original fetching
+  /*  const response = await fetch(`${API_URL}?type=index-filter-cards`); 
+    if (!response.ok) {
+      throw new Error("Failed to fetch filter-cards");
+    } */
+  indexProducts = await fetchSpecificSheet(
+    "best-seller-cards", //Case in apps script
+    "bestSellers", //Declared name in apps script
+    formatBestSellers,
+  );
+  //indexProducts = formatFilterCards(indexProducts.bestSellers); //data.name_of_data is from apps script
+  productsArr = [...indexProducts]; //spread inside array
+  renderBestSellers(productsArr);
+  //console.log(productsArr);
+}
+async function loadFilterCards() {
+  indexProducts = await fetchSpecificSheet(
+    "index-filter-cards",
+    "filterCards",
+    formatFilterCards,
+  );
+  productsArr = [...indexProducts];
+  renderOccasionCards(productsArr);
+}
+//format back data to numbers and strings
+function formatBestSellers(data) {
+  return data.map((card) => ({
+    no: Number(card.no),
+    product: card.product,
+    price: Number(card.price),
+    description: card.description,
+    image: card.image,
+    imageAlt: card.imageAlt,
+    review: card.review,
+    rate: card.rateTotal,
+    condition: card.condition,
+  }));
+}
+function formatFilterCards(data) {
+  return data.map((card) => ({
+    no: Number(card.No),
+    filterValue: card.FilterValue,
+    mainImage: card.MainImage,
+    circleImage: card.CircleImage,
+    cardTitle: card.CardTitle,
+    cardText: card.CardText,
+  }));
+}
+
 //Render index cards
 //firstSection content
-function renderBestSellers() {
+function renderBestSellers(bestSell) {
+  console.count("loadBestSellers");
   const cards = document.querySelector(".best-seller-cards");
   if (!cards) return;
   //li.innerHTML = "";
-  bestSeller.map((item) => {
+  bestSell.map((item) => {
     const li = document.createElement("li");
     li.innerHTML = `
-    <img src=${item.image} alt="bouquet-1" />
+    <img src=${item.image} alt='bouquet-${item.no}' />
         <div>
           <small>Best Seller</small>
           <span>${item.product}</span>
@@ -225,43 +296,10 @@ function renderBestSellers() {
     cards.append(li);
   });
 }
-let filterCards = [];
-let filteringCard = [];
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbxUJ_DkojSxACQtgGQvsaaQ6HqwiS3Xz3w2JTpAlZEIFUlS-7PllkX3u8xlFDSiBRJ0/exec";
-async function loadFilterCards() {
-  try {
-    //const response = await fetch(API_URL); original fetching
-    const response = await fetch(`${API_URL}?type=index-filter-cards`); //send type to just fetch related files only
-    if (!response.ok) {
-      throw new Error("Failed to fetch filter-cards");
-    }
-    const data = await response.json();
-    console.log(data);
-    console.log(data.filterCards);
-    filterCards = formatFilterCards(data.filterCards); //data.name_of_data is from apps script
-    filteringCard = [...filterCards]; //spread inside array
-
-    renderOccasionCards(filteringCard);
-    console.log(filteringCard); //for checking captures
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function formatFilterCards(filterCards) {
-  return filterCards.map((card) => ({
-    no: Number(card.No),
-    filterValue: card.FilterValue,
-    mainImage: card.MainImage,
-    circleImage: card.CircleImage,
-    cardTitle: card.CardTitle,
-    cardText: card.CardText,
-  }));
-}
 
 //secondSection content
 function renderOccasionCards(filteringCard) {
+  console.count("loadFilterCards");
   const cards = document.querySelector(".occasion-list");
   if (!cards) return;
   filteringCard.map((item) => {
@@ -286,6 +324,7 @@ function renderOccasionCards(filteringCard) {
     `;
     cards.append(li);
   });
+  goToShopFiltered();
 }
 //thirdSection content
 function renderCards() {
