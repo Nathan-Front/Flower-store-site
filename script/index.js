@@ -346,7 +346,7 @@ function renderBestSellers(bestSell) {
           <p>${item.description}</p>
           <div class="price-btn-con">
             <span class="price">${formatPrice(item.price)}</span> 
-            <button aria-label="Add to cart" class="add-to-cart-btn">
+            <button aria-label="Add to cart" class="add-to-cart-best-seller" data-product-id=${item.no}>
               <i class="fa-solid fa-cart-shopping"></i>
               Add to Cart →
             </button>
@@ -355,6 +355,7 @@ function renderBestSellers(bestSell) {
   `;
     cards.append(li);
   });
+  addToCartBestSeller();
 }
 
 //thirdSection content
@@ -431,7 +432,16 @@ function sectionsInterSections() {
   );
   interSectItems.forEach((item) => observer.observe(item));
 }
-
+//add to cardt best seller
+export function addToCartBestSeller() {
+  const addToCart = document.querySelectorAll(".add-to-cart-best-seller");
+  addToCart.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const productId = e.currentTarget.dataset.productId;
+      window.location.href = `./shop.html?product=${productId}`;
+    });
+  });
+}
 //Selecting card from index html
 function goToShopFiltered() {
   const filterBtn = document.querySelectorAll(".to-shop-filter-item");

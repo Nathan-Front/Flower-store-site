@@ -1,4 +1,8 @@
-import { fetchSpecificSheet, setSectionLoading } from "./index.js";
+import {
+  fetchSpecificSheet,
+  setSectionLoading,
+  addToCartBestSeller,
+} from "./index.js";
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -22,6 +26,7 @@ function createPagination(products) {
   const paginationContainer = document.querySelector(".pagination");
   if (!paginationContainer) return;
   const cardsPerPage = getCardsPerPage();
+  //console.log("data", products);
   const totalPages = Math.ceil(products.length / cardsPerPage);
   currentPage = Math.min(currentPage, totalPages || 1); //always return the smaller number of the two
   paginationContainer.innerHTML = "";
@@ -150,6 +155,7 @@ const API_URL =
     }
   }
 } */
+
 let shopProducts = [];
 let filteredProducts = []; //For rendering and pagination function
 export async function loadBouquets() {
@@ -175,6 +181,7 @@ export async function loadBouquets() {
     renderProducts(filteredProducts);
     createPagination(filteredProducts);
     displayPage(1);
+    openProductFromURL();
   } catch (error) {
     console.log(error);
   } finally {
@@ -201,12 +208,37 @@ function formatProducts(products) {
       : [],
   }));
 }
-function formatThumbnailImages() {}
+function openProductFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const productId = Number(params.get("product"));
+  console.log("Product ID from URL:", productId);
+  if (!productId) return;
 
+  const product = shopProducts.find((product) => product.no === productId); //Search same id product in the list
+  if (!product) {
+    console.log("Product not found:", productId);
+    return;
+  }
+
+  const productCard = document.querySelector(`li[data-id="${productId}"]`); //retrieve the selected product
+  if (!productCard) {
+    console.log("Product card not found:", productId);
+    return;
+  }
+
+  const cartBtn = productCard.querySelector(".cart-btn"); //retrieve its button
+  if (!cartBtn) {
+    console.log("Cart button not found");
+    return;
+  }
+
+  cartBtn.click(); //apply click function
+}
 //Render product list
 function renderProducts(filtered) {
   const cardContainer = document.querySelector(".flower-grid");
   if (!cardContainer) return;
+  addToCartBestSeller();
   cardContainer.innerHTML = "";
   filtered.map((item, index) => {
     const li = document.createElement("li");
@@ -429,6 +461,7 @@ function renderSelectedProduct() {
       const asideCon = document.createElement("aside");
       asideCon.classList = "aside-con";
       const id = Number(product.dataset.id);
+      console.log("id of product", id);
       const selectedProduct = shopProducts.find((item) => item.no === id);
       asideCon.innerHTML = `
             <button type="button" class="close-modal-btn">Close</button>
