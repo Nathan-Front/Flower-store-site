@@ -127,78 +127,85 @@ async function fetchHTML() {
   }
   //footer subscribe
   newSubscriber();
-
-  loadBestSellers();
-  loadFilterCards(); //I will change this into await in the future
-  loadWhyUsCards();
+  if (page === "index") {
+    loadBestSellers();
+    loadFilterCards();
+    loadWhyUsCards();
+  }
 
   displayNav();
   sectionsInterSections();
   //goToShopFiltered(); //filter card of index
 
   //about contents
-  renderAboutCards();
-  renderWhyUs();
-  renderOurPromise();
-  aboutIntersection();
+  if (page === "about") {
+    renderAboutCards();
+    renderWhyUs();
+    renderOurPromise();
+    aboutIntersection();
+  }
 
   //contact contents
-  contactIntersection();
-  FAQs();
-  sendMessage();
+  if (page === "contact") {
+    contactIntersection();
+    FAQs();
+    sendMessage();
+  }
 
   //shop contents
   //Category filter
-  document.querySelectorAll('input[name="category"]').forEach((radio) => {
-    radio.addEventListener("change", filterProduct);
-  });
-  //load filter first since its from index html
-  const params = new URLSearchParams(window.location.search);
-  //const selectedCategory = params.get("category");
-  async function initShop() {
-    //Occasion filter
-    document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
+  if (page === "shop") {
+    document.querySelectorAll('input[name="category"]').forEach((radio) => {
       radio.addEventListener("change", filterProduct);
     });
-    //  await loadProducts(); //apply the loading of product here since filter in index is async
-    await loadBouquets();
-    const params = new URLSearchParams(window.location.search);
-    const selectedOccasion = params.get("occasion");
 
-    if (selectedOccasion) {
-      const radio = document.querySelector(
-        `input[name="occasions"][value="${selectedOccasion}"]`,
-      );
+    async function initShop() {
+      document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
+        radio.addEventListener("change", filterProduct);
+      });
 
-      if (radio) {
-        radio.checked = true;
-        filterProduct();
+      await loadBouquets();
+
+      const params = new URLSearchParams(window.location.search);
+      const selectedOccasion = params.get("occasion");
+
+      if (selectedOccasion) {
+        const radio = document.querySelector(
+          `input[name="occasions"][value="${selectedOccasion}"]`,
+        );
+
+        if (radio) {
+          radio.checked = true;
+          filterProduct();
+        }
       }
     }
+
+    initShop();
+
+    const minSlider = document.getElementById("min-price");
+    const maxSlider = document.getElementById("max-price");
+
+    if (minSlider && maxSlider) {
+      minSlider.addEventListener("input", filterProduct);
+      maxSlider.addEventListener("input", filterProduct);
+    }
+
+    document.querySelectorAll('input[name="color"]').forEach((radio) => {
+      radio.addEventListener("change", filterProduct);
+    });
+
+    displayCategory();
+    initializePriceSlider();
+    displayFilters();
+    resetFilters();
   }
-  initShop();
-  //Price filter
-  const minSlider = document.getElementById("min-price");
-  const maxSlider = document.getElementById("max-price");
-  if (!minSlider || !maxSlider) return;
-  minSlider.addEventListener("input", filterProduct);
-  maxSlider.addEventListener("input", filterProduct);
-
-  //Color filter
-  document.querySelectorAll('input[name="color"]').forEach((radio) => {
-    radio.addEventListener("change", filterProduct);
-  });
-
-  //filterProduct();
-  displayCategory();
-  initializePriceSlider();
-  displayFilters();
-  resetFilters();
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
 //fetch data from google sheet first
 let indexProducts = [];
+
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzLF_J0sW70rYHDivb38iWP8jHNMOjbcfjPIGi0uFH5qlky7g50oZs0KSD9l106qnm2/exec";
 export async function fetchSpecificSheet(sheetType, key, dataFormatter) {
@@ -432,6 +439,7 @@ function sectionsInterSections() {
   );
   interSectItems.forEach((item) => observer.observe(item));
 }
+
 //add to cardt best seller
 export function addToCartBestSeller() {
   const addToCart = document.querySelectorAll(".add-to-cart-best-seller");
@@ -442,6 +450,7 @@ export function addToCartBestSeller() {
     });
   });
 }
+
 //Selecting card from index html
 function goToShopFiltered() {
   const filterBtn = document.querySelectorAll(".to-shop-filter-item");

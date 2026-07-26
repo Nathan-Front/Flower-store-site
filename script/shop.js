@@ -17,12 +17,13 @@ window.addEventListener("resize", () => {
   const newCardsPerPage = getCardsPerPage();
   if (newCardsPerPage !== currentCardsPerPage) {
     currentCardsPerPage = newCardsPerPage;
-    createPagination();
+    createPagination(filteredProducts);
     displayPage(currentPage);
   }
 });
 //Create page
 function createPagination(products) {
+  //console.log("createPagination received", products);
   const paginationContainer = document.querySelector(".pagination");
   if (!paginationContainer) return;
   const cardsPerPage = getCardsPerPage();
@@ -182,6 +183,7 @@ export async function loadBouquets() {
     createPagination(filteredProducts);
     displayPage(1);
     openProductFromURL();
+    //addToTemporaryCart(filteredProducts);
   } catch (error) {
     console.log(error);
   } finally {
@@ -198,7 +200,7 @@ function formatProducts(products) {
     description: product.Description,
     image: product.Image,
     imgAlt: product.ImageAlt,
-    review: Number(product.Review),
+    review: Number(product.Reviews),
     rateTotal: Number(product.Rating),
     condition: product.Condition,
     category: product.Category,
@@ -555,6 +557,7 @@ function renderSelectedProduct() {
         });
       addMinusModal();
       thumbnailIcons();
+      addToTemporaryCart(selectedProduct, asideCon);
     });
   });
 }
@@ -603,3 +606,53 @@ function thumbnailIcons() {
     });
   });
 }
+function addToTemporaryCart(product, asideCon) {
+  //console.log("addtocard", filteredProducts);
+  const addBtn = asideCon.querySelector("#add-to-cart");
+  if (!addBtn) return;
+
+  addBtn.addEventListener("click", () => {
+    //Find item with the same unique number/Id
+    const selectedProduct = filteredProducts.find(
+      (item) => Number(item.no) === Number(product.no),
+    );
+
+    const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+    const itemExisting = tempCart.find(
+      (cartItem) => cartItem.item.no === Number(product.no),
+    ); //Check if item already in the cart
+    const quantity = Number(document.querySelector(".qty-display").textContent);
+    if (!quantity) {
+      return alert("Input quantity.");
+    }
+    if (itemExisting) {
+      itemExisting.quantity += quantity;
+      alert("Item already in the cart.\nAdded quantity");
+      //Clear effects
+    } else {
+      tempCart.push({
+        item: selectedProduct,
+        quantity: quantity,
+      });
+      alert("Item added to cart.");
+    }
+    localStorage.setItem("temporaryCart", JSON.stringify(tempCart));
+    //console.log(tempCart);
+    const overlay = document.querySelector(".overlay");
+    asideCon.classList.remove("showModal");
+    asideCon.classList.add("hideModal");
+    overlay.classList.remove("activeOverlay");
+    document.body.classList.remove("no-scroll");
+    //remove modal after transition
+    asideCon.addEventListener(
+      "transitionend",
+      () => {
+        asideCon.remove();
+      },
+      { once: true },
+    );
+  });
+}
+
+//cart modal
+function cartModal() {}
