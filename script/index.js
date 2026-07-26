@@ -1,5 +1,6 @@
 import {
-  loadProducts,
+  loadBouquets,
+  //loadProducts,
   filterProduct,
   displayCategory,
   initializePriceSlider,
@@ -159,7 +160,8 @@ async function fetchHTML() {
     document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
       radio.addEventListener("change", filterProduct);
     });
-    await loadProducts(); //apply the loading of product here since filter in index is async
+    //  await loadProducts(); //apply the loading of product here since filter in index is async
+    await loadBouquets();
     const params = new URLSearchParams(window.location.search);
     const selectedOccasion = params.get("occasion");
 
@@ -195,12 +197,11 @@ async function fetchHTML() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchHTML);
-
 //fetch data from google sheet first
 let indexProducts = [];
 const API_URL =
   "https://script.google.com/macros/s/AKfycbzLF_J0sW70rYHDivb38iWP8jHNMOjbcfjPIGi0uFH5qlky7g50oZs0KSD9l106qnm2/exec";
-async function fetchSpecificSheet(sheetType, key, dataFormatter) {
+export async function fetchSpecificSheet(sheetType, key, dataFormatter) {
   try {
     const response = await fetch(`${API_URL}?type=${sheetType}`); //send type to just fetch related files only
     if (!response.ok) {
@@ -209,7 +210,7 @@ async function fetchSpecificSheet(sheetType, key, dataFormatter) {
     const data = await response.json();
     /* console.log(data); //for debugging only
     console.log(data[key]); */ //for debugging only
-    return dataFormatter(data[key]);
+    return dataFormatter ? dataFormatter(data[key]) : data[key];
   } catch (error) {
     console.log(`Error fetching ${sheetType}:`, error);
     throw error; //Re-throw so the caller knows it failed
@@ -217,12 +218,23 @@ async function fetchSpecificSheet(sheetType, key, dataFormatter) {
 }
 
 //Shared spinner loaders
-function setSectionLoading(section, isLoading) {
+export function setSectionLoading(section, isLoading) {
   if (!section) return;
   const loading = section.querySelector(".product-loading");
   if (loading) {
     loading.hidden = !isLoading;
   }
+}
+
+//error message
+function showSectionError(section) {
+  const errorMessage = document.createElement("div");
+  errorMessage.classList.add("section-error");
+  errorMessage.innerHTML = `
+    <p>We couldn't load this section."</p>
+    <span>Please reload the page and try again.</span>
+  `;
+  section.appendChild(errorMessage);
 }
 
 //loader for each section
@@ -243,6 +255,7 @@ async function loadBestSellers() {
     renderBestSellers(indexProducts);
   } catch (error) {
     console.log(error);
+    showSectionError(secondSection);
   } finally {
     setSectionLoading(secondSection, false);
   }
@@ -259,6 +272,7 @@ async function loadFilterCards() {
     renderOccasionCards(indexProducts);
   } catch (error) {
     console.log(error);
+    showSectionError(thirdSection);
   } finally {
     setSectionLoading(thirdSection, false);
   }
@@ -273,13 +287,14 @@ async function loadWhyUsCards() {
       formatWhyUsCards,
     );
     renderCards(indexProducts);
-    console.log("fourth", indexProducts);
   } catch (error) {
     console.log(error);
+    showSectionError(fourthSection);
   } finally {
     setSectionLoading(fourthSection, false);
   }
 }
+
 //format back data to numbers and strings
 function formatBestSellers(data) {
   return data.map((card) => ({
@@ -324,7 +339,7 @@ function renderBestSellers(bestSell) {
   bestSell.map((item) => {
     const li = document.createElement("li");
     li.innerHTML = `
-    <img src=${item.image} alt='bouquet-${item.no}' />
+    <img src=${item.image} alt='bouquet-${item.no}' loading="lazy"/>
         <div>
           <small>Best Seller</small>
           <span>${item.product}</span>
@@ -356,11 +371,13 @@ function renderOccasionCards(filteringCard) {
             src=${item.mainImage}
             alt="bouquet ${item.no}"
             class="bouquet-img"
+            loading="lazy"
           />
           <img
             src=${item.circleImage}
             alt="image-icon-${item.no}"
             class="round-images"
+            loading="lazy"
           />
         </div>
         <span>${item.cardTitle}</span>
@@ -383,10 +400,11 @@ function renderCards(whyUsCards) {
         src=${item.mainImage}
         alt=${item.mainImgAlt}
         class="why-us-icon"
+        loading="lazy"
       />
       <span>${item.cardTitle}</span>
       <div class="heart-con">
-        <img src="./images/index/fourthSection/heart.svg" alt="heart-image" />
+        <img src="./images/index/fourthSection/heart.svg" alt="heart-image" loading="lazy"/>
       </div>
       <p>${item.cardText}</p>
     `;

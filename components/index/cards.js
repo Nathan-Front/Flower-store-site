@@ -1,4 +1,4 @@
-export const cards = [
+/* export const cards = [
   {
     no: 1,
     mainImage: "./images/index/fourthSection/rose.webp",
@@ -35,3 +35,4 @@ export const cards = [
     cardText: "Beautifully packaged to make every gift special.",
   },
 ];
+ */

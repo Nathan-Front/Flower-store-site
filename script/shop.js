@@ -1,3 +1,4 @@
+import { fetchSpecificSheet, setSectionLoading } from "./index.js";
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -108,10 +109,10 @@ export function displayFilters() {
 
 //Retrieve products from google sheet
 let products = [];
-let filteredProducts = []; //For pagination function
+
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyn16sgCxlrfSCXEgDHL-CEQsLsotmo8ezEyr3fm5V0ogXnWJHqnDriHmU0oPS4Rtey/exec";
-export async function loadProducts() {
+/* export async function loadProducts() {
   const loading = document.getElementById("loading-product");
   if (loading) {
     loading.classList.remove("loadingOff");
@@ -148,6 +149,37 @@ export async function loadProducts() {
       loading.classList.add("loadingOff");
     }
   }
+} */
+let shopProducts = [];
+let filteredProducts = []; //For rendering and pagination function
+export async function loadBouquets() {
+  const secondSection = document.querySelector(".shop-second-sec");
+  setSectionLoading(secondSection, true);
+  try {
+    shopProducts = await fetchSpecificSheet(
+      "products",
+      "products",
+      formatProducts,
+    );
+    const productImages = await fetchSpecificSheet("products", "productImages");
+    shopProducts.forEach((product) => {
+      product.modal = productImages
+        .filter((img) => Number(img.productId) === product.no)
+        .map((img) => ({
+          no: Number(img.order),
+          icon: img.image,
+          iconAlt: img.alt,
+        }));
+    });
+    filteredProducts = [...shopProducts];
+    renderProducts(filteredProducts);
+    createPagination(filteredProducts);
+    displayPage(1);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setSectionLoading(secondSection, false);
+  }
 }
 //change format back to number and strings
 function formatProducts(products) {
@@ -169,6 +201,7 @@ function formatProducts(products) {
       : [],
   }));
 }
+function formatThumbnailImages() {}
 
 //Render product list
 function renderProducts(filtered) {
@@ -235,7 +268,7 @@ export function filterProduct() {
   const checkedColor = document.querySelector(
     'input[name="color"]:checked',
   )?.value;
-  let filtered = products; //get the product array
+  let filtered = shopProducts; //get the product array
   //Category filter
   if (checkedCategory && checkedCategory !== "all-bouquets") {
     filtered = filtered.filter((item) => item.category === checkedCategory);
@@ -368,7 +401,7 @@ export function resetFilters() {
         priceFilter.classList.add("price-filter-pad");
       }
     });
-    filteredProducts = [...products];
+    filteredProducts = [...shopProducts];
     initializePriceSlider(); //Reset the price range display
     currentPage = 1; //need to re-declare inside this function to be able to reset the counter start to 1
     createPagination(filteredProducts); //reset button creation
@@ -396,7 +429,7 @@ function renderSelectedProduct() {
       const asideCon = document.createElement("aside");
       asideCon.classList = "aside-con";
       const id = Number(product.dataset.id);
-      const selectedProduct = products.find((item) => item.no === id);
+      const selectedProduct = shopProducts.find((item) => item.no === id);
       asideCon.innerHTML = `
             <button type="button" class="close-modal-btn">Close</button>
             <div class="aside-product-image">

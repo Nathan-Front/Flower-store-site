@@ -526,3 +526,19 @@ nav {
         transform: rotate(360deg);
     }
 }
+/*section fetching error message*/
+.section-error {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.section-error p {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+.section-error span {
+  font-size: 0.9rem;
+}
