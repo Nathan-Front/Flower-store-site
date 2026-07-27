@@ -28,7 +28,7 @@
 .shop-now-btn {
     width: fit-content;
     padding: 1rem 1.5rem;
-    font-size: clamp(1.3rem, 2vw, 2rem);
+    font-size: clamp(1.1rem, 1.5vw, 1.8rem);
     border: none;
     background-color: #2c3e35;
     color: #c48b71;
