@@ -655,4 +655,7 @@ function addToTemporaryCart(product, asideCon) {
 }
 
 //cart modal
-function cartModal() {}
+async function cartModal() {
+  const cartCnt = document.querySelector(".cart-count");
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+}
