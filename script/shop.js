@@ -655,7 +655,10 @@ function addToTemporaryCart(product, asideCon) {
 }
 
 //cart modal
-async function cartModal() {
+export function cartCounterDisplay() {
   const cartCnt = document.querySelector(".cart-count");
+  if (!cartCnt) return;
   const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  let totalQty = tempCart.reduce((total, item) => total + item.quantity, 0);
+  cartCnt.textContent = totalQty;
 }

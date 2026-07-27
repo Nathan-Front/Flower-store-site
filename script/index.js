@@ -7,6 +7,7 @@ import {
   displayFilters,
   resetFilters,
   formatPrice,
+  cartCounterDisplay,
 } from "./shop.js";
 import {
   renderAboutCards,
@@ -135,7 +136,7 @@ async function fetchHTML() {
 
   displayNav();
   sectionsInterSections();
-  //goToShopFiltered(); //filter card of index
+  cartCounterDisplay();
 
   //about contents
   if (page === "about") {
