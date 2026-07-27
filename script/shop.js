@@ -221,19 +221,16 @@ function openProductFromURL() {
     console.log("Product not found:", productId);
     return;
   }
-
   const productCard = document.querySelector(`li[data-id="${productId}"]`); //retrieve the selected product
   if (!productCard) {
     console.log("Product card not found:", productId);
     return;
   }
-
   const cartBtn = productCard.querySelector(".cart-btn"); //retrieve its button
   if (!cartBtn) {
     console.log("Cart button not found");
     return;
   }
-
   cartBtn.click(); //apply click function
 }
 //Render product list
@@ -651,14 +648,95 @@ function addToTemporaryCart(product, asideCon) {
       },
       { once: true },
     );
+    cartCounterDisplay();
   });
 }
 
-//cart modal
+//cart counter display
 export function cartCounterDisplay() {
   const cartCnt = document.querySelector(".cart-count");
   if (!cartCnt) return;
   const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
   let totalQty = tempCart.reduce((total, item) => total + item.quantity, 0);
   cartCnt.textContent = totalQty;
+}
+
+//render the modal conainer only once
+export function viewCartModal() {
+  if (document.querySelector(".cart-modal-aside")) return;
+  const cartModal = document.createElement("aside");
+  cartModal.classList = "cart-modal-aside";
+  cartModal.innerHTML = `
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart" aria-label="Close cart">X</button>
+        </div>
+
+        <div class="cart-modal-content">
+            
+        </div>
+    `;
+  document.body.append(cartModal);
+  const overlay = document.querySelector(".overlay");
+  const closeCartBtn = document.querySelector("#close-cart");
+  closeCartBtn.addEventListener("click", () => {
+    cartModal.classList.remove("cartModal");
+    overlay.classList.remove("activeOverlay");
+    document.body.classList.remove("no-scroll");
+  });
+  const cart = document.querySelector(".cart-button");
+  cart.addEventListener("click", () => {
+    renderCartModalContent(cartModal); //pass the element create
+    cartModal.classList.add("cartModal");
+    overlay.classList.add("activeOverlay");
+    document.body.classList.add("no-scroll");
+  });
+}
+//separate the element being updated for the buttons of modal to work
+function renderCartModalContent(cartModal) {
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  let totalQty = tempCart.reduce((total, item) => total + item.quantity, 0);
+  const cartContent = cartModal.querySelector(".cart-modal-content"); //use the passed element
+  cartContent.innerHTML = `
+    ${
+      tempCart.length === 0
+        ? `<p>Your cart is empty (<span>${totalQty} item</span>)</p>`
+        : `
+          <p>Your cart content (<span>${totalQty} item${tempCart.length > 1 ? "s" : ""}</span>)</p>
+          <ul class="added-items-container">
+              ${tempCart
+                .map(
+                  (product) => `
+                  <li>
+                    <div class="product-details-con">
+                      <div class="cart-product-image">
+                        <img src=${product.item.image} alt="product-item-${product.item.no}" />
+                      </div>
+                      <div class="cart-product-details">
+                        <strong>${product.item.product}</strong>
+                        <span>${formatPrice(product.item.price)}</span>
+                        <div class="cart-add-minus-con">
+                          <div class="quantity-con">
+                            <span>Quantity:</span>
+                          </div>
+                          <button id="cart-minus-qty-btn">−</button>
+                          <div class="cart-qty-display-con">
+                            <span class="cart-qty-display">${product.quantity}</span>
+                          </div>
+                          <button id="cart-add-qty-btn">+</button>
+                          <button class="cart-modal-del-btn"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+              `,
+                )
+                .join("")}
+          </ul>
+          `
+    }
+          <div class="to-check-out">
+            <button>Proceed to check out</button>
+          </div>
+  `;
 }

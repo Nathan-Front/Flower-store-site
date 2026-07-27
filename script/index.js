@@ -8,6 +8,7 @@ import {
   resetFilters,
   formatPrice,
   cartCounterDisplay,
+  viewCartModal,
 } from "./shop.js";
 import {
   renderAboutCards,
@@ -128,6 +129,8 @@ async function fetchHTML() {
   }
   //footer subscribe
   newSubscriber();
+
+  //index contents
   if (page === "index") {
     loadBestSellers();
     loadFilterCards();
@@ -136,7 +139,9 @@ async function fetchHTML() {
 
   displayNav();
   sectionsInterSections();
+  //from shop.js
   cartCounterDisplay();
+  viewCartModal();
 
   //about contents
   if (page === "about") {
@@ -159,43 +164,33 @@ async function fetchHTML() {
     document.querySelectorAll('input[name="category"]').forEach((radio) => {
       radio.addEventListener("change", filterProduct);
     });
-
     async function initShop() {
       document.querySelectorAll('input[name="occasions"]').forEach((radio) => {
         radio.addEventListener("change", filterProduct);
       });
-
-      await loadBouquets();
-
+      await loadBouquets(); //load bouquets here for index and shop filter functions
       const params = new URLSearchParams(window.location.search);
       const selectedOccasion = params.get("occasion");
-
       if (selectedOccasion) {
         const radio = document.querySelector(
           `input[name="occasions"][value="${selectedOccasion}"]`,
         );
-
         if (radio) {
           radio.checked = true;
           filterProduct();
         }
       }
     }
-
     initShop();
-
     const minSlider = document.getElementById("min-price");
     const maxSlider = document.getElementById("max-price");
-
     if (minSlider && maxSlider) {
       minSlider.addEventListener("input", filterProduct);
       maxSlider.addEventListener("input", filterProduct);
     }
-
     document.querySelectorAll('input[name="color"]').forEach((radio) => {
       radio.addEventListener("change", filterProduct);
     });
-
     displayCategory();
     initializePriceSlider();
     displayFilters();
@@ -441,7 +436,7 @@ function sectionsInterSections() {
   interSectItems.forEach((item) => observer.observe(item));
 }
 
-//add to cardt best seller
+//add to cart best seller
 export function addToCartBestSeller() {
   const addToCart = document.querySelectorAll(".add-to-cart-best-seller");
   addToCart.forEach((btn) => {
@@ -455,7 +450,6 @@ export function addToCartBestSeller() {
 //Selecting card from index html
 function goToShopFiltered() {
   const filterBtn = document.querySelectorAll(".to-shop-filter-item");
-
   filterBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       btn.closest("li");
