@@ -740,13 +740,13 @@ function renderCartModalContent(cartModal) {
           </div>
   `;
   addMinusCartModal();
+  deleteItemCartModal();
   updateTotalPaymentDisplay();
 }
 
 function addMinusCartModal() {
   const increaseBtn = document.querySelectorAll(".cart-add-qty-btn");
   const decreaseBtn = document.querySelectorAll(".cart-minus-qty-btn");
-
   increaseBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
@@ -783,6 +783,25 @@ function addMinusCartModal() {
       );
       localStorage.setItem("temporaryCart", JSON.stringify(tempCart));
       cartModalCnt.textContent = tempCart[cartIndex].quantity;
+      updateCartModalContentCounter();
+      cartCounterDisplay();
+      updateTotalPaymentDisplay();
+    });
+  });
+}
+//Delete item in cart modal
+function deleteItemCartModal() {
+  const delBtn = document.querySelectorAll(".cart-modal-del-btn");
+  delBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const li = btn.closest("li");
+      const productId = Number(li.dataset.productId);
+      const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+      const newTempCart = tempCart.filter(
+        (product) => product.item.no !== productId,
+      );
+      localStorage.setItem("temporaryCart", JSON.stringify(newTempCart));
+      li.remove();
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
