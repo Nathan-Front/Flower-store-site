@@ -661,6 +661,7 @@ export function cartCounterDisplay() {
   cartCnt.textContent = totalQty;
 }
 
+//Cart modal related functions
 //render the modal conainer only once
 export function viewCartModal() {
   if (document.querySelector(".cart-modal-aside")) return;
@@ -671,9 +672,7 @@ export function viewCartModal() {
             <h2>Your Cart</h2>
             <button id="close-cart" aria-label="Close cart">X</button>
         </div>
-
-        <div class="cart-modal-content">
-            
+        <div class="cart-modal-content">  
         </div>
     `;
   document.body.append(cartModal);
@@ -700,14 +699,14 @@ function renderCartModalContent(cartModal) {
   cartContent.innerHTML = `
     ${
       tempCart.length === 0
-        ? `<p>Your cart is empty (<span>${totalQty} item</span>)</p>`
+        ? `<p>Your cart is empty (<span>0 item</span>)</p>`
         : `
-          <p>Your cart content (<span>${totalQty} item${tempCart.length > 1 ? "s" : ""}</span>)</p>
+          <p>Your cart content (<span class="cart-modal-counter">${totalQty} item${totalQty > 1 ? "s" : ""}</span>)</p>
           <ul class="added-items-container">
               ${tempCart
                 .map(
                   (product) => `
-                  <li>
+                  <li data-product-id=${product.item.no}>
                     <div class="product-details-con">
                       <div class="cart-product-image">
                         <img src=${product.item.image} alt="product-item-${product.item.no}" />
@@ -719,11 +718,11 @@ function renderCartModalContent(cartModal) {
                           <div class="quantity-con">
                             <span>Quantity:</span>
                           </div>
-                          <button id="cart-minus-qty-btn">−</button>
+                          <button class="cart-minus-qty-btn">−</button>
                           <div class="cart-qty-display-con">
                             <span class="cart-qty-display">${product.quantity}</span>
                           </div>
-                          <button id="cart-add-qty-btn">+</button>
+                          <button class="cart-add-qty-btn">+</button>
                           <button class="cart-modal-del-btn"><i class="fa-solid fa-trash"></i></button>
                         </div>
                       </div>
@@ -736,7 +735,77 @@ function renderCartModalContent(cartModal) {
           `
     }
           <div class="to-check-out">
+            <p>Total: <span class="cart-modal-total-payment"></span></p>
             <button>Proceed to check out</button>
           </div>
   `;
+  addMinusCartModal();
+  updateTotalPaymentDisplay();
+}
+
+function addMinusCartModal() {
+  const increaseBtn = document.querySelectorAll(".cart-add-qty-btn");
+  const decreaseBtn = document.querySelectorAll(".cart-minus-qty-btn");
+
+  increaseBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+      const li = btn.closest("li");
+      const productId = Number(li.dataset.productId);
+      const cartModalCnt = li.querySelector(".cart-qty-display");
+      //find item using its index in the array
+      const cartIndex = tempCart.findIndex(
+        (product) => product.item.no === productId, //use the id of li tag to compare
+      );
+      if (cartIndex === -1) return;
+      tempCart[cartIndex].quantity++; //update the quantity of the found index
+      localStorage.setItem("temporaryCart", JSON.stringify(tempCart));
+      cartModalCnt.textContent = tempCart[cartIndex].quantity;
+      updateCartModalContentCounter();
+      cartCounterDisplay();
+      updateTotalPaymentDisplay();
+    });
+  });
+
+  decreaseBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+      const li = btn.closest("li");
+      const productId = Number(li.dataset.productId);
+      const cartModalCnt = li.querySelector(".cart-qty-display");
+      const cartIndex = tempCart.findIndex(
+        (product) => product.item.no === productId,
+      );
+      if (cartIndex === -1) return;
+      tempCart[cartIndex].quantity = Math.max(
+        1,
+        tempCart[cartIndex].quantity - 1,
+      );
+      localStorage.setItem("temporaryCart", JSON.stringify(tempCart));
+      cartModalCnt.textContent = tempCart[cartIndex].quantity;
+      updateCartModalContentCounter();
+      cartCounterDisplay();
+      updateTotalPaymentDisplay();
+    });
+  });
+}
+
+//This is to update modal total counter when add/minus button is clicked
+function updateCartModalContentCounter() {
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  let totalQty = tempCart.reduce((total, item) => total + item.quantity, 0);
+  const totalDisplay = document.querySelector(".cart-modal-counter");
+  if (!totalDisplay) return;
+  totalDisplay.textContent = `${totalQty} item${totalQty > 1 ? "s" : ""}`;
+}
+
+//This is to update total payment in cart modal
+function updateTotalPaymentDisplay() {
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  const totalPayment = tempCart.reduce(
+    (total, product) => total + product.item.price * product.quantity,
+    0,
+  );
+  const totalDisplay = document.querySelector(".cart-modal-total-payment");
+  totalDisplay.innerHTML = formatPrice(totalPayment);
 }

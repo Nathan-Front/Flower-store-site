@@ -555,6 +555,8 @@ nav {
     right: 0;
     transform: translateX(100%);
     transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
 }
 .cart-modal-aside.cartModal {
     transform: translate(0);
@@ -580,6 +582,12 @@ nav {
     color: #a64b66;
     border: 1px solid #a64b66;
 }
+.cart-modal-content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
 .cart-modal-content> p {
     margin: 8px 0;
     text-align: center;
@@ -588,10 +596,12 @@ nav {
 }
 .added-items-container {
     width: 100%;
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    height: 80dvh;
+  
     padding: 16px 0;
     overflow-y: auto;
     background: #fff;
@@ -699,7 +709,18 @@ nav {
 }
 .to-check-out {
     width: 100%;
-    margin: 8px 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.to-check-out> p {
+    font-size: 1.2rem;
+    margin-top: 8px;
+}
+.cart-modal-total-payment {
+    font-weight: 600;
+    color: #a64b66;
 }
 .to-check-out> button {
     width: 100%;
@@ -722,6 +743,11 @@ nav {
 }
 @media (min-width: 641px) and (max-width: 950px) {
     .cart-modal-aside {
-        width: 45vw;
+        width: 60vw;
+    }
+}
+@media (min-width: 951px) and (max-width: 1366px) {
+    .cart-modal-aside {
+        width: 40vw;
     }
 }
