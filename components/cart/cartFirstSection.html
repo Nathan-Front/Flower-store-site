@@ -1,0 +1,163 @@
+<section class="cart-first-sec">
+  <h2>Checkout</h2>
+  <p>Fill in correct information to complete your order.</p>
+  <div class="form-container">
+    <form>
+      <div class="contact-info-con">
+        <div>
+          <img src="" alt="" />
+          <span>1. Contact Information</span>
+        </div>
+        <div class="input-label-con">
+          <label for="checkoutEmail">Email address</label>
+          <input
+            type="email"
+            name="email"
+            id="checkoutEmail"
+            placeholder="Your email@example.com"
+            required
+          />
+        </div>
+        <div class="input-label-con">
+          <label for="checkoutPhone">Contact Number</label>
+          <input
+            type="text"
+            name="phone"
+            id="checkoutPhone"
+            placeholder="09XX XXXX XXXX"
+            required
+          />
+        </div>
+      </div>
+      <div class="shipping-info-con">
+        <div>
+          <img src="" alt="" />
+          <span>2. Shipping Information</span>
+        </div>
+        <div class="input-label-con">
+          <label for="checkoutName">Full Name</label>
+          <input
+            type="text"
+            name="name"
+            id="checkoutName"
+            placeholder="John Doe"
+            required
+          />
+        </div>
+        <div class="input-label-con">
+          <label for="checkoutAddress">Address</label>
+          <input
+            type="text"
+            name="address"
+            id="checkoutAddress"
+            placeholder="Street, block, building, house number"
+            required
+          />
+        </div>
+        <div class="shipping-inner-con">
+          <div class="input-label-con">
+            <label for="checkoutCity">City</label>
+            <input
+              type="text"
+              name="city"
+              id="checkoutCity"
+              placeholder="City"
+              required
+            />
+          </div>
+          <div class="input-label-con">
+            <label for="checkoutZip">Zip Code</label>
+            <input
+              type="text"
+              name="zip"
+              id="checkoutZip"
+              placeholder="Zip code"
+              required
+            />
+          </div>
+          <div class="input-label-con">
+            <label for="checkoutDate">Delivery Date</label>
+            <input
+              type="date"
+              name="date"
+              id="checkoutDate"
+              placeholder="Select delivery date"
+              required
+            />
+          </div>
+          <div class="input-label-con">
+            <label for="checkoutTime">Delivery Time</label>
+            <input
+              type="time"
+              name="time"
+              id="checkoutTime"
+              placeholder="Select desired time"
+              required
+            />
+          </div>
+        </div>
+        <div class="input-label-con">
+          <small>Order Notes (Optional)</small>
+          <textarea
+            name="note"
+            placeholder="Order note"
+            id="order-note"
+          ></textarea>
+        </div>
+      </div>
+      <div class="payment-method-con">
+        <div>
+          <img src="" alt="" />
+          <span>3. Payment Method</span>
+        </div>
+        <div>
+          <label class="payment-option">
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="creditCard"
+              value="credit-card"
+              required
+            />
+            <span>Credit / Debit Card</span>
+            <div class="payment-card-con">
+              <img src="./images/cart/firstSection/visa.svg" alt="visa" />
+              <img
+                src="./images/cart/firstSection/mastercard.svg"
+                alt="master"
+              />
+            </div>
+          </label>
+        </div>
+        <div>
+          <label class="payment-option">
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="paypal"
+              value="paypal"
+            />
+            <span>PayPal</span>
+            <div class="payment-card-con">
+              <img src="./images/cart/firstSection/paypal.svg" alt="paypal" />
+            </div>
+          </label>
+        </div>
+        <div>
+          <label class="payment-option">
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="cashOnDelivery"
+              value="cash-on-delivery"
+            />
+            <span>Cash on Delivery</span>
+            <div class="payment-card-con">
+              <img src="./images/cart/firstSection/money-cash.svg" alt="cash" />
+            </div>
+          </label>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

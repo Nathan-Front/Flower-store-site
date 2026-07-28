@@ -18,6 +18,7 @@ import {
 } from "./about.js";
 import { contactIntersection, sendMessage, FAQs } from "./contact.js";
 import { newSubscriber } from "./footer.js";
+import { cartCheckoutSummary } from "./cart.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -107,6 +108,16 @@ async function fetchHTML() {
         ),
       ]);
     }
+    if (page === "cart") {
+      sections = await Promise.all([
+        fetch("./components/cart/cartFirstSection.html").then((res) =>
+          res.text(),
+        ),
+        fetch("./components/cart/cartSecondSection.html").then((res) =>
+          res.text(),
+        ),
+      ]);
+    }
     //clear app content
     app.innerHTML = "";
     //render sections based on page
@@ -132,9 +143,11 @@ async function fetchHTML() {
 
   //index contents
   if (page === "index") {
-    loadBestSellers();
-    loadFilterCards();
-    loadWhyUsCards();
+    Promise.all([loadBestSellers(), loadFilterCards(), loadWhyUsCards()]).catch(
+      (error) => {
+        console.error("Failed to load index content:", error);
+      },
+    );
   }
 
   displayNav();
@@ -195,6 +208,10 @@ async function fetchHTML() {
     initializePriceSlider();
     displayFilters();
     resetFilters();
+  }
+
+  if (page === "cart") {
+    cartCheckoutSummary();
   }
 }
 

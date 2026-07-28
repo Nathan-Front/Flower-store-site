@@ -1,0 +1,7 @@
+.cart-second-sec {
+    grid-column: 2 / 3;
+    margin-top: calc(var(--nav-height-desk) + 50px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

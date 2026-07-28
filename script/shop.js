@@ -736,7 +736,7 @@ function renderCartModalContent(cartModal) {
     }
           <div class="to-check-out">
             <p>Total: <span class="cart-modal-total-payment"></span></p>
-            <button>Proceed to check out</button>
+            <a href="./cart.html">Proceed to check out</a>
           </div>
   `;
   addMinusCartModal();

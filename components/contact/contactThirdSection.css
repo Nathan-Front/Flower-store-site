@@ -178,6 +178,9 @@ textarea::placeholder {
     color: #a64b66;
     background-color: white;
 }
+.visually-hidden {
+    display: none;
+}
 .honeypot {
     position: absolute;
     left: 99999999;

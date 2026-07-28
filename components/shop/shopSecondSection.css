@@ -879,20 +879,6 @@
     font-weight: 500;
     font-size: 0.8rem;
 }
-.overlay {
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
-    z-index: 99;
-    transition: 0.4s ease;
-}
-.overlay.activeOverlay {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
 .no-scroll {
     overflow: hidden;
 }

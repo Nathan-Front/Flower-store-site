@@ -211,6 +211,20 @@ nav {
 .menu-btn {
     border: none;
 }
+.overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 99;
+    transition: 0.4s ease;
+}
+.overlay.activeOverlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 @media only screen and (max-width: 640px) {
     nav {
         height: var(--nav-height-mobile);
@@ -686,7 +700,7 @@ nav {
     transform: translate(-50%, -50%);
 }
 .cart-modal-del-btn {
-    width: 25px;
+    width: 40px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -722,7 +736,7 @@ nav {
     font-weight: 600;
     color: #a64b66;
 }
-.to-check-out> button {
+.to-check-out> a {
     width: 100%;
     padding: 8px;
     border-radius: 0.5rem;
@@ -731,8 +745,9 @@ nav {
     background-color: #4f6f52;
     border: 1px solid #4f6f52;
     color: #fff;
+    text-align: center;
 }
-.to-check-out> button:hover {
+.to-check-out> a:hover {
     color: #4f6f52;
     background-color: #fff;
 }
