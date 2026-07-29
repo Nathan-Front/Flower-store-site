@@ -3,6 +3,7 @@ import {
   setSectionLoading,
   addToCartBestSeller,
 } from "./index.js";
+import { cartCheckoutSummary } from "./cart.js";
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -764,6 +765,7 @@ function addMinusCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      cartCheckoutSummary();
     });
   });
 
@@ -786,6 +788,7 @@ function addMinusCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      cartCheckoutSummary();
     });
   });
 }
@@ -805,12 +808,13 @@ function deleteItemCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      cartCheckoutSummary();
     });
   });
 }
 
 //This is to update modal total counter when add/minus button is clicked
-function updateCartModalContentCounter() {
+export function updateCartModalContentCounter() {
   const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
   let totalQty = tempCart.reduce((total, item) => total + item.quantity, 0);
   const totalDisplay = document.querySelector(".cart-modal-counter");
@@ -819,7 +823,7 @@ function updateCartModalContentCounter() {
 }
 
 //This is to update total payment in cart modal
-function updateTotalPaymentDisplay() {
+export function updateTotalPaymentDisplay() {
   const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
   const totalPayment = tempCart.reduce(
     (total, product) => total + product.item.price * product.quantity,

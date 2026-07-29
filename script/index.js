@@ -149,12 +149,15 @@ async function fetchHTML() {
       },
     );
   }
-
   displayNav();
   sectionsInterSections();
   //from shop.js
   cartCounterDisplay();
   viewCartModal();
+  //from cart.js
+  if (page === "cart") {
+    cartCheckoutSummary();
+  }
 
   //about contents
   if (page === "about") {
@@ -208,10 +211,6 @@ async function fetchHTML() {
     initializePriceSlider();
     displayFilters();
     resetFilters();
-  }
-
-  if (page === "cart") {
-    cartCheckoutSummary();
   }
 }
 

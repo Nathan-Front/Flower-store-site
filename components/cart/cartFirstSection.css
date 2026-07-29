@@ -1,12 +1,11 @@
 body[data-page="cart"] #app {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
 }
 .cart-first-sec {
     grid-column: 1 / 2;
     margin-top: var(--nav-height-desk);
-    padding: 40px;
+    padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -17,8 +16,7 @@ body[data-page="cart"] #app {
 .form-container> form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    
+    gap: 16px; 
 }
 .form-container> form> div {
     display: flex;
@@ -75,9 +73,17 @@ body[data-page="cart"] #app {
     pointer-events: none;
 }
 .payment-card-con> img {
-    width: clamp(30px, 3.5vw, 60px);
+    width: clamp(25px, 3vw, 60px);
 }
 .payment-option:has(input[type="radio"]:checked) {
     border: 1px solid #a64b66;
     background: #e0bac5;
+}
+@media only screen and (max-width: 640px) {
+    body[data-page="cart"] #app {
+        grid-template-columns: 1fr;
+    }
+    .cart-first-sec {
+        grid-row: 1 / 2;
+    }
 }

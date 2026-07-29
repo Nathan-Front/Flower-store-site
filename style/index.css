@@ -2,6 +2,7 @@
     --nav-height-mobile: 50px;
     --nav-height-desk: 70px;
     --container-width: 1400px;
+    --header-font-style: "Cormorant Garamond", serif;
 }
 * {
     box-sizing: border-box;
@@ -652,10 +653,6 @@ nav {
     justify-content: center;
     gap: 8px;
 }
-.cart-product-rating> span {
-    font-size: 0.7rem;
-    color: #777;
-}
 .cart-product-details> span {
     color: #a64b66;
     font-weight: 600;
@@ -712,11 +709,9 @@ nav {
     border: none;
     transition: 0.3s ease;
     border-radius: 0.25rem;
-
 }
 .fa-trash {
     width: 100%;
-
 }
 .cart-modal-del-btn:hover> .fa-trash {
     color: #fff;
