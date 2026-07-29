@@ -1,3 +1,4 @@
+import { fetchSpecificSheet } from "./index.js";
 import {
   formatPrice,
   cartCounterDisplay,
@@ -63,6 +64,7 @@ function addMinusCartCheckout() {
       cartCounterDisplay();
       updateTotalPaymentDisplay();
       viewCartModal();
+      renderCheckoutData(cartSettings);
     });
   });
 
@@ -86,6 +88,46 @@ function addMinusCartCheckout() {
       cartCounterDisplay();
       updateTotalPaymentDisplay();
       viewCartModal();
+      renderCheckoutData(cartSettings);
     });
   });
+}
+export let cartSettings = [];
+export async function loadCheckoutDisplay() {
+  //const secondSection = document.querySelector(".cart-second-sec");
+  try {
+    cartSettings = await fetchSpecificSheet(
+      "checkout",
+      "settings",
+      formatCartDisplay,
+    );
+    console.log("cartSettings:", cartSettings);
+    renderCheckoutData(cartSettings);
+  } catch (error) {
+    console.log(error);
+  }
+}
+function formatCartDisplay(data) {
+  return data.map((setting) => ({
+    delFee: setting.DeliveryFee,
+    taxRate: setting.TaxRate,
+  }));
+}
+
+export function renderCheckoutData(settings) {
+  const subTotal = document.querySelector(".sub-total");
+  const delFee = document.querySelector(".delivery-fee");
+  const taxRate = document.querySelector(".tax-fee");
+  const grandTotal = document.querySelector(".grand-total");
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  const totalPayment = tempCart.reduce(
+    (total, product) => total + product.item.price * product.quantity,
+    0,
+  );
+  subTotal.textContent = "$" + totalPayment.toFixed(2);
+  delFee.textContent = "$" + settings[0].delFee.toFixed(2);
+  const percentage = Number(settings[0].taxRate) * 100;
+  taxRate.textContent = percentage + "%";
+  let grand = Number(totalPayment) * settings[0].taxRate + Number(totalPayment);
+  grandTotal.textContent = "$" + grand.toFixed(2);
 }

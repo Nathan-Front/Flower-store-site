@@ -1,6 +1,5 @@
 import {
   loadBouquets,
-  //loadProducts,
   filterProduct,
   displayCategory,
   initializePriceSlider,
@@ -18,7 +17,11 @@ import {
 } from "./about.js";
 import { contactIntersection, sendMessage, FAQs } from "./contact.js";
 import { newSubscriber } from "./footer.js";
-import { cartCheckoutSummary } from "./cart.js";
+import {
+  cartCheckoutSummary,
+  loadCheckoutDisplay,
+  renderCheckoutData,
+} from "./cart.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -116,6 +119,9 @@ async function fetchHTML() {
         fetch("./components/cart/cartSecondSection.html").then((res) =>
           res.text(),
         ),
+        fetch("./components/cart/cartThirdSection.html").then((res) =>
+          res.text(),
+        ),
       ]);
     }
     //clear app content
@@ -157,6 +163,8 @@ async function fetchHTML() {
   //from cart.js
   if (page === "cart") {
     cartCheckoutSummary();
+    loadCheckoutDisplay();
+    //renderCheckoutData();
   }
 
   //about contents
@@ -217,9 +225,8 @@ async function fetchHTML() {
 document.addEventListener("DOMContentLoaded", fetchHTML);
 //fetch data from google sheet first
 let indexProducts = [];
-
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzLF_J0sW70rYHDivb38iWP8jHNMOjbcfjPIGi0uFH5qlky7g50oZs0KSD9l106qnm2/exec";
+  "https://script.google.com/macros/s/AKfycbwnSQnfBTIYi7RH8RU1MATMKByLfIX6VMW4r0AQPZHaXvuFH4WRmktXi4e1M7xpn4mX/exec";
 export async function fetchSpecificSheet(sheetType, key, dataFormatter) {
   try {
     const response = await fetch(`${API_URL}?type=${sheetType}`); //send type to just fetch related files only
@@ -246,7 +253,7 @@ export function setSectionLoading(section, isLoading) {
 }
 
 //error message
-function showSectionError(section) {
+export function showSectionError(section) {
   const errorMessage = document.createElement("div");
   errorMessage.classList.add("section-error");
   errorMessage.innerHTML = `

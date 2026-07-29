@@ -1,0 +1,120 @@
+.cart-third-sec {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.form-container {
+    width: 100%; 
+}
+.form-container> form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+.form-container> form> div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.45);
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 16px;
+}
+.contact-info-con> div,
+.shipping-info-con> div {
+    display: flex;
+    flex-direction: column;
+}
+.checkout-panel-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+}
+.checkout-icon {
+    width: 25px;
+}
+.shipping-inner-con {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.shipping-inner-con> div {
+    display: flex;
+    flex-direction: column;
+}
+.input-label-con {
+    display: flex;
+    gap: 4px;
+}
+.input-label-con> input,
+.input-label-con> textarea {
+    padding: 10px 24px 10px 8px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.input-label-con> input::placeholder,
+.input-label-con> textarea::placeholder {
+    font-family: "Cormorant Garamond", serif;
+}
+.input-label-con> input:focus,
+.input-label-con> textarea:focus {
+    outline: none;
+    border-color: #A64B66;
+    box-shadow: 0 0 0 1px rgba(166, 75, 102, 0.15);
+}
+.input-label-con> textarea {
+    height: 100px;
+}
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0px 8px;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.payment-option span {
+    cursor: pointer;
+}
+.payment-card-con {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    pointer-events: none;
+}
+.payment-card-con> img {
+    width: clamp(25px, 3vw, 60px);
+}
+.payment-option:has(input[type="radio"]:checked) {
+    border: 1px solid #a64b66;
+    background: #e0bac5;
+}
+@media only screen and (max-width: 640px) {
+    .cart-third-sec {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        width: 90%;
+        margin: 0 auto 40px auto;
+        padding: 0;
+    }
+    .shipping-inner-con {
+        display: flex !important;
+        flex-direction: column;
+    }
+}
+@media (min-width: 641px) and (max-width: 800px) {
+    .cart-third-sec {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        margin: 0 0 40px 0;
+        padding: 0;
+    }
+}

@@ -2,8 +2,13 @@ import {
   fetchSpecificSheet,
   setSectionLoading,
   addToCartBestSeller,
+  showSectionError,
 } from "./index.js";
-import { cartCheckoutSummary } from "./cart.js";
+import {
+  cartCheckoutSummary,
+  renderCheckoutData,
+  cartSettings,
+} from "./cart.js";
 //get cards per page
 function getCardsPerPage() {
   if (window.innerWidth <= 540) return 6; // 1 × 6
@@ -116,7 +121,6 @@ export function displayFilters() {
 
 //Retrieve products from google sheet
 let products = [];
-
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyn16sgCxlrfSCXEgDHL-CEQsLsotmo8ezEyr3fm5V0ogXnWJHqnDriHmU0oPS4Rtey/exec";
 /* export async function loadProducts() {
@@ -187,6 +191,7 @@ export async function loadBouquets() {
     //addToTemporaryCart(filteredProducts);
   } catch (error) {
     console.log(error);
+    showSectionError(secondSection);
   } finally {
     setSectionLoading(secondSection, false);
   }
@@ -765,7 +770,9 @@ function addMinusCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      //from cart.js
       cartCheckoutSummary();
+      renderCheckoutData(cartSettings);
     });
   });
 
@@ -788,7 +795,9 @@ function addMinusCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      //from cart.js
       cartCheckoutSummary();
+      renderCheckoutData(cartSettings);
     });
   });
 }
@@ -808,6 +817,7 @@ function deleteItemCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
+      //from cart.js
       cartCheckoutSummary();
     });
   });
@@ -830,5 +840,6 @@ export function updateTotalPaymentDisplay() {
     0,
   );
   const totalDisplay = document.querySelector(".cart-modal-total-payment");
+  if (!totalDisplay) return;
   totalDisplay.innerHTML = formatPrice(totalPayment);
 }
