@@ -21,6 +21,7 @@ import {
   cartCheckoutSummary,
   loadCheckoutDisplay,
   renderCheckoutData,
+  openPaymentMEthod,
 } from "./cart.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
@@ -164,7 +165,7 @@ async function fetchHTML() {
   if (page === "cart") {
     cartCheckoutSummary();
     loadCheckoutDisplay();
-    //renderCheckoutData();
+    openPaymentMEthod();
   }
 
   //about contents

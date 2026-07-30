@@ -131,3 +131,16 @@ export function renderCheckoutData(settings) {
   let grand = Number(totalPayment) * settings[0].taxRate + Number(totalPayment);
   grandTotal.textContent = "$" + grand.toFixed(2);
 }
+
+export function openPaymentMEthod() {
+  const paymentMethods = document.querySelectorAll(
+    'input[name="paymentMethod"]',
+  );
+  const paypalContainer = document.querySelector(".paypal-container");
+  paymentMethods.forEach((method) => {
+    method.addEventListener("change", () => {
+      paypalContainer.hidden =
+        document.getElementById("paypal").checked === false;
+    });
+  });
+}
