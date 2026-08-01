@@ -27,23 +27,22 @@ app.use(express.static(path.join(__dirname, "..")));
 const allowedOrigins = [
   "http://127.0.0.1:5500",
   "http://localhost:5500",
-  "https://your-github-username.github.io",
+  "https://nathan-front.github.io",
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests without origin (Postman, server-to-server, etc.)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like Postman or server-to-server calls)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS policy violation"));
       }
-
-      return callback(new Error("Not allowed by CORS"));
     },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 );
 
