@@ -21,8 +21,9 @@ import {
   cartCheckoutSummary,
   loadCheckoutDisplay,
   renderCheckoutData,
-  openPaymentMEthod,
+  //openPaymentMethod,
 } from "./cart.js";
+import { updatePaymentMethod } from "./app.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -131,6 +132,7 @@ async function fetchHTML() {
     sections.forEach((sec) => {
       app.insertAdjacentHTML("beforeend", sec);
     });
+
     //render footer
     body.insertAdjacentHTML("beforeend", foot);
   } catch (error) {
@@ -165,7 +167,13 @@ async function fetchHTML() {
   if (page === "cart") {
     cartCheckoutSummary();
     loadCheckoutDisplay();
-    openPaymentMEthod();
+    //openPaymentMethod();
+    updatePaymentMethod();
+    document
+      .querySelectorAll('input[name="paymentMethod"]')
+      .forEach((input) => {
+        input.addEventListener("change", updatePaymentMethod);
+      });
   }
 
   //about contents

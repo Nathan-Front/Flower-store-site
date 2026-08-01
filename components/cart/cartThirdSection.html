@@ -1,6 +1,6 @@
 <section class="cart-third-sec">
   <div class="form-container">
-    <form>
+    <form id="checkout-form">
       <div class="contact-info-con">
         <div class="checkout-panel-title">
           <img
@@ -146,14 +146,19 @@
               name="paymentMethod"
               id="paypal"
               value="paypal"
-              checked
             />
             <span>PayPal</span>
             <div class="payment-card-con">
               <img src="./images/cart/firstSection/paypal.svg" alt="paypal" />
+              <img src="./images/cart/firstSection/visa.svg" alt="visa" />
+              <img
+                src="./images/cart/firstSection/mastercard.svg"
+                alt="mastercard"
+              />
             </div>
           </label>
           <div class="paypal-container">
+            <div id="paypal-message" class="paypal-message"></div>
             <div id="paypal-button-container"></div>
             <p id="result-message"></p>
           </div>

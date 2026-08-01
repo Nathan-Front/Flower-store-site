@@ -91,7 +91,7 @@
     pointer-events: none;
 }
 .payment-card-con> img {
-    width: clamp(25px, 3vw, 60px);
+    width: clamp(25px, 2.5vw, 50px);
 }
 .payment-option:has(input[type="radio"]:checked) {
     border: 1px solid #a64b66;
@@ -117,4 +117,32 @@
         margin: 0 0 40px 0;
         padding: 0;
     }
+}
+
+/*paypal*/
+.paypal-container {
+    display: none;
+   
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition:
+        max-height 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.paypal-container.show {
+    display: block;
+    max-height: 500px; 
+    opacity: 1;
+    transform: translateY(0);
+    padding: 24px 0 0 0;
+}
+.paypal-message {
+    margin-bottom: 8px;
+    color: #c0392b;
+    font-size: 0.8rem;
+    text-align: center;
 }
