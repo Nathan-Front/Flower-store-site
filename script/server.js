@@ -24,12 +24,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..")));
 
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://your-github-username.github.io",
+];
+
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500",
+    origin: function (origin, callback) {
+      // Allow requests without origin (Postman, server-to-server, etc.)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    origin: "https://your-github-username.github.io",
   }),
 );
 
