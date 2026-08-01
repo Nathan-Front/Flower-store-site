@@ -29,8 +29,10 @@ app.use(
     origin: "http://127.0.0.1:5500",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "https://your-github-username.github.io",
   }),
 );
+
 app.use(bodyParser.json());
 
 const {

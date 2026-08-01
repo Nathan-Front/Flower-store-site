@@ -1,4 +1,5 @@
 let paypalRendered = false;
+const SERVER_URL = "https://flosandflorere.onrender.com";
 function initPaypalButtons() {
   if (paypalRendered) return;
   paypal
@@ -52,7 +53,7 @@ function initPaypalButtons() {
           },
         };
 
-        const response = await fetch("api/orders", {
+        const response = await fetch(`${SERVER_URL}/api/orders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +71,7 @@ function initPaypalButtons() {
       async onApprove(data, actions) {
         try {
           const response = await fetch(
-            `http://localhost:8080/api/orders/${data.orderID}/capture`,
+            `${SERVER_URL}/api/orders/${data.orderID}/capture`,
             {
               method: "POST",
               headers: {
