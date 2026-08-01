@@ -18,15 +18,14 @@ import {
 import bodyParser from "body-parser";
 //added
 import cors from "cors";
-//added
+
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "..")));
 
 const allowedOrigins = [
-  "http://127.0.0.1:5500",
-  "http://localhost:5500",
+  "http://localhost:8080",
+  "http://127.0.0.1:8080",
   "https://nathan-front.github.io",
 ];
 
@@ -47,6 +46,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "..")));
 
 const {
   PAYPAL_CLIENT_ID,
