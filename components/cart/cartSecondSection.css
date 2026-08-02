@@ -54,7 +54,7 @@
     width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 }
 .check-cart-product-details> strong {
     font-size: clamp(1.2rem, 1.5vw, 1.8rem);
@@ -186,7 +186,7 @@
     border-right: 1px solid rgba(120, 120, 120, 0.3);
 }
 .checkout-info-cards> li> img {
-    width: 50px;
+    width: clamp(40px, 5vw, 50px);;
 }
 .checkout-info-cards> li> p {
     width: 70%;
@@ -243,9 +243,6 @@
     }
     .check-cart-product-details {
         flex: 1;
-    }
-    .check-cart-add-minus-con {
-        gap: 8px;
     }
     .checkout-help-con> div {
         flex-direction: column;
