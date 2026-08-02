@@ -95,6 +95,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 3ch; 
 }
 .check-cart-qty-display {
     width: 3ch; 
@@ -246,6 +247,9 @@
     }
     .check-cart-add-minus-con {
         gap: 8px;
+    }
+    .check-cart-add-minus-con> button {
+        padding: 6px 12px;
     }
     .checkout-help-con> div {
         flex-direction: column;
