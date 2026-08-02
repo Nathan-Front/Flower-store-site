@@ -750,6 +750,15 @@ nav {
     .cart-modal-aside {
         width: 100%;
     }
+    .cart-product-image {
+        width: 25%;
+    }
+    .cart-product-details  {
+        flex: 1;
+    }
+    .cart-qty-display-con  {
+        gap: 8px;
+    }
 }
 @media (min-width: 641px) and (max-width: 950px) {
     .cart-modal-aside {

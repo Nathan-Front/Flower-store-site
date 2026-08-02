@@ -592,6 +592,10 @@
     }
     .filter-btn {
         padding: 0.4rem 0.8rem;
+        background-color: rgb(252, 244, 235);
+        border: none;
+        border-radius: 0.25rem;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.35);
     }
     .right-top-con {
         width: 90%;
@@ -617,7 +621,7 @@
     .flower-info {
         justify-content: center;
         padding: 8px 0;
-        gap: 4px;
+        gap: 16px;
         align-items: unset;
         flex: unset;  
     }
@@ -626,6 +630,7 @@
     }
     .product-price {
         margin-top: unset !important;
+        margin-bottom: 16px;
     }
 }
 @media (min-width: 601px) and (max-width: 820px) {
