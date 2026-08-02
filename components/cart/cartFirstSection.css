@@ -11,7 +11,7 @@ body[data-page="cart"] #app {
     margin-top: var(--nav-height-desk);
     padding: 32px 32px 0 32px;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 949px) {
     body[data-page="cart"] #app {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
