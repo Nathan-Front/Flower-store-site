@@ -28,7 +28,7 @@ const allowedOrigins = [
   "http://127.0.0.1:8080",
   "https://nathan-front.github.io",
 ];
-
+const pendingOrders = new Map(); //for pending orders, to be used for order capture after approval
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -162,7 +162,6 @@ const createOrder = async (cart) => {
   }
 };
 
-const pendingOrders = new Map();
 // createOrder route
 app.post("/api/orders", async (req, res) => {
   console.log("🔥 /api/orders was called");
@@ -229,6 +228,14 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
     const { orderID } = req.params;
     const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
     res.status(httpStatusCode).json(jsonResponse);
+    const savedOrder = pendingOrders.get(orderID);
+    console.log("Retrieved pending order:", savedOrder);
+    if (captureResponse.result.status === "COMPLETED") {
+      console.log("Payment completed");
+
+      console.log("Customer:", savedOrder.customer);
+      console.log("Cart:", savedOrder.cart);
+    }
   } catch (error) {
     console.error("❌ Failed to create order:", error);
 
