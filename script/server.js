@@ -227,15 +227,16 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
   try {
     const { orderID } = req.params;
     const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
-    res.status(httpStatusCode).json(jsonResponse);
+
     const savedOrder = pendingOrders.get(orderID);
     console.log("Retrieved pending order:", savedOrder);
-    if (captureResponse.result.status === "COMPLETED") {
+    if (jsonResponse.status === "COMPLETED") {
       console.log("Payment completed");
 
       console.log("Customer:", savedOrder.customer);
       console.log("Cart:", savedOrder.cart);
     }
+    res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
     console.error("❌ Failed to create order:", error);
 
