@@ -179,12 +179,15 @@ app.post("/api/orders", async (req, res) => {
     }
 
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
-    console.log("PayPal create response:", jsonResponse);
-    //Pass the cart and customer info
+
+    if (!jsonResponse?.id) {
+      throw new Error("PayPal did not return an order ID");
+    }
     pendingOrders.set(jsonResponse.id, {
       cart,
       customer,
     });
+
     console.log("Saved pending order:", pendingOrders.get(jsonResponse.id));
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
