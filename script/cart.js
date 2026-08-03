@@ -103,7 +103,7 @@ export async function loadCheckoutDisplay() {
       "settings",
       formatCartDisplay,
     );
-    console.log("cartSettings:", cartSettings);
+    //console.log("cartSettings:", cartSettings);
     renderCheckoutData(cartSettings);
   } catch (error) {
     console.log(error);
