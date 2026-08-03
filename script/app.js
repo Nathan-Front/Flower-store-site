@@ -37,7 +37,7 @@ function initPaypalButtons() {
         const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
 
         console.log("Frontend cart:", cart);
-
+        //Capture cart and customer infor
         const orderDetails = {
           cart,
           customer: {
@@ -58,7 +58,7 @@ function initPaypalButtons() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(orderDetails),
+          body: JSON.stringify(orderDetails), //Send cart and customer info to the server
         });
 
         const data = await response.json();
