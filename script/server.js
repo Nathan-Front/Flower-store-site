@@ -162,6 +162,7 @@ const createOrder = async (cart) => {
   }
 };
 
+const pendingOrders = new Map();
 // createOrder route
 app.post("/api/orders", async (req, res) => {
   console.log("🔥 /api/orders was called");
@@ -178,7 +179,7 @@ app.post("/api/orders", async (req, res) => {
     }
 
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
-
+    console.log("PayPal create response:", jsonResponse);
     //Pass the cart and customer info
     pendingOrders.set(jsonResponse.id, {
       cart,
