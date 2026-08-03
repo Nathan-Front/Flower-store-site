@@ -802,7 +802,7 @@ function addMinusCartModal() {
   });
 }
 //Delete item in cart modal
-function deleteItemCartModal() {
+export function deleteItemCartModal() {
   const delBtn = document.querySelectorAll(".cart-modal-del-btn");
   delBtn.forEach((btn) => {
     btn.addEventListener("click", () => {

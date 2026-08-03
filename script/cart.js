@@ -5,6 +5,7 @@ import {
   viewCartModal,
   updateCartModalContentCounter,
   updateTotalPaymentDisplay,
+  deleteItemCartModal,
 } from "./shop.js";
 export function cartCheckoutSummary() {
   const ul = document.querySelector(".cart-checkout-content");
@@ -41,6 +42,7 @@ export function cartCheckoutSummary() {
       .join("")}
   `;
   addMinusCartCheckout();
+  deleteItemCartModal();
 }
 
 function addMinusCartCheckout() {
@@ -134,37 +136,3 @@ export function renderCheckoutData(settings) {
     settings[0].delFee;
   grandTotal.textContent = "$" + grand.toFixed(2);
 }
-
-/* export function openPaymentMethod() {
-  const paymentMethods = document.querySelectorAll(
-    'input[name="paymentMethod"]',
-  );
-  const paypalContainer = document.querySelector(".paypal-container");
-  paymentMethods.forEach((radio) => {
-    radio.addEventListener("change", () => {
-      paypalContainer.hidden =
-        document.getElementById("paypal").checked === false;
-    });
-  });
-} */
-/* function getOrderDetails() {
-  return {
-    customer: {
-      name: document.getElementById("checkoutName").value.trim(),
-      email: document.getElementById("checkoutEmail").value.trim(),
-      phone: document.getElementById("checkoutPhone").value.trim(),
-      address: document.getElementById("checkoutAddress").value.trim(),
-      city: document.getElementById("checkoutCity").value.trim(),
-      zip: document.getElementById("checkoutZip").value.trim(),
-      deliveryDate: document.getElementById("checkoutDate").value,
-      deliveryTime: document.getElementById("checkoutTime").value,
-      note: document.getElementById("order-note").value.trim(),
-    },
-
-    paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')
-      .value,
-
-    cart: JSON.parse(localStorage.getItem("cartContent")) || [],
-  };
-}
- */
