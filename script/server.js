@@ -235,10 +235,11 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
       console.log("Customer:", savedOrder.customer);
       console.log("Cart:", savedOrder.cart);
       const orderData = {
+        formType: "order", // Need this since we are using multiple function in apps script doPost
         orderID: jsonResponse.id, // This is the paypal order ID
         captureID: capture.id, // This is the paypal capture ID
         status: jsonResponse.status,
-        date: jsonResponse.create_time,
+        date: capture.create_time,
         name: savedOrder.customer.name,
         email: savedOrder.customer.email,
         phone: savedOrder.customer.phone,
@@ -247,16 +248,20 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         deliveryTime: savedOrder.customer.deliveryTime,
         items: savedOrder.cart.map((item) => ({
           productId: item.item.no,
-          name: item.item.product,
+          product: item.item.product,
           price: item.item.price,
           quantity: item.quantity,
         })),
-        subTotal: savedOrder.cart
-          .reduce((total, item) => total + item.item.price * item.quantity, 0)
-          .toFixed(2),
         grandTotal: capture.amount.value,
       };
       console.log("Order data to send to Google Script:", orderData);
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
     }
 
     res.status(httpStatusCode).json(jsonResponse);
