@@ -227,15 +227,37 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
   try {
     const { orderID } = req.params;
     const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
-
+    const capture = jsonResponse.purchase_units[0].payments.captures[0]; // Get the capture details
     const savedOrder = pendingOrders.get(orderID);
     console.log("Retrieved pending order:", savedOrder);
     if (jsonResponse.status === "COMPLETED") {
       console.log("Payment completed");
-
       console.log("Customer:", savedOrder.customer);
       console.log("Cart:", savedOrder.cart);
+      const orderData = {
+        orderID: jsonResponse.id, // This is the paypal order ID
+        captureID: capture.id, // This is the paypal capture ID
+        status: jsonResponse.status,
+        date: jsonResponse.create_time,
+        name: savedOrder.customer.name,
+        email: savedOrder.customer.email,
+        phone: savedOrder.customer.phone,
+        address: savedOrder.customer.address,
+        deliveryDate: savedOrder.customer.deliveryDate,
+        deliveryTime: savedOrder.customer.deliveryTime,
+        items: savedOrder.cart.map((item) => ({
+          productId: item.item.no,
+          name: item.item.product,
+          price: item.item.price,
+          quantity: item.quantity,
+        })),
+        subTotal: savedOrder.cart
+          .reduce((total, item) => total + item.item.price * item.quantity, 0)
+          .toFixed(2),
+        grandTotal: capture.amount.value,
+      };
     }
+    console.log("Order data to send to Google Script:", orderData);
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
     console.error("❌ Failed to create order:", error);
