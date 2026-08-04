@@ -256,8 +256,9 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
           .toFixed(2),
         grandTotal: capture.amount.value,
       };
+      console.log("Order data to send to Google Script:", orderData);
     }
-    console.log("Order data to send to Google Script:", orderData);
+
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
     console.error("❌ Failed to create order:", error);
