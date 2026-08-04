@@ -278,15 +278,20 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         },
         body: JSON.stringify(orderData),
       });
+
+      const result = await response.json();
+      if (!result.success) {
+        return res.status(500).json(result);
+      }
+      return res.status(httpStatusCode).json({
+        paypal: jsonResponse,
+        googleScript: result, //return to app.js to be used to inform user of success or failure
+      });
     }
 
-    const result = await response.json();
-    if (!result.success) {
-      return res.status(500).json(result);
-    }
+    // Fallback if payment wasn't completed
     return res.status(httpStatusCode).json({
       paypal: jsonResponse,
-      googleScript: result, //return to app.js to be used to inform user of success or failure
     });
   } catch (error) {
     console.error("❌ Failed to create order:", error);
