@@ -80,13 +80,14 @@ function initPaypalButtons() {
             },
           );
 
-          const orderData = await response.json();
+          //const orderData = await response.json(); the original code
+          const result = await response.json(); //capture the passed result from the server.js
           // Three cases to handle:
           //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
           //   (2) Other non-recoverable errors -> Show a failure message
           //   (3) Successful transaction -> Show confirmation or thank you message
 
-          const errorDetail = orderData?.details?.[0];
+          const errorDetail = result?.paypal?.details?.[0];
 
           if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
             // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
@@ -96,25 +97,27 @@ function initPaypalButtons() {
           } else if (errorDetail) {
             // (2) Other non-recoverable errors -> Show a failure message
             throw new Error(
-              `${errorDetail.description} (${orderData.debug_id})`,
+              `${errorDetail.description} (${result.paypal.debug_id})`,
             );
-          } else if (!orderData.purchase_units) {
-            throw new Error(JSON.stringify(orderData));
+          } else if (!result.paypal.purchase_units) {
+            throw new Error(JSON.stringify(result.paypal));
           } else {
             // (3) Successful transaction -> Show confirmation or thank you message
             // Or go to another URL:  actions.redirect('thank_you.html');
             const transaction =
-              orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
-              orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+              result.paypal?.purchase_units?.[0]?.payments?.captures?.[0] ||
+              result.paypal?.purchase_units?.[0]?.payments?.authorizations?.[0];
             resultMessage(
               `Transaction ${transaction.status}: ${transaction.id}
               <br>Thank you for trying our service!<br>`,
             );
-            console.log(
-              "Capture result",
-              orderData,
-              JSON.stringify(orderData, null, 2),
-            );
+            console.log("Capture result", result.paypal);
+          }
+
+          if (result.googleScript.success) {
+            alert(`Order ${result.googleScript.orderId} sent successfully`);
+          } else {
+            return alert("Failed to send order");
           }
         } catch (error) {
           console.error(error);

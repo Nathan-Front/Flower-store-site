@@ -100,8 +100,8 @@ const createOrder = async (cart) => {
   const paymentSettings = settings.settings[0];
   const taxRate = Number(paymentSettings.TaxRate);
   const deliveryFee = Number(paymentSettings.DeliveryFee);
-  const taxAmount = total * taxRate;
-  const grandTotal = total + taxAmount + deliveryFee;
+  const taxAmount = Number((total * taxRate).toFixed(2));
+  const grandTotal = Number((total + taxAmount + deliveryFee).toFixed(2));
   console.log({
     total,
     taxRate,
@@ -271,7 +271,7 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         grandTotal: savedOrder.orderCalculation.grandTotal,
       };
       console.log("Order data to send to Google Script:", orderData);
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -280,7 +280,14 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
       });
     }
 
-    res.status(httpStatusCode).json(jsonResponse);
+    const result = await response.json();
+    if (!result.success) {
+      return res.status(500).json(result);
+    }
+    return res.status(httpStatusCode).json({
+      paypal: jsonResponse,
+      googleScript: result, //return to app.js to be used to inform user of success or failure
+    });
   } catch (error) {
     console.error("❌ Failed to create order:", error);
 
