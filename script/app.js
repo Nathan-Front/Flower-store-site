@@ -117,6 +117,8 @@ function initPaypalButtons() {
           }
 
           if (result.googleScript.success) {
+            console.log(result);
+            console.log(result.googleScript);
             localStorage.removeItem("temporaryCart");
             cartCounterDisplay();
             showOrderSuccessModal(result);
