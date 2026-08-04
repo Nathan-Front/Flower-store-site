@@ -136,3 +136,7 @@ export function renderCheckoutData(settings) {
     settings[0].delFee;
   grandTotal.textContent = "$" + grand.toFixed(2);
 }
+
+export function showOrderSuccessModal(result) {
+  console.log("Order success result:", result);
+}

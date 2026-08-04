@@ -1,3 +1,5 @@
+import { cartCounterDisplay } from "./shop.js";
+import { showOrderSuccessModal } from "./cart.js";
 let paypalRendered = false;
 const SERVER_URL = "https://flosandflorere.onrender.com";
 function initPaypalButtons() {
@@ -115,9 +117,9 @@ function initPaypalButtons() {
           }
 
           if (result.googleScript.success) {
-            alert(`Order ${result.googleScript.orderId} sent successfully`);
-          } else {
-            return alert("Failed to send order");
+            localStorage.removeItem("temporaryCart");
+            cartCounterDisplay();
+            showOrderSuccessModal(result);
           }
         } catch (error) {
           console.error(error);
