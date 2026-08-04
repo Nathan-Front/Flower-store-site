@@ -195,7 +195,7 @@ app.post("/api/orders", async (req, res) => {
       customer,
       orderCalculation,
     });
-
+    console.log("Calculation:", savedOrder.orderCalculation);
     console.log("Saved pending order:", pendingOrders.get(jsonResponse.id));
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
@@ -213,7 +213,7 @@ const captureOrder = async (orderID) => {
     id: orderID,
     prefer: "return=minimal",
   };
-  console.log("Calculation:", savedOrder.orderCalculation);
+
   try {
     const { body, ...httpResponse } =
       await ordersController.captureOrder(collect);
