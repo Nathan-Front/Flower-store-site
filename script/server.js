@@ -152,6 +152,13 @@ const createOrder = async (cart) => {
     return {
       jsonResponse: JSON.parse(body),
       httpStatusCode: httpResponse.statusCode,
+      orderCalculation: {
+        subtotal: total,
+        taxRate,
+        taxAmount,
+        deliveryFee,
+        grandTotal,
+      },
     };
   } catch (error) {
     if (error instanceof ApiError) {
@@ -177,7 +184,8 @@ app.post("/api/orders", async (req, res) => {
       });
     }
 
-    const { jsonResponse, httpStatusCode } = await createOrder(cart);
+    const { jsonResponse, httpStatusCode, orderCalculation } =
+      await createOrder(cart);
 
     if (!jsonResponse?.id) {
       throw new Error("PayPal did not return an order ID");
@@ -185,6 +193,7 @@ app.post("/api/orders", async (req, res) => {
     pendingOrders.set(jsonResponse.id, {
       cart,
       customer,
+      orderCalculation,
     });
 
     console.log("Saved pending order:", pendingOrders.get(jsonResponse.id));
@@ -204,7 +213,7 @@ const captureOrder = async (orderID) => {
     id: orderID,
     prefer: "return=minimal",
   };
-
+  console.log("Calculation:", savedOrder.orderCalculation);
   try {
     const { body, ...httpResponse } =
       await ordersController.captureOrder(collect);
