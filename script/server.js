@@ -195,7 +195,7 @@ app.post("/api/orders", async (req, res) => {
       customer,
       orderCalculation,
     });
-    console.log("Calculation:", savedOrder.orderCalculation);
+    console.log("Calculation:", savedOrder);
     console.log("Saved pending order:", pendingOrders.get(jsonResponse.id));
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
