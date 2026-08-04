@@ -117,10 +117,8 @@ function initPaypalButtons() {
           }
 
           if (result.googleScript.success) {
-            console.log(result);
-            console.log(result.googleScript);
-            localStorage.removeItem("temporaryCart");
-            cartCounterDisplay();
+            console.log("Result: " + result);
+            console.log("googleScript: " + result.googleScript);
             showOrderSuccessModal(result);
           }
         } catch (error) {

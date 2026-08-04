@@ -139,4 +139,48 @@ export function renderCheckoutData(settings) {
 
 export function showOrderSuccessModal(result) {
   console.log("Order success result:", result);
+  if (!result) {
+    console.error("No order result received");
+    return;
+  }
+  const aside = document.createElement("aside");
+  aside.classList.add("order-success-modal");
+  aside.innerHTML = `
+    <div>
+      <h2>Order Confirmed!</h2>
+      <p>Thank you for your order.</p>
+      <p>Your transaction was successful.</p>
+      <p>
+        Transaction ID:
+        ${
+          result.paypal?.purchase_units?.[0]?.payments?.captures?.[0]?.id ||
+          "N/A"
+        }
+      </p>
+      <strong>Order ID:${result.googleScript?.orderId || "N/A"}</strong> 
+      <p>
+        Payment Method: ${result.paypal?.payer?.payment_method || "N/A"}
+      </p>
+      
+      <p>
+        Amount Paid:
+        $${
+          result.paypal?.purchase_units?.[0]?.payments?.captures?.[0]?.amount
+            ?.value || "N/A"
+        }
+      </p>
+      <small>Please check your email for order details.</small>
+      <button id="close-order-success-modal">Close</button>
+    </div>
+  `;
+  document.body.appendChild(aside);
+  closeOrderSuccessModal();
+}
+function closeOrderSuccessModal() {
+  const modal = document.querySelector("#close-order-success-modal");
+  modal.addEventListener("click", () => {
+    localStorage.removeItem("temporaryCart");
+    cartCounterDisplay();
+    window.location.href = "index.html";
+  });
 }
