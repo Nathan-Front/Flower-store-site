@@ -264,7 +264,11 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
           price: item.item.price,
           quantity: item.quantity,
         })),
-        grandTotal: capture.amount.value,
+        deliveryFee: savedOrder.orderCalculation.deliveryFee,
+        taxRate: savedOrder.orderCalculation.taxRate,
+        taxAmount: savedOrder.orderCalculation.taxAmount,
+        subTotal: savedOrder.orderCalculation.subtotal,
+        grandTotal: savedOrder.orderCalculation.grandTotal,
       };
       console.log("Order data to send to Google Script:", orderData);
       await fetch(GOOGLE_SCRIPT_URL, {
