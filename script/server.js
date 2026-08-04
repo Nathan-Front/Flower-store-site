@@ -239,7 +239,10 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         orderID: jsonResponse.id, // This is the paypal order ID
         captureID: capture.id, // This is the paypal capture ID
         status: jsonResponse.status,
-        date: capture.create_time,
+        date: new Date(capture.create_time)
+          .toISOString()
+          .replace("T", " ")
+          .substring(0, 19),
         name: savedOrder.customer.name,
         email: savedOrder.customer.email,
         phone: savedOrder.customer.phone,
