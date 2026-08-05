@@ -1,5 +1,5 @@
 import { cartCounterDisplay } from "./shop.js";
-import { showOrderSuccessModal, placeOrderCOD } from "./cart.js";
+import { showOrderSuccessModal } from "./cart.js";
 let paypalRendered = false;
 const SERVER_URL = "https://flosandflorere.onrender.com";
 function getOrderDetails() {
@@ -144,24 +144,25 @@ function initPaypalButtons() {
 export function updatePaymentMethod() {
   const paypalContainer = document.querySelector(".paypal-container");
   const CODContainer = document.querySelector(".cash-on-delivery-btn-con");
+
   if (!paypalContainer || !CODContainer) {
     console.log("PayPal or COD elements not found");
     return;
   }
-  if (
-    document.querySelector('input[name="paymentMethod"]:checked')?.value ===
-    "paypal"
-  ) {
+
+  const selectedMethod = document.querySelector(
+    'input[name="paymentMethod"]:checked',
+  )?.value;
+
+  if (selectedMethod === "paypal") {
     CODContainer.classList.remove("showCODbtn");
     paypalContainer.classList.add("show");
     initPaypalButtons();
-  } else if (
-    document.querySelector('input[name="paymentMethod"]:checked')?.value ===
-    "cash-on-delivery"
-  ) {
+  }
+
+  if (selectedMethod === "cash-on-delivery") {
     paypalContainer.classList.remove("show");
     CODContainer.classList.add("showCODbtn");
-    placeOrderCOD();
   }
 }
 

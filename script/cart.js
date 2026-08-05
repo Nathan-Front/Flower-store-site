@@ -157,37 +157,43 @@ export function showOrderSuccessModal(result) {
   }
   const aside = document.createElement("aside");
   aside.classList.add("order-success-modal");
+  const isPaypal = result.type === "paypal";
   aside.innerHTML = `
     <div>
       <h2>Order Confirmed!</h2>
       <p>Thank you for your order.</p>
-      <p>Your transaction was successful.</p>
-      <p>
-        Transaction ID:
-        ${
-          result.paypal?.purchase_units?.[0]?.payments?.captures?.[0]?.id ||
-          "N/A"
-        }
-      </p>
-      <strong>Order ID:${result.googleScript?.orderId || "N/A"}</strong> 
-      <p>
-        Payment Method: ${result.paymentMethod || "N/A"}
-      </p>
-      
+      <strong>Order ID: ${
+        result.googleScript?.orderId || result.orderID || "N/A"
+      }</strong>
+
+      <p>Status: ${result.status}</p>
+      <p>Payment Method: ${result.paymentMethod}</p>
+      ${
+        isPaypal
+          ? `
+      <p>Transaction ID: ${result.captureID}</p>
       <p>
         Amount Paid:
-        $${
-          result.paypal?.purchase_units?.[0]?.payments?.captures?.[0]?.amount
-            ?.value || "N/A"
-        }
+        $${result.amount}
       </p>
+      `
+          : `
+      <p>Payment will be collected upon delivery.</p>
+      <p>
+        Amount Due:
+        $${result.amount}
+      </p>
+      `
+      }
       <small>Please check your email for order details.</small>
-      <button id="close-order-success-modal">Close</button>
+      <button id="close-order-success-modal">
+        Close
+      </button>
     </div>
   `;
+
   document.body.appendChild(aside);
-  const overlay = document.querySelector(".overlay");
-  overlay.classList.add("activeOverlay");
+  document.querySelector(".overlay").classList.add("activeOverlay");
   document.body.classList.add("no-scroll");
   closeOrderSuccessModal();
 }

@@ -21,8 +21,7 @@ import {
   cartCheckoutSummary,
   loadCheckoutDisplay,
   renderCheckoutData,
-  showOrderSuccessModal,
-  //placeOrderCOD,
+  placeOrderCOD,
 } from "./cart.js";
 import { updatePaymentMethod } from "./app.js";
 async function fetchHTML() {
@@ -170,13 +169,12 @@ async function fetchHTML() {
     loadCheckoutDisplay();
     //openPaymentMethod();
     updatePaymentMethod();
-    //placeOrderCOD();
+    placeOrderCOD();
     document
       .querySelectorAll('input[name="paymentMethod"]')
       .forEach((input) => {
         input.addEventListener("change", updatePaymentMethod);
       });
-    showOrderSuccessModal();
   }
 
   //about contents
