@@ -174,6 +174,9 @@ export function showOrderSuccessModal(result) {
     </div>
   `;
   document.body.appendChild(aside);
+  const overlay = document.querySelector(".overlay");
+  overlay.classList.add("activeOverlay");
+  document.body.classList.add("no-scroll");
   closeOrderSuccessModal();
 }
 function closeOrderSuccessModal() {
@@ -181,6 +184,9 @@ function closeOrderSuccessModal() {
   modal.addEventListener("click", () => {
     localStorage.removeItem("temporaryCart");
     cartCounterDisplay();
+    const overlay = document.querySelector(".overlay");
+    overlay.classList.remove("activeOverlay");
+    document.body.classList.remove("no-scroll");
     window.location.href = "index.html";
   });
 }
