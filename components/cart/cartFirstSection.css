@@ -27,13 +27,14 @@ body[data-page="cart"] #app {
 .order-success-modal {
     width: 600px;
     max-width: 800px;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     background-color: #fff;
     padding: 32px;
+    z-index: 9999;
 }
 .order-success-modal> div {
     width: 100%;
