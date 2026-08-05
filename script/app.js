@@ -190,6 +190,7 @@ export async function placeCODOrder() {
     }
 
     const result = await response.json();
+    console.log("COD modal data:", result);
     showOrderSuccessModal(result);
   } catch (error) {
     console.error("Failed to place COD order:", error);
