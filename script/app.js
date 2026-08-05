@@ -198,3 +198,17 @@ export async function placeCODOrder() {
     alert("Failed to place COD order. Please try again.");
   }
 }
+
+export function placeOrderCOD() {
+  console.log("🔥 placeOrderCOD initialized");
+  const placeOrderBtn = document.getElementById("place-order-btn");
+  console.log("Button found:", placeOrderBtn);
+  if (!placeOrderBtn) {
+    console.error("Place Order button not found");
+    return;
+  }
+  placeOrderBtn.addEventListener("click", async () => {
+    console.log("🔥 Place Order clicked");
+    await placeCODOrder();
+  });
+}

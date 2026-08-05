@@ -389,7 +389,7 @@ app.post("/api/orders/cod", async (req, res) => {
     const orderData = buildOrderData({
       orderID,
       captureID: null,
-      status: "Pending Payment",
+      status: "Pending Delivery",
       date: new Date().toISOString().replace("T", " ").substring(0, 19),
       customer,
       cart,

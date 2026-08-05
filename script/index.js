@@ -21,9 +21,8 @@ import {
   cartCheckoutSummary,
   loadCheckoutDisplay,
   renderCheckoutData,
-  placeOrderCOD,
 } from "./cart.js";
-import { updatePaymentMethod } from "./app.js";
+import { updatePaymentMethod, placeOrderCOD } from "./app.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -169,12 +168,12 @@ async function fetchHTML() {
     loadCheckoutDisplay();
     //openPaymentMethod();
     updatePaymentMethod();
-    placeOrderCOD();
     document
       .querySelectorAll('input[name="paymentMethod"]')
       .forEach((input) => {
         input.addEventListener("change", updatePaymentMethod);
       });
+    placeOrderCOD();
   }
 
   //about contents
