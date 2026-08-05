@@ -22,6 +22,7 @@ import {
   loadCheckoutDisplay,
   renderCheckoutData,
   showOrderSuccessModal,
+  //placeOrderCOD,
 } from "./cart.js";
 import { updatePaymentMethod } from "./app.js";
 async function fetchHTML() {
@@ -169,6 +170,7 @@ async function fetchHTML() {
     loadCheckoutDisplay();
     //openPaymentMethod();
     updatePaymentMethod();
+    //placeOrderCOD();
     document
       .querySelectorAll('input[name="paymentMethod"]')
       .forEach((input) => {

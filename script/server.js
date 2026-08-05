@@ -153,7 +153,7 @@ const createOrder = async (cart) => {
       jsonResponse: JSON.parse(body),
       httpStatusCode: httpResponse.statusCode,
       orderCalculation: {
-        subtotal: total,
+        subTotal: total,
         taxRate,
         taxAmount,
         deliveryFee,
@@ -169,7 +169,7 @@ const createOrder = async (cart) => {
   }
 };
 
-// createOrder route
+// createOrder route for paypal
 app.post("/api/orders", async (req, res) => {
   console.log("🔥 /api/orders was called");
   try {
@@ -233,46 +233,89 @@ const captureOrder = async (orderID) => {
   }
 };
 
-// captureOrder route
+// capture orderData
+function buildOrderData({
+  orderID,
+  captureID,
+  status,
+  date,
+  customer,
+  cart,
+  orderCalculation,
+  paymentMethod,
+}) {
+  return {
+    formType: "order",
+    orderID,
+    captureID,
+    status,
+    date,
+
+    name: customer.name,
+    email: customer.email,
+    phone: customer.phone,
+    address: customer.address,
+    city: customer.city,
+    zip: customer.zip,
+    deliveryDate: customer.deliveryDate,
+    deliveryTime: customer.deliveryTime,
+    note: customer.note,
+
+    items: cart.map((item) => ({
+      productId: item.item.no,
+      product: item.item.product,
+      price: item.item.price,
+      quantity: item.quantity,
+    })),
+
+    deliveryFee: orderCalculation.deliveryFee,
+    taxRate: orderCalculation.taxRate,
+    taxAmount: orderCalculation.taxAmount,
+    subTotal: orderCalculation.subTotal,
+    grandTotal: orderCalculation.grandTotal,
+
+    paymentMethod,
+  };
+}
+
+// captureOrder route for paypal
 app.post("/api/orders/:orderID/capture", async (req, res) => {
   try {
     const { orderID } = req.params;
     const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
     const capture = jsonResponse.purchase_units[0].payments.captures[0]; // Get the capture details
     const savedOrder = pendingOrders.get(orderID);
+    if (!savedOrder) {
+      return res.status(404).json({
+        success: false,
+        error: "Order not found.",
+      });
+    }
     console.log("Retrieved pending order:", savedOrder);
     if (jsonResponse.status === "COMPLETED") {
       console.log("Payment completed");
       console.log("Customer:", savedOrder.customer);
       console.log("Cart:", savedOrder.cart);
-      const orderData = {
-        formType: "order", // Need this since we are using multiple function in apps script doPost
-        orderID: jsonResponse.id, // This is the paypal order ID
-        captureID: capture.id, // This is the paypal capture ID
+      const orderData = buildOrderData({
+        orderID: jsonResponse.id,
+        captureID: capture.id,
         status: jsonResponse.status,
         date: new Date(capture.create_time)
           .toISOString()
           .replace("T", " ")
           .substring(0, 19),
-        name: savedOrder.customer.name,
-        email: savedOrder.customer.email,
-        phone: savedOrder.customer.phone,
-        address: savedOrder.customer.address,
-        deliveryDate: savedOrder.customer.deliveryDate,
-        deliveryTime: savedOrder.customer.deliveryTime,
-        items: savedOrder.cart.map((item) => ({
-          productId: item.item.no,
-          product: item.item.product,
-          price: item.item.price,
-          quantity: item.quantity,
-        })),
-        deliveryFee: savedOrder.orderCalculation.deliveryFee,
-        taxRate: savedOrder.orderCalculation.taxRate,
-        taxAmount: savedOrder.orderCalculation.taxAmount,
-        subTotal: savedOrder.orderCalculation.subtotal,
-        grandTotal: savedOrder.orderCalculation.grandTotal,
+        customer: savedOrder.customer, // pass the block
+        cart: savedOrder.cart, // pass the block
+        orderCalculation: {
+          deliveryFee: savedOrder.orderCalculation.deliveryFee,
+          taxRate: savedOrder.orderCalculation.taxRate,
+          taxAmount: savedOrder.orderCalculation.taxAmount,
+          subTotal: savedOrder.orderCalculation.subTotal,
+          grandTotal: savedOrder.orderCalculation.grandTotal,
+        },
+
         paymentMethod: savedOrder.paymentMethod,
-      };
+      });
       console.log("Order data to send to Google Script:", orderData);
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -287,9 +330,14 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         return res.status(500).json(result);
       }
       return res.status(httpStatusCode).json({
-        paypal: jsonResponse,
-        googleScript: result, //return to app.js to be used to inform user of success or failure
+        success: true,
+        type: "paypal",
+        orderID: jsonResponse.id,
+        captureID: capture.id,
+        status: jsonResponse.status,
         paymentMethod: savedOrder.paymentMethod,
+        googleScript: result,
+        paypal: jsonResponse,
       });
     }
 
@@ -303,6 +351,77 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
     res.status(500).json({
       error: error.message,
       details: error.body || error,
+    });
+  }
+});
+
+// COD order route
+app.post("/api/orders/cod", async (req, res) => {
+  try {
+    const { cart, customer, paymentMethod } = req.body;
+
+    console.log("COD Order Received");
+    console.log(cart);
+    console.log(customer);
+    console.log(paymentMethod);
+
+    const scriptResponse = await fetch(`${GOOGLE_SCRIPT_URL}?type=checkout`);
+    const settings = await scriptResponse.json();
+    const total = cart.reduce(
+      (sum, cartItem) =>
+        sum + Number(cartItem.item.price) * Number(cartItem.quantity),
+      0,
+    );
+    const paymentSettings = settings.settings[0];
+    const taxRate = Number(paymentSettings.TaxRate);
+    const deliveryFee = Number(paymentSettings.DeliveryFee);
+    const taxAmount = Number((total * taxRate).toFixed(2));
+    const grandTotal = Number((total + taxAmount + deliveryFee).toFixed(2));
+    const orderID = `COD-${randomUUID()}`; // Generate a unique order ID for COD orders
+    const orderCalculation = {
+      deliveryFee,
+      taxRate,
+      taxAmount,
+      subTotal: total,
+      grandTotal,
+    };
+    const orderData = buildOrderData({
+      orderID,
+      captureID: null,
+      status: "Pending Payment",
+      date: new Date().toISOString().replace("T", " ").substring(0, 19),
+      customer,
+      cart,
+      orderCalculation, // pass the block
+      paymentMethod,
+    });
+    console.log("Order data to send to Google Script:", orderData);
+    const sheetResponse = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
+    const result = await sheetResponse.json();
+    if (!result.success) {
+      return res.status(500).json(result);
+    }
+    //Make it similar to paypal return data
+    res.json({
+      success: true,
+      type: "cod",
+      orderID,
+      captureID: null,
+      status: "Pending Payment",
+      paymentMethod,
+      googleScript: result,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
     });
   }
 });

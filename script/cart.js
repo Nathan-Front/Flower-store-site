@@ -7,6 +7,7 @@ import {
   updateTotalPaymentDisplay,
   deleteItemCartModal,
 } from "./shop.js";
+import { placeCODOrder } from "./app.js";
 export function cartCheckoutSummary() {
   const ul = document.querySelector(".cart-checkout-content");
   if (!ul) return;
@@ -137,6 +138,17 @@ export function renderCheckoutData(settings) {
   grandTotal.textContent = "$" + grand.toFixed(2);
 }
 
+export function placeOrderCOD() {
+  const placeOrderBtn = document.getElementById("place-order-btn");
+  if (!placeOrderBtn) {
+    console.error("Place Order button not found");
+    return;
+  }
+  placeOrderBtn.addEventListener("click", async () => {
+    await placeCODOrder();
+  });
+}
+
 export function showOrderSuccessModal(result) {
   console.log("Order success result:", result);
   if (!result) {
@@ -179,6 +191,7 @@ export function showOrderSuccessModal(result) {
   document.body.classList.add("no-scroll");
   closeOrderSuccessModal();
 }
+
 function closeOrderSuccessModal() {
   const modal = document.querySelector("#close-order-success-modal");
   modal.addEventListener("click", () => {

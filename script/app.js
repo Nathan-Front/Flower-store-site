@@ -1,7 +1,26 @@
 import { cartCounterDisplay } from "./shop.js";
-import { showOrderSuccessModal } from "./cart.js";
+import { showOrderSuccessModal, placeOrderCOD } from "./cart.js";
 let paypalRendered = false;
 const SERVER_URL = "https://flosandflorere.onrender.com";
+function getOrderDetails() {
+  const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  return {
+    cart,
+    customer: {
+      email: document.getElementById("checkoutEmail").value,
+      phone: document.getElementById("checkoutPhone").value,
+      name: document.getElementById("checkoutName").value,
+      address: document.getElementById("checkoutAddress").value,
+      city: document.getElementById("checkoutCity").value,
+      zip: document.getElementById("checkoutZip").value,
+      deliveryDate: document.getElementById("checkoutDate").value,
+      deliveryTime: document.getElementById("checkoutTime").value,
+      note: document.getElementById("order-note").value,
+    },
+    paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')
+      ?.value,
+  };
+}
 function initPaypalButtons() {
   if (paypalRendered) return;
   paypal
@@ -35,29 +54,15 @@ function initPaypalButtons() {
 
       async createOrder() {
         console.log("PayPal createOrder called");
-
-        const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
-        const selectedPaymentMethod = document.querySelector(
-          'input[name="paymentMethod"]:checked',
-        )?.value;
-        console.log("Frontend cart:", cart);
-        console.log("Selected payment method:", selectedPaymentMethod);
-        //Capture cart and customer infor
-        const orderDetails = {
-          cart,
-          customer: {
-            email: document.getElementById("checkoutEmail").value,
-            phone: document.getElementById("checkoutPhone").value,
-            name: document.getElementById("checkoutName").value,
-            address: document.getElementById("checkoutAddress").value,
-            city: document.getElementById("checkoutCity").value,
-            zip: document.getElementById("checkoutZip").value,
-            deliveryDate: document.getElementById("checkoutDate").value,
-            deliveryTime: document.getElementById("checkoutTime").value,
-            note: document.getElementById("order-note").value,
-          },
-          paymentMethod: selectedPaymentMethod,
-        };
+        // Get the order details from the form and localstorage
+        const orderDetails = getOrderDetails();
+        if (orderDetails.paymentMethod !== "paypal") {
+          throw new Error(
+            "Selected payment method is not PayPal. Please select PayPal to proceed.",
+          );
+        }
+        console.log("Frontend cart:", orderDetails.cart);
+        console.log("Selected payment method:", orderDetails.paymentMethod);
 
         const response = await fetch(`${SERVER_URL}/api/orders`, {
           method: "POST",
@@ -137,18 +142,26 @@ function initPaypalButtons() {
   paypalRendered = true;
 }
 export function updatePaymentMethod() {
-  const paypalRadio = document.getElementById("paypal");
   const paypalContainer = document.querySelector(".paypal-container");
-  if (!paypalRadio || !paypalContainer) {
-    console.log("PayPal elements not found");
+  const CODContainer = document.querySelector(".cash-on-delivery-btn-con");
+  if (!paypalContainer || !CODContainer) {
+    console.log("PayPal or COD elements not found");
     return;
   }
-
-  if (paypalRadio.checked) {
+  if (
+    document.querySelector('input[name="paymentMethod"]:checked')?.value ===
+    "paypal"
+  ) {
+    CODContainer.classList.remove("showCODbtn");
     paypalContainer.classList.add("show");
     initPaypalButtons();
-  } else {
+  } else if (
+    document.querySelector('input[name="paymentMethod"]:checked')?.value ===
+    "cash-on-delivery"
+  ) {
     paypalContainer.classList.remove("show");
+    CODContainer.classList.add("showCODbtn");
+    placeOrderCOD();
   }
 }
 
@@ -156,4 +169,29 @@ export function updatePaymentMethod() {
 function resultMessage(message) {
   const container = document.querySelector("#result-message");
   container.innerHTML = message;
+}
+
+// COD payment method handling
+export async function placeCODOrder() {
+  const orderDetails = getOrderDetails();
+
+  try {
+    const response = await fetch(`${SERVER_URL}/api/orders/cod`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderDetails),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to place COD order.");
+    }
+
+    const result = await response.json();
+    showOrderSuccessModal(result);
+  } catch (error) {
+    console.error("Failed to place COD order:", error);
+    alert("Failed to place COD order. Please try again.");
+  }
 }
