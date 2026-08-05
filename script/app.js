@@ -174,9 +174,7 @@ function resultMessage(message) {
 
 // COD payment method handling
 export async function placeCODOrder() {
-  console.log("🔥 COD button function started");
   const orderDetails = getOrderDetails();
-  console.log("🔥 COD order details:", orderDetails);
   try {
     const response = await fetch(`${SERVER_URL}/api/orders/cod`, {
       method: "POST",
@@ -185,22 +183,19 @@ export async function placeCODOrder() {
       },
       body: JSON.stringify(orderDetails),
     });
-    console.log("🔥 COD response received:", response);
     if (!response.ok) {
       throw new Error("Failed to place COD order.");
     }
 
     const result = await response.json();
-    console.log("🔥 COD modal data:", result);
     showOrderSuccessModal(result);
   } catch (error) {
     console.error("Failed to place COD order:", error);
     alert("Failed to place COD order. Please try again.");
   }
 }
-
+// COD button event
 export function placeOrderCOD() {
-  console.log("🔥 placeOrderCOD initialized");
   const placeOrderBtn = document.getElementById("place-order-btn");
   console.log("Button found:", placeOrderBtn);
   if (!placeOrderBtn) {
@@ -208,7 +203,6 @@ export function placeOrderCOD() {
     return;
   }
   placeOrderBtn.addEventListener("click", async () => {
-    console.log("🔥 Place Order clicked");
     await placeCODOrder();
   });
 }

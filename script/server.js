@@ -1,7 +1,7 @@
 //added
 import path from "path";
 import { fileURLToPath } from "url";
-import { randomUUID } from "crypto"; //For COD order ID generation
+
 import express from "express";
 import "dotenv/config";
 import {
@@ -378,7 +378,12 @@ app.post("/api/orders/cod", async (req, res) => {
     const deliveryFee = Number(paymentSettings.DeliveryFee);
     const taxAmount = Number((total * taxRate).toFixed(2));
     const grandTotal = Number((total + taxAmount + deliveryFee).toFixed(2));
-    const orderID = `COD-${randomUUID()}`; // Generate a unique order ID for COD orders
+    const now = new Date();
+    const orderID = `COD-${now.getFullYear()}${String(
+      now.getMonth() + 1,
+    ).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${Math.floor(
+      Math.random() * 9000 + 1000,
+    )}`;
     const orderCalculation = {
       deliveryFee,
       taxRate,
