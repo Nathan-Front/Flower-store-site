@@ -174,9 +174,10 @@ app.post("/api/orders", async (req, res) => {
   console.log("🔥 /api/orders was called");
   try {
     //use the cart information passed from the front-end
-    const { cart, customer } = req.body;
+    const { cart, customer, paymentMethod } = req.body;
     console.log("Cart received:", cart);
     console.log("Customer received:", customer);
+    console.log("Payment method received:", paymentMethod);
 
     if (!cart || cart.length === 0) {
       return res.status(400).json({
@@ -193,6 +194,7 @@ app.post("/api/orders", async (req, res) => {
     pendingOrders.set(jsonResponse.id, {
       cart,
       customer,
+      paymentMethod,
       orderCalculation,
     });
 
@@ -269,6 +271,7 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
         taxAmount: savedOrder.orderCalculation.taxAmount,
         subTotal: savedOrder.orderCalculation.subtotal,
         grandTotal: savedOrder.orderCalculation.grandTotal,
+        paymentMethod: savedOrder.paymentMethod,
       };
       console.log("Order data to send to Google Script:", orderData);
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -286,6 +289,7 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
       return res.status(httpStatusCode).json({
         paypal: jsonResponse,
         googleScript: result, //return to app.js to be used to inform user of success or failure
+        paymentMethod: savedOrder.paymentMethod,
       });
     }
 

@@ -37,8 +37,11 @@ function initPaypalButtons() {
         console.log("PayPal createOrder called");
 
         const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
-
+        const selectedPaymentMethod = document.querySelector(
+          'input[name="paymentMethod"]:checked',
+        )?.value;
         console.log("Frontend cart:", cart);
+        console.log("Selected payment method:", selectedPaymentMethod);
         //Capture cart and customer infor
         const orderDetails = {
           cart,
@@ -53,6 +56,7 @@ function initPaypalButtons() {
             deliveryTime: document.getElementById("checkoutTime").value,
             note: document.getElementById("order-note").value,
           },
+          paymentMethod: selectedPaymentMethod,
         };
 
         const response = await fetch(`${SERVER_URL}/api/orders`, {

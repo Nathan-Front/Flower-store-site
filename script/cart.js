@@ -159,7 +159,7 @@ export function showOrderSuccessModal(result) {
       </p>
       <strong>Order ID:${result.googleScript?.orderId || "N/A"}</strong> 
       <p>
-        Payment Method: ${result.paypal?.payer?.payment_method || "N/A"}
+        Payment Method: ${result.paymentMethod || "N/A"}
       </p>
       
       <p>
