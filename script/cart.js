@@ -175,7 +175,11 @@ export function showOrderSuccessModal(result) {
   `;
   document.body.appendChild(aside);
   const overlay = document.querySelector(".overlay");
+  console.log("Overlay:", overlay);
+
   overlay.classList.add("activeOverlay");
+
+  console.log("Has class:", overlay.classList.contains("activeOverlay"));
   document.body.classList.add("no-scroll");
   closeOrderSuccessModal();
 }
