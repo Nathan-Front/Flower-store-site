@@ -180,17 +180,16 @@ export function showOrderSuccessModal(result) {
       </button>
     </div>
   `;
-
   document.body.appendChild(aside);
   document.querySelector(".overlay").classList.add("activeOverlay");
   document.body.classList.add("no-scroll");
+  localStorage.removeItem("temporaryCart");
   closeOrderSuccessModal();
 }
 
 function closeOrderSuccessModal() {
   const modal = document.querySelector("#close-order-success-modal");
   modal.addEventListener("click", () => {
-    localStorage.removeItem("temporaryCart");
     cartCounterDisplay();
     const overlay = document.querySelector(".overlay");
     overlay.classList.remove("activeOverlay");

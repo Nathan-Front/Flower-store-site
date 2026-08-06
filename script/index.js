@@ -22,7 +22,11 @@ import {
   loadCheckoutDisplay,
   renderCheckoutData,
 } from "./cart.js";
-import { updatePaymentMethod, placeOrderCOD } from "./app.js";
+import {
+  updatePaymentMethod,
+  placeOrderCOD,
+  initPaymentValidation,
+} from "./app.js";
 async function fetchHTML() {
   const page = document.body.dataset.page;
   const app = document.getElementById("app"); //For page loader callback
@@ -173,6 +177,7 @@ async function fetchHTML() {
       .forEach((input) => {
         input.addEventListener("change", updatePaymentMethod);
       });
+    initPaymentValidation();
     placeOrderCOD();
   }
 

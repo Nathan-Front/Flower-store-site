@@ -161,7 +161,6 @@
 /*paypal*/
 .paypal-container {
     display: none;
-   
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -178,8 +177,8 @@
     transform: translateY(0);
     padding: 24px 0 0 0;
 }
-.paypal-message {
-    margin-bottom: 8px;
+.payment-message {
+    margin-bottom: 4px;
     color: #c0392b;
     font-size: 0.8rem;
     text-align: center;

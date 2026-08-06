@@ -1,6 +1,7 @@
 import { cartCounterDisplay } from "./shop.js";
 import { showOrderSuccessModal } from "./cart.js";
 let paypalRendered = false;
+let paypalActions = null; //For form validity check
 const SERVER_URL = "https://flosandflorere.onrender.com";
 function getOrderDetails() {
   const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
@@ -21,8 +22,40 @@ function getOrderDetails() {
       ?.value,
   };
 }
+//form validation
+function checkFormValidity() {
+  const form = document.querySelector("#checkout-form");
+  const message = document.querySelector("#payment-message");
+  const codBtn = document.querySelector("#place-order-btn");
+  if (!form || !codBtn) return;
+  const isValid = form.checkValidity();
+  codBtn.disabled = !isValid;
+  //Message
+  if (isValid) {
+    message.textContent = "";
+  } else {
+    message.textContent =
+      "Please complete all required fields before placing an order.";
+  }
+  //PayPal only if initialized
+  if (paypalActions) {
+    if (isValid) {
+      paypalActions.enable();
+    } else {
+      paypalActions.disable();
+    }
+  }
+}
+//form initialization
+export function initPaymentValidation() {
+  const form = document.querySelector("#checkout-form");
+  if (!form) return;
+  form.addEventListener("input", checkFormValidity);
+  form.addEventListener("change", checkFormValidity);
+  checkFormValidity();
+}
 function initPaypalButtons() {
-  if (paypalRendered) return;
+  if (paypalRendered) return; //prevent rendering the PayPal buttons multiple times
   paypal
     .Buttons({
       style: {
@@ -32,23 +65,8 @@ function initPaypalButtons() {
         label: "paypal",
       },
       onInit(data, actions) {
-        const form = document.querySelector("#checkout-form");
-        const message = document.querySelector("#paypal-message");
+        paypalActions = actions; //Store actions for later use in form validation
         actions.disable();
-        function checkFormValidity() {
-          if (form.checkValidity()) {
-            actions.enable();
-            message.textContent = "";
-          } else {
-            actions.disable();
-            message.textContent =
-              "Please complete all required fields before paying with PayPal.";
-          }
-        }
-
-        form.addEventListener("input", checkFormValidity);
-        form.addEventListener("change", checkFormValidity);
-
         checkFormValidity();
       },
 
@@ -205,6 +223,7 @@ export function placeOrderCOD() {
     //Prevent double clicks
     placeOrderBtn.disabled = true;
     placeOrderBtn.textContent = "Placing Order...";
+    document.body.classList.add("no-scroll");
     try {
       await placeCODOrder();
     } catch (error) {
@@ -213,6 +232,7 @@ export function placeOrderCOD() {
       hideLoadingOverlay();
       placeOrderBtn.disabled = false;
       placeOrderBtn.textContent = "Place Order";
+      document.body.classList.remove("no-scroll");
     }
   });
 }
