@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", fetchHTML);
 //fetch data from google sheet first
 let indexProducts = [];
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxUE8Br1i2HesAIcZQSkxqy8RMI6RrbfcbLdyWSO_RqY5rhJ9EowarY0C4SHoPfy8fH/exec";
+  "https://script.google.com/macros/s/AKfycbzwhNy3w9dsZerWonNqKUKJsQFWpEdSq7DQnlIpG-MzY32gFALqi_72VgSGTiL1TKzw/exec";
 export async function fetchSpecificSheet(sheetType, key, dataFormatter) {
   try {
     const response = await fetch(`${API_URL}?type=${sheetType}`); //send type to just fetch related files only

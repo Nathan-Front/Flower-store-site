@@ -215,7 +215,7 @@ export async function placeCODOrder() {
 // COD button event
 export function placeOrderCOD() {
   const placeOrderBtn = document.getElementById("place-order-btn");
-  console.log("Button found:", placeOrderBtn);
+
   if (!placeOrderBtn) return;
   placeOrderBtn.addEventListener("click", async () => {
     //Show loading UI immediately
