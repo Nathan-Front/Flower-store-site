@@ -98,6 +98,8 @@ function initPaypalButtons() {
         return data.id;
       },
       async onApprove(data, actions) {
+        showLoadingOverlay();
+        document.body.classList.add("no-scroll");
         try {
           const response = await fetch(
             `${SERVER_URL}/api/orders/${data.orderID}/capture`,
@@ -115,13 +117,18 @@ function initPaypalButtons() {
           //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
           //   (2) Other non-recoverable errors -> Show a failure message
           //   (3) Successful transaction -> Show confirmation or thank you message
-
+          console.log("FULL SERVER RESULT:", result);
+          console.log("Payment type:", result.type);
+          console.log("Google Script result:", result.googleScript);
+          console.log("Full response:", result);
           const errorDetail = result?.paypal?.details?.[0];
 
           if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
             // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
             // recoverable state, per
             // https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+            hideLoadingOverlay();
+            document.body.classList.remove("no-scroll");
             return actions.restart();
           } else if (errorDetail) {
             // (2) Other non-recoverable errors -> Show a failure message
@@ -147,8 +154,12 @@ function initPaypalButtons() {
             console.log("Result: " + result);
             console.log("googleScript: " + result.googleScript);
             showOrderSuccessModal(result);
+            hideLoadingOverlay();
+            document.body.classList.remove("no-scroll");
           }
         } catch (error) {
+          hideLoadingOverlay();
+          document.body.classList.remove("no-scroll");
           console.error(error);
           resultMessage(
             `Sorry, your transaction could not be processed...<br><br>${error}`,
@@ -206,10 +217,10 @@ export async function placeCODOrder() {
     }
 
     const result = await response.json();
-    showOrderSuccessModal(result);
+    return result; // Return the result to be used in the calling function
   } catch (error) {
     console.error("Failed to place COD order:", error);
-    alert("Failed to place COD order. Please try again.");
+    throw error; //Throw back the error to be handled in the calling function
   }
 }
 // COD button event
@@ -225,7 +236,8 @@ export function placeOrderCOD() {
     placeOrderBtn.textContent = "Placing Order...";
     document.body.classList.add("no-scroll");
     try {
-      await placeCODOrder();
+      const result = await placeCODOrder();
+      showOrderSuccessModal(result);
     } catch (error) {
       console.error(error);
     } finally {
@@ -237,8 +249,14 @@ export function placeOrderCOD() {
   });
 }
 function showLoadingOverlay() {
-  document.getElementById("loading-overlay").classList.add("showCODwait");
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) {
+    overlay.classList.add("show-loading");
+  }
 }
 function hideLoadingOverlay() {
-  document.getElementById("loading-overlay").classList.remove("showCODwait");
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) {
+    overlay.classList.remove("show-loading");
+  }
 }

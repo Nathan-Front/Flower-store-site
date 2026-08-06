@@ -783,7 +783,7 @@ nav {
     transition: opacity .3s ease, visibility .3s ease;
     z-index: 9999;
 }
-.loading-overlay.showCODwait {
+.loading-overlay.show-loading {
     opacity: 1;
     visibility: visible;
 }

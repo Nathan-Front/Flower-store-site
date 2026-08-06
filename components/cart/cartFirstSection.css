@@ -31,6 +31,7 @@ body[data-page="cart"] #app {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 12px;
     display: flex;
     background-color: #fff;
     padding: 32px;
