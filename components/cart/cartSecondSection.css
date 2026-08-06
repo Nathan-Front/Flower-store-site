@@ -17,12 +17,11 @@
 .cart-second-sec> div h3 {
     margin: 16px 0;
 }
-.display-no-item-message {
-    display: none;
+.order-summary-message {
+    color: red;
+    font-size: 0.9rem;
 }
-.display-no-item-message.displayCartMessage {
-    display: block;
-}
+
 .cart-checkout-content {
     display: flex;
     flex-direction: column;

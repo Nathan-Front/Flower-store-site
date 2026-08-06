@@ -8,6 +8,7 @@ import {
   cartCheckoutSummary,
   renderCheckoutData,
   cartSettings,
+  checkCartAvailability,
 } from "./cart.js";
 //get cards per page
 function getCardsPerPage() {
@@ -817,8 +818,9 @@ export function deleteItemCartModal() {
       updateCartModalContentCounter();
       cartCounterDisplay();
       updateTotalPaymentDisplay();
-      //from cart.js
+      checkCartAvailability();
       cartCheckoutSummary();
+      renderCheckoutData(cartSettings);
     });
   });
 }

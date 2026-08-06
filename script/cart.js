@@ -8,6 +8,25 @@ import {
   deleteItemCartModal,
 } from "./shop.js";
 import { placeCODOrder } from "./app.js";
+export function checkCartAvailability() {
+  const tempCart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+  const message = document.querySelector(".order-summary-message");
+  if (!message) return;
+  const paymentRadios = document.querySelectorAll(
+    'input[name="paymentMethod"]',
+  );
+  if (tempCart.length === 0) {
+    paymentRadios.forEach((radio) => {
+      radio.disabled = true;
+    });
+    message.textContent = `Your cart is empty. Please add items to your cart before proceeding to checkout.`;
+  } else {
+    paymentRadios.forEach((radio) => {
+      radio.disabled = false;
+    });
+    message.textContent = "";
+  }
+}
 export function cartCheckoutSummary() {
   const ul = document.querySelector(".cart-checkout-content");
   if (!ul) return;
@@ -128,14 +147,16 @@ export function renderCheckoutData(settings) {
     0,
   );
   subTotal.textContent = "$" + totalPayment.toFixed(2);
-  delFee.textContent = "$" + settings[0].delFee.toFixed(2);
+  delFee.textContent =
+    "$" + (tempCart.length !== 0 ? settings[0].delFee.toFixed(2) : "0.00");
   const percentage = Number(settings[0].taxRate) * 100;
-  taxRate.textContent = percentage + "%";
+  taxRate.textContent = (tempCart.length !== 0 ? percentage : 0) + "%";
   let grand =
     Number(totalPayment) * settings[0].taxRate +
     Number(totalPayment) +
     settings[0].delFee;
-  grandTotal.textContent = "$" + grand.toFixed(2);
+  grandTotal.textContent =
+    "$" + (tempCart.length !== 0 ? grand.toFixed(2) : "0.00");
 }
 
 export function showOrderSuccessModal(result) {
