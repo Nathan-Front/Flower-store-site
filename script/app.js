@@ -198,11 +198,27 @@ export async function placeCODOrder() {
 export function placeOrderCOD() {
   const placeOrderBtn = document.getElementById("place-order-btn");
   console.log("Button found:", placeOrderBtn);
-  if (!placeOrderBtn) {
-    console.error("Place Order button not found");
-    return;
-  }
+  if (!placeOrderBtn) return;
   placeOrderBtn.addEventListener("click", async () => {
-    await placeCODOrder();
+    //Show loading UI immediately
+    showLoadingOverlay();
+    //Prevent double clicks
+    placeOrderBtn.disabled = true;
+    placeOrderBtn.textContent = "Placing Order...";
+    try {
+      await placeCODOrder();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      hideLoadingOverlay();
+      placeOrderBtn.disabled = false;
+      placeOrderBtn.textContent = "Place Order";
+    }
   });
+}
+function showLoadingOverlay() {
+  document.getElementById("loading-overlay").classList.add("showCODwait");
+}
+function hideLoadingOverlay() {
+  document.getElementById("loading-overlay").classList.remove("showCODwait");
 }

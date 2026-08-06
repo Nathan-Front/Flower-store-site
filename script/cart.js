@@ -139,7 +139,7 @@ export function renderCheckoutData(settings) {
 }
 
 export function showOrderSuccessModal(result) {
-  console.log("Order success result:", result);
+  //console.log("Order success result:", result);
   if (!result) {
     console.error("No order result received");
     return;
