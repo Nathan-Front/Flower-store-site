@@ -297,12 +297,14 @@
 .bouquet-con ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    gap: 1.5rem;
+    gap: 1rem;
+    align-items: stretch;
 }
 .bouquet-con ul li {
     animation: cardReveal 0.5s ease forwards;
     opacity: 0;
+    display: flex;
+    flex: 1;
 }
 @keyframes cardReveal {
   from {
@@ -316,6 +318,7 @@
   }
 }
 .hover-cards {
+    width: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -333,13 +336,13 @@
     top: 8px;
     left: 8px;
     z-index: 2;
-    padding: 0.3rem 0.6rem;
+    padding: 0.2rem 0.4rem !important;
     border-radius: 999px;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    font-size: 0.9rem;
+    font-size: 0.7rem !important;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -365,7 +368,6 @@
 }*/
 .bouquet-img {
     width: 100%;
-   
 }
 .new {
     color: #9A4D66;
@@ -379,8 +381,6 @@
     color: #4E6A50;
     background: #D9E8D8;
 }
-
-
 .flower-grid li img {
     transition: 0.3s ease;
 }
@@ -410,6 +410,7 @@
 }
 .product-description p {
     line-height: 1.2;
+    flex: 1;
 }
 .product-price {
     margin-top: auto;
