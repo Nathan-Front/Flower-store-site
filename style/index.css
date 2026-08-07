@@ -801,9 +801,9 @@ nav {
     border: 5px solid #eee;
     border-top-color: #a64b66;
     border-radius: 50%;
-    animation: spinCOD .8s linear infinite;
+    animation: spinLoading .8s linear infinite;
 }
-@keyframes spinCOD {
+@keyframes spinLoading {
     to {
         transform: rotate(360deg);
     }
