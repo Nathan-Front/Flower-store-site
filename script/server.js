@@ -80,7 +80,7 @@ const createOrder = async (cart) => {
   //google apps script url
   const response = await fetch(`${GOOGLE_SCRIPT_URL}?type=checkout`);
   console.log("Google Script URL:", GOOGLE_SCRIPT_URL);
-  console.log("Sending orderData:", orderData);
+  //console.log("Sending orderData:", orderData);
   const settings = await response.json();
 
   const items = cart.map((cartItem) => ({
