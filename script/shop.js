@@ -9,6 +9,7 @@ import {
   renderCheckoutData,
   cartSettings,
   checkCartAvailability,
+  updateCheckoutFormState,
 } from "./cart.js";
 //get cards per page
 function getCardsPerPage() {
@@ -821,6 +822,7 @@ export function deleteItemCartModal() {
       checkCartAvailability();
       cartCheckoutSummary();
       renderCheckoutData(cartSettings);
+      updateCheckoutFormState();
     });
   });
 }

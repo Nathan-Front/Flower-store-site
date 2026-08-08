@@ -22,6 +22,7 @@ import {
   loadCheckoutDisplay,
   renderCheckoutData,
   checkCartAvailability,
+  updateCheckoutFormState,
 } from "./cart.js";
 import {
   updatePaymentMethod,
@@ -171,6 +172,7 @@ async function fetchHTML() {
   if (page === "cart") {
     cartCheckoutSummary();
     loadCheckoutDisplay();
+    updateCheckoutFormState();
     checkCartAvailability();
     updatePaymentMethod();
     document

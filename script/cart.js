@@ -159,6 +159,20 @@ export function renderCheckoutData(settings) {
     "$" + (tempCart.length !== 0 ? grand.toFixed(2) : "0.00");
 }
 
+export function updateCheckoutFormState() {
+  const form = document.querySelector("#checkout-form");
+  const cart = JSON.parse(localStorage.getItem("temporaryCart")) || [];
+
+  if (!form) return;
+
+  const hasItems = cart.length > 0;
+  form.classList.toggle("form-disabled", !hasItems); //hasItems true = remove form-disabled, false = add form-disabled
+  //get all form elements and disable them if cart is empty
+  [...form.elements].forEach((element) => {
+    element.disabled = !hasItems;
+  });
+}
+
 export function showOrderSuccessModal(result) {
   //console.log("Order success result:", result);
   if (!result) {
