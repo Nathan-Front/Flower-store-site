@@ -26,8 +26,6 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
 
 ### Home Page
 
-![Desktop Hero](images/readme/index_html.png)
-
 <table>
   <tr>
     <th>Desktop</th>
@@ -36,21 +34,21 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        ![Desktop Hero](images/readme/index_html.png)
+    <img src="./images/readMe/index_html.png" alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-      <img src="./images/readme/mobile_hero.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readMe/mobile_hero.png" alt="Flos & Florere  Homepage mobile" width="180" height="240">
       <br>
-      <img src="./images/readme/mobile_card.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readMe/mobile_card.png" alt="Flos & Florere  Homepage mobile" width="180" height="240">
       <br>
-      <img src="./images/readme/mobile_card2.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readMe/mobile_card2.png" alt="Flos & Florere  Homepage mobile" width="180" height="240">
       <br>
-      <img src="./images/readme/mobile_card3.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readMe/mobile_card3.png" alt="Flos & Florere  Homepage mobile" width="180" height="240">
       <br>
-      <img src="./images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readMe/mobile_footer.jpeg" alt="Flos & Florere  Homepage mobile" width="180" height="240">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_nav.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_nav.png" alt="Flos & Florere  Homepage mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -64,14 +62,14 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/shop.png" alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/shop.png" alt="Flos & Florere Shoppage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_shop.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_shop.png" alt="Flos & Florere Shoppage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_shop_card.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_shop_card.png" alt="Flos & Florere Shoppage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_footer.jpeg" alt="Flos & Florere Shoppage mobile" width="180" height="240">
     </td>
     
   </tr>
@@ -86,10 +84,10 @@ Modal
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/product_modal.png" alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/product_modal.png" alt="Flos & Florere Shoppage modal" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_modal.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_modal.png" alt="Flos & Florere Shoppage modal mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -103,10 +101,10 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/cart.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/cart.png"  alt="Flos & Florere Shoppage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_cart.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_cart.png" alt="Flos & Florere Shoppage cart mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -120,12 +118,12 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/checkout.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/checkout.png"  alt="Flos & Florere checkoutpage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_checkout1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_checkout1.png" alt="Flos & Florere checkoutpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_checkout2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_checkout2.png" alt="Flos & Florere checkoutpage mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -139,16 +137,16 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/about.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/about.png"  alt="Flos & Florere Aboutpage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_about1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_about1.png" alt="Flos & Florere  Aboutpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_about2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_about2.png" alt="Flos & Florere Aboutpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_about3.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_about3.png" alt="Flos & Florere Aboutpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_about4.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_about4.png" alt="Flos & Florere Aboutpage mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -162,14 +160,14 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/contact.png"   alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readMe/contact.png"   alt="Flos & Florere Contactpage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="./images/readme/mobile_contact1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_contact1.png" alt="Flos & Florere Contactpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_contact2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_contact2.png" alt="Flos & Florere Contactpage mobile" width="180" height="240">
         <br>
-        <img src="./images/readme/mobile_contact3.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readMe/mobile_contact3.png" alt="Flos & Florere Contactpage mobile" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -195,7 +193,7 @@ I did not put email validator on this form so its ok to input anything.
 
 \*If paypal is selected
 
-<img src="images/readme/paypal_button.png" alt="Paypal payment" width="500">
+<img src="images/readMe/paypal_button.png" alt="Paypal payment" width="500">
 
 ### Test Payment
 
@@ -229,6 +227,6 @@ https://apps.naaccr.org/vpr-cls/about-postal-codes
 
 \*If Cash-On-Delivery is selected just fill the form then click place order button
 
-<img src="images/readme/COD.png" alt="COD payment" width="500">
+<img src="images/readMe/COD.png" alt="COD payment" width="500">
 
 \*Loading and rendering of data may take some few second up to 20 seconds dependig to the Google apps script and/or Render backend
