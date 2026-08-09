@@ -34,7 +34,7 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="./images/readme/index.html.png" alt="Flos & Florere Homepage" width="400">
+        <img src="https://raw.githubusercontent.com/Nathan-Front/Flower-store-site/master/images/readme/index_html.png" alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
       <img src="./images/readme/mobile_hero.png" alt="Flos & Florere Homepage" width="180" height="240">
@@ -193,7 +193,7 @@ I did not put email validator on this form so its ok to input anything.
 
 \*If paypal is selected
 
-<img src="images/readme/paypal_button.png" alt="Flos & Florere Homepage" width="500">
+<img src="images/readme/paypal_button.png" alt="Paypal payment" width="500">
 
 ### Test Payment
 
@@ -227,6 +227,6 @@ https://apps.naaccr.org/vpr-cls/about-postal-codes
 
 \*If Cash-On-Delivery is selected just fill the form then click place order button
 
-<img src="images/readme/COD.png" alt="Flos & Florere Homepage" width="500">
+<img src="images/readme/COD.png" alt="COD payment" width="500">
 
 \*Loading and rendering of data may take some few second up to 20 seconds dependig to the Google apps script and/or Render backend
