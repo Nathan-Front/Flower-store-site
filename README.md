@@ -8,7 +8,7 @@ I’m a self-taught developer currently building my skills in HTML, CSS, JavaScr
 
 This project includes features such as dynamic products, a shopping cart, checkout, PayPal payments, Pay Later, and Cash on Delivery. Also, news subscription and a message us with auto-mail reply.
 
-I built this project to see challenge my self, practice real-world development, and continue improving my skills.
+I built this project to challenge my self, practice real-world development, and continue improving my skills.
 
 ⚠️ \*\*Payment Testing:
 
@@ -34,21 +34,21 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/index.html.png" alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/index.html.png" alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-      <img src="images/readme/mobile_hero.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readme/mobile_hero.png" alt="Flos & Florere Homepage" width="180" height="240">
       <br>
-      <img src="images/readme/mobile_card.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readme/mobile_card.png" alt="Flos & Florere Homepage" width="180" height="240">
       <br>
-      <img src="images/readme/mobile_card2.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readme/mobile_card2.png" alt="Flos & Florere Homepage" width="180" height="240">
       <br>
-      <img src="images/readme/mobile_card3.png" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readme/mobile_card3.png" alt="Flos & Florere Homepage" width="180" height="240">
       <br>
-      <img src="images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
+      <img src="./images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_nav.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_nav.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -62,14 +62,14 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/shop.png" alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/shop.png" alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_shop.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_shop.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_shop_card.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_shop_card.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_footer.jpeg" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
     
   </tr>
@@ -84,10 +84,10 @@ Modal
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/product_modal.png" alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/product_modal.png" alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_modal.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_modal.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -101,10 +101,10 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/cart.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/cart.png"  alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_cart.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_cart.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -118,12 +118,12 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/checkout.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/checkout.png"  alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_checkout1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_checkout1.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_checkout2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_checkout2.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -137,16 +137,16 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/about.png"  alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/about.png"  alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_about1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_about1.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_about2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_about2.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_about3.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_about3.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_about4.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_about4.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
@@ -160,14 +160,14 @@ Cart
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="images/readme/contact.png"   alt="Flos & Florere Homepage" width="400">
+        <img src="./images/readme/contact.png"   alt="Flos & Florere Homepage" width="400">
     </td>
     <td align="center" valign="top">
-        <img src="images/readme/mobile_contact1.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_contact1.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_contact2.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_contact2.png" alt="Flos & Florere Homepage" width="180" height="240">
         <br>
-        <img src="images/readme/mobile_contact3.png" alt="Flos & Florere Homepage" width="180" height="240">
+        <img src="./images/readme/mobile_contact3.png" alt="Flos & Florere Homepage" width="180" height="240">
     </td>
   </tr>
 </table>
