@@ -34,7 +34,7 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
   </tr>
   <tr>
     <td align="center" valign="top">
-        <img src="https://raw.githubusercontent.com/Nathan-Front/Flower-store-site/master/images/readme/index_html.png" alt="Flos & Florere Homepage" width="400">
+        ![Desktop Hero](images/readme/index_html.png)
     </td>
     <td align="center" valign="top">
       <img src="./images/readme/mobile_hero.png" alt="Flos & Florere Homepage" width="180" height="240">
