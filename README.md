@@ -26,6 +26,8 @@ Some Icons, especially SVG icons, were sourced from https://www.svgrepo.com/
 
 ### Home Page
 
+![Desktop Hero](images/readme/index_html.png)
+
 <table>
   <tr>
     <th>Desktop</th>
